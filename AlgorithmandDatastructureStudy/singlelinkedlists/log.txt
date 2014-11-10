@@ -1,0 +1,256 @@
+gcc  app.c  basiclistops.c  -o simplelist -g -O0
+In file included from app.c:4:0:
+basiclistops.h:3:5: error: unknown type name 'mylist'
+     mylist *next;
+     ^
+app.c: In function 'main':
+app.c:106:17: warning: assignment from incompatible pointer type [enabled by default]
+            temp = temp->next;
+                 ^
+In file included from basiclistops.c:5:0:
+basiclistops.h:3:5: error: unknown type name 'mylist'
+     mylist *next;
+     ^
+basiclistops.c: In function 'create_list':
+basiclistops.c:32:20: warning: assignment from incompatible pointer type [enabled by default]
+         prev->next = node;
+                    ^
+basiclistops.c: In function 'create_looped_list':
+basiclistops.c:71:20: warning: assignment from incompatible pointer type [enabled by default]
+         prev->next = node;
+                    ^
+basiclistops.c:83:19: warning: assignment from incompatible pointer type [enabled by default]
+         node->next=temp;
+                   ^
+basiclistops.c: In function 'disp_list':
+basiclistops.c:103:13: warning: assignment from incompatible pointer type [enabled by default]
+         node=node->next;
+             ^
+basiclistops.c: In function 'rem_node_by_index':
+basiclistops.c:117:13: warning: assignment from incompatible pointer type [enabled by default]
+        *head=(*head)->next;
+             ^
+basiclistops.c:126:12: warning: assignment from incompatible pointer type [enabled by default]
+        temp=temp->next;
+            ^
+basiclistops.c: In function 'free_my_list':
+basiclistops.c:157:9: warning: assignment from incompatible pointer type [enabled by default]
+     temp=(*head)->next;
+         ^
+basiclistops.c: In function 'print_reverse':
+basiclistops.c:171:9: warning: passing argument 1 of 'print_reverse' from incompatible pointer type [enabled by default]
+         print_reverse(head->next);
+         ^
+basiclistops.c:167:6: note: expected 'struct mylist *' but argument is of type 'int *'
+ void print_reverse(mylist* head) {
+      ^
+basiclistops.c: In function 'find_length_of_list':
+basiclistops.c:190:14: warning: assignment from incompatible pointer type [enabled by default]
+         head = head->next;
+              ^
+basiclistops.c: In function 'rem_node_by_addr':
+basiclistops.c:205:37: error: request for member 'ptr' in something not a structure or union
+         (*node)->ptr = (*node)->next->ptr;
+                                     ^
+basiclistops.c:206:14: warning: assignment from incompatible pointer type [enabled by default]
+         temp = (*node)->next;
+              ^
+basiclistops.c:207:39: error: request for member 'next' in something not a structure or union
+         (*node)->next = ((*node)->next->next);
+                                       ^
+basiclistops.c: In function 'find_middle_node':
+basiclistops.c:231:13: warning: assignment from incompatible pointer type [enabled by default]
+         ptr1=ptr1->next;
+             ^
+basiclistops.c:233:24: error: request for member 'next' in something not a structure or union
+         ptr2=ptr2->next->next;
+                        ^
+basiclistops.c: In function 'checkif_loop_exist':
+basiclistops.c:256:9: warning: assignment from incompatible pointer type [enabled by default]
+     ptr1=ptr1->next;
+         ^
+basiclistops.c:257:33: error: request for member 'next' in something not a structure or union
+     ptr2=(ptr2->next)?ptr2->next->next:NULL;
+                                 ^
+basiclistops.c: In function 'push_to_head':
+basiclistops.c:287:19: warning: assignment from incompatible pointer type [enabled by default]
+         node->next= (*head);
+                   ^
+basiclistops.c: In function 'reverse_list':
+basiclistops.c:308:14: warning: assignment from incompatible pointer type [enabled by default]
+         next = curr->next;
+              ^
+basiclistops.c:309:20: warning: assignment from incompatible pointer type [enabled by default]
+         curr->next =prev;
+                    ^
+basiclistops.c: In function 'pop':
+basiclistops.c:351:14: warning: assignment from incompatible pointer type [enabled by default]
+         temp = (*head)->next;
+              ^
+basiclistops.c: In function 'sortedInsert':
+basiclistops.c:371:16: warning: assignment from incompatible pointer type [enabled by default]
+     dummy->next=(*head);
+                ^
+basiclistops.c:373:44: error: request for member 'ptr' in something not a structure or union
+     while((dummy!=NULL) && (*((dummy)->next->ptr) < *(node->ptr)))
+                                            ^
+basiclistops.c:375:15: warning: assignment from incompatible pointer type [enabled by default]
+         dummy = dummy->next;
+               ^
+basiclistops.c:380:16: warning: assignment from incompatible pointer type [enabled by default]
+     dummy->next= node;
+                ^
+basiclistops.c:381:11: warning: assignment from incompatible pointer type [enabled by default]
+     *head = dummy->next;
+           ^
+basiclistops.c: In function 'sortedInsert2':
+basiclistops.c:393:17: warning: assignment from incompatible pointer type [enabled by default]
+         headref = &((*headref)->next);
+                 ^
+basiclistops.c:396:15: warning: assignment from incompatible pointer type [enabled by default]
+     node->next= (*headref);
+               ^
+basiclistops.c: In function 'InsertSort':
+basiclistops.c:411:19: warning: initialization from incompatible pointer type [enabled by default]
+     mylist* tmp = (*head)->next;
+                   ^
+basiclistops.c:420:13: warning: assignment from incompatible pointer type [enabled by default]
+         tmp = tmp->next;
+             ^
+basiclistops.c: In function 'Append':
+basiclistops.c:457:15: warning: assignment from incompatible pointer type [enabled by default]
+         flptr = flptr->next;
+               ^
+basiclistops.c:465:24: warning: assignment from incompatible pointer type [enabled by default]
+             flptr->next=node;
+                        ^
+basiclistops.c:469:14: warning: assignment from incompatible pointer type [enabled by default]
+         slptr=slptr->next;
+              ^
+basiclistops.c: In function 'FrontBackSplit':
+basiclistops.c:499:36: warning: pointer type mismatch in conditional expression [enabled by default]
+     midnode = (len%2)?midnode->next:midnode;
+                                    ^
+basiclistops.c:502:14: warning: assignment from incompatible pointer type [enabled by default]
+         temp = temp->next;
+              ^
+basiclistops.c:503:19: warning: assignment from incompatible pointer type [enabled by default]
+         (frontRef)= &((*frontRef)->next);
+                   ^
+basiclistops.c: In function 'RemoveDuplicates':
+basiclistops.c:529:30: error: request for member 'ptr' in something not a structure or union
+        if(comp == *(ref->next->ptr))
+                              ^
+basiclistops.c:531:17: warning: assignment from incompatible pointer type [enabled by default]
+            temp = ref->next;
+                 ^
+basiclistops.c:538:16: warning: assignment from incompatible pointer type [enabled by default]
+            ref = ref->next;
+                ^
+basiclistops.c: In function 'MoveNode':
+basiclistops.c:568:14: warning: assignment from incompatible pointer type [enabled by default]
+         temp = (*sourceRef)->next;
+              ^
+basiclistops.c:569:28: warning: assignment from incompatible pointer type [enabled by default]
+         (*sourceRef)->next = (*destRef);
+                            ^
+basiclistops.c: In function 'ShuffleMerge':
+basiclistops.c:680:22: warning: assignment from incompatible pointer type [enabled by default]
+                 temp = a->next;
+                      ^
+basiclistops.c:685:25: warning: assignment from incompatible pointer type [enabled by default]
+                 a->next = b;
+                         ^
+basiclistops.c:686:22: warning: assignment from incompatible pointer type [enabled by default]
+                 tempb= b->next;
+                      ^
+basiclistops.c:691:25: warning: assignment from incompatible pointer type [enabled by default]
+                 b->next = temp;
+                         ^
+basiclistops.c: In function 'SortedMerge':
+basiclistops.c:772:13: warning: assignment from incompatible pointer type [enabled by default]
+            a= a->next;
+             ^
+basiclistops.c:778:13: warning: assignment from incompatible pointer type [enabled by default]
+            b=b->next;
+             ^
+basiclistops.c:781:15: warning: assignment from incompatible pointer type [enabled by default]
+    dummy.next = head;
+               ^
+basiclistops.c:786:18: warning: assignment from incompatible pointer type [enabled by default]
+             temp = a->next;
+                  ^
+basiclistops.c:787:24: warning: assignment from incompatible pointer type [enabled by default]
+             head->next = a;
+                        ^
+basiclistops.c:795:18: warning: assignment from incompatible pointer type [enabled by default]
+             temp = b->next;
+                  ^
+basiclistops.c:796:24: warning: assignment from incompatible pointer type [enabled by default]
+             head->next = b;
+                        ^
+basiclistops.c:800:13: warning: assignment from incompatible pointer type [enabled by default]
+         head= head->next;     
+             ^
+basiclistops.c:803:22: warning: assignment from incompatible pointer type [enabled by default]
+            head->next= b;
+                      ^
+basiclistops.c:806:23: warning: assignment from incompatible pointer type [enabled by default]
+            head->next =a;
+                       ^
+basiclistops.c:810:4: warning: return from incompatible pointer type [enabled by default]
+    return (dummy.next);
+    ^
+basiclistops.c: In function 'SortedIntersect':
+basiclistops.c:863:13: warning: passing argument 1 of 'push_to_head' from incompatible pointer type [enabled by default]
+             push_to_head(&(tail->next),*(a->ptr));
+             ^
+basiclistops.c:265:6: note: expected 'struct mylist **' but argument is of type 'int **'
+ void push_to_head(mylist **head,int val) 
+      ^
+basiclistops.c:864:18: warning: assignment from incompatible pointer type [enabled by default]
+             tail = tail->next;
+                  ^
+basiclistops.c:865:14: warning: assignment from incompatible pointer type [enabled by default]
+             a= a->next;
+              ^
+basiclistops.c:866:14: warning: assignment from incompatible pointer type [enabled by default]
+             b= b->next;
+              ^
+basiclistops.c:872:14: warning: assignment from incompatible pointer type [enabled by default]
+             a= a->next;
+              ^
+basiclistops.c:877:14: warning: assignment from incompatible pointer type [enabled by default]
+             b=b->next;
+              ^
+basiclistops.c:884:5: warning: return from incompatible pointer type [enabled by default]
+     return dummy.next;
+     ^
+basiclistops.c: In function 'Reverse':
+basiclistops.c:900:23: warning: initialization from incompatible pointer type [enabled by default]
+     mylist **headref= &((*head)->next);
+                       ^
+basiclistops.c:901:19: warning: initialization from incompatible pointer type [enabled by default]
+     mylist *temp =((*headref)->next);
+                   ^
+basiclistops.c:905:13: warning: assignment from incompatible pointer type [enabled by default]
+        temp = (*headref)->next;
+             ^
+basiclistops.c: In function 'ReverseRecursive':
+basiclistops.c:928:10: warning: assignment from incompatible pointer type [enabled by default]
+     rest = (*head)->next;
+          ^
+basiclistops.c:932:16: error: request for member 'next' in something not a structure or union
+     first->next->next= first;
+                ^
+basiclistops.c: In function 'swapKth':
+basiclistops.c:981:15: warning: assignment from incompatible pointer type [enabled by default]
+       headref = &((*headref)->next);
+               ^
+basiclistops.c:991:6: warning: assignment from incompatible pointer type [enabled by default]
+    t = curr2->next;
+      ^
+basiclistops.c:994:15: warning: assignment from incompatible pointer type [enabled by default]
+    curr->next = t;
+               ^
+make: *** [all] Error 1

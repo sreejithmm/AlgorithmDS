@@ -1,0 +1,42 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AlternatingSplit	basiclistops.c	/^void AlternatingSplit(mylist* source,$/;"	f
+Append	basiclistops.c	/^void Append(mylist** listA, mylist** listB)$/;"	f
+FrontBackSplit	basiclistops.c	/^void FrontBackSplit(mylist* source,$/;"	f
+InsertSort	basiclistops.c	/^void InsertSort(mylist **head)$/;"	f
+MergeSort	basiclistops.c	/^void MergeSort(mylist** headRef) $/;"	f
+MoveNode	basiclistops.c	/^void MoveNode(mylist** destRef, mylist** sourceRef) {$/;"	f
+RemoveDuplicates	basiclistops.c	/^void RemoveDuplicates(mylist* head) $/;"	f
+Reverse	basiclistops.c	/^void Reverse(mylist **head)$/;"	f
+ShuffleMerge	basiclistops.c	/^mylist* ShuffleMerge(mylist* a, mylist* b) $/;"	f
+SortedIntersect	basiclistops.c	/^mylist* SortedIntersect(mylist* a, mylist* b) $/;"	f
+SortedMerge	basiclistops.c	/^mylist* SortedMerge(mylist* a, mylist* b) $/;"	f
+_mylist	basiclistops.h	/^typedef struct _mylist{$/;"	s
+checkif_loop_exist	basiclistops.c	/^int checkif_loop_exist(mylist* head) {$/;"	f
+container_of	basiclistops.h	19;"	d
+create_list	basiclistops.c	/^mylist* create_list(int num)$/;"	f
+create_looped_list	basiclistops.c	/^mylist* create_looped_list(int num) $/;"	f
+disp_list	basiclistops.c	/^void disp_list(mylist* node) {$/;"	f
+find_length_of_list	basiclistops.c	/^int find_length_of_list(mylist *head)$/;"	f
+find_middle_node	basiclistops.c	/^mylist* find_middle_node(mylist* head) {$/;"	f
+free_my_list	basiclistops.c	/^void free_my_list(mylist** head)$/;"	f
+main	app.c	/^int main()$/;"	f
+mem_malloc	mymemman/memman.c	/^int mem_malloc(int bytes) {$/;"	f
+mem_map	mymemman/memman.h	/^typedef struct mem_map {$/;"	s
+mylist	basiclistops.h	/^ }mylist;$/;"	t	typeref:struct:_mylist
+next	basiclistops.h	/^    struct _mylist *next;$/;"	m	struct:_mylist	typeref:struct:_mylist::_mylist
+offsetof	basiclistops.h	17;"	d
+pop	basiclistops.c	/^void pop(mylist** head,int *val)$/;"	f
+print_node	basiclistops.c	/^void print_node(mylist* node) {$/;"	f
+print_reverse	basiclistops.c	/^void print_reverse(mylist* head) {$/;"	f
+ptr	basiclistops.h	/^    int *ptr;$/;"	m	struct:_mylist
+push_to_head	basiclistops.c	/^void push_to_head(mylist **head,int val) $/;"	f
+rem_node_by_addr	basiclistops.c	/^void rem_node_by_addr(mylist** node) {$/;"	f
+rem_node_by_index	basiclistops.c	/^int rem_node_by_index(int idx,mylist** head)$/;"	f
+reverse_list	basiclistops.c	/^void reverse_list(mylist** head)$/;"	f
+sortedInsert	basiclistops.c	/^void sortedInsert(mylist** head,mylist* node)$/;"	f
+sortedInsert2	basiclistops.c	/^void sortedInsert2(mylist **head,mylist *node)$/;"	f

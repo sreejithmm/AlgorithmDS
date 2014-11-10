@@ -1,0 +1,48 @@
+gcc  test.c  tree.c  -o simpletree -g -O0
+In file included from test.c:4:0:
+tree.h:59:9: error: expected ';', identifier or '(' before 'struct'
+ typedef struct conn_queue{
+         ^
+test.c: In function 'main':
+test.c:332:32: warning: assignment makes pointer from integer without a cast [enabled by default]
+                       intTree3 = newnode(10);
+                                ^
+test.c:333:45: warning: assignment makes pointer from integer without a cast [enabled by default]
+                       intTree3->left        = newnode(8);
+                                             ^
+test.c:334:45: warning: assignment makes pointer from integer without a cast [enabled by default]
+                       intTree3->right       = newnode(2);
+                                             ^
+test.c:335:45: warning: assignment makes pointer from integer without a cast [enabled by default]
+                       intTree3->left->left  = newnode(3);
+                                             ^
+In file included from tree.c:4:0:
+tree.h:59:9: error: expected ';', identifier or '(' before 'struct'
+ typedef struct conn_queue{
+         ^
+tree.c:1016:1: error: unknown type name 'connqueue'
+ connqueue* createConnQueue()
+ ^
+tree.c: In function 'createConnQueue':
+tree.c:1018:16: error: 'q' undeclared (first use in this function)
+     connqueue* q = (connqueue*)malloc(sizeof(connqueue));
+                ^
+tree.c:1018:16: note: each undeclared identifier is reported only once for each function it appears in
+tree.c:1018:31: error: expected expression before ')' token
+     connqueue* q = (connqueue*)malloc(sizeof(connqueue));
+                               ^
+tree.c: At top level:
+tree.c:1024:19: error: expected declaration specifiers or '...' before 'connqueue'
+ void conn_enqueue(connqueue* q ,tree_sp_int* root,int level)
+                   ^
+tree.c:1047:27: error: expected declaration specifiers or '...' before 'connqueue'
+ tree_sp_int* conn_dequeue(connqueue* q, int* level)
+                           ^
+tree.c:1064:27: error: expected declaration specifiers or '...' before 'connqueue'
+ int peek_level_conn_queue(connqueue* q)
+                           ^
+tree.c: In function 'ConnectToNext':
+tree.c:1078:16: error: 'q' undeclared (first use in this function)
+     connqueue *q = createConnQueue();
+                ^
+make: *** [all] Error 1
