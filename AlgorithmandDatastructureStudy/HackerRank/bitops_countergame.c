@@ -17,22 +17,7 @@ unsigned long long power(unsigned long long base, unsigned int exp)
      return result;
 
 }
-unsigned int maxbitset(unsigned long long n)
-{
-    const unsigned long long  b[] = {0x2, 0xC, 0xF0, 0xFF00, 0xFFFF0000,0xFFFFFFFF00000000};
-    const unsigned int S[] = {1, 2, 4, 8, 16,32};
-    int i;
 
-    register unsigned int r = 0; // result of log2(v) will go here
-    for (i = 5; i >= 0; i--) // unroll for speed...
-    {
-          if (n & b[i])
-          {
-             n >>= S[i];
-             n |= S[i];
-          } 
-    }
-}
 int getWinner(unsigned long long n,unsigned int w)
 {
 
