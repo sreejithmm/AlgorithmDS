@@ -49,6 +49,7 @@ typedef struct queue{
 
     struct queue_node* front;
     struct queue_node* rear;
+    int size;
 
 }myqueue;
 

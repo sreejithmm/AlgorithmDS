@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "tree.h"
+#include "limits.h"
 
 
 int main(){
@@ -20,8 +21,8 @@ int main(){
      char buf[100]={'\0'};
      mylist* list;
 
-     int inor[]={1,2,3,4,5};
-     int preor[]={4,2,1,3,5};
+     int inor[]={4, 2, 5, 1, 3, 6};
+     int preor[]={1, 2, 4, 5, 3, 6};
      int inorMax[]={1,5,10,40,30,15,28,20};
      int preorsp[]={10,30,20,5,15};
      char propsp[]={'N','N','L','L','L'};
@@ -32,7 +33,8 @@ int main(){
 
      int num[100]={0};
      int weight[100]={0};
-
+     int testarr[10]={4,5,8,11,100,121,99,22,1000,555};
+     int alpharr[100]={0};
     while(1){
         printf("\nMENU\n");
         printf("****\n");
@@ -67,6 +69,18 @@ int main(){
         printf("29. Find largest independent subset of a tree (LISS)\n");
         printf("30. Convert a list to tree\n");
         printf("31. Find max weight of increasing subarry\n");
+        printf("32. Find maximum in a range\n");
+        printf("33. Interpretations of array of digits\n");
+        printf("34. Print postorder from inorder and preorder\n");
+        printf("35. Find odd depth of a leaf node\n");
+        printf("36. check if all leaf nodes are at same level\n");
+        printf("37. Print left view of a tree\n");
+        printf("38. Prune a tree\n");
+        printf("39. convert leaves of a tree to list\n");
+        printf("40. Deepest left leaf\n");
+        printf("41. Convert Binary tree to D-List -method 4\n");
+        printf("42. FindLCA\n");
+        printf("43. Insert and search in BST\n");
 
         scanf("%d",&k);
         switch(k)
@@ -78,7 +92,7 @@ int main(){
                      intTree->left->left = (tree_int*)newNode(1);
                      intTree->left->right = (tree_int*)newNode(3);
                      
-                     printf("Preorder Traversal\n");
+                     printf("Pretemporder Traversal\n");
                      preorderTraverseInt(intTree);
                      printf("\n");
 
@@ -112,6 +126,7 @@ int main(){
                      printf("\n");
                      printf("Size of a tree =%d\n",sizeofTree(intTree));
                      printf("Depth of a tree =%d\n",depth(intTree));
+                     printf("Depth/height of a tree in ITR=%d\n",heightofTreeItr(intTree));
 
                      printf("paths of array\n");
                      printPaths(intTree);
@@ -335,6 +350,9 @@ int main(){
                      scanf("%d",&k);
                      printf("ancestors::::\n");
                      printAncestors(intTree,k);
+                     printf("\n");
+                     printf("Ancestors::ITR\n");
+                     printAncestorsItr(intTree,k);
                      printf("\n");
                      break;
               case 14:
@@ -634,10 +652,166 @@ int main(){
                     i= findMaxWeight(num,weight,k);
                     printf("maximum weight = %d\n",i);
                     break;
-                    
+               case 32:
+
+                    API_maxbetweenIndices(testarr,0,9,10);
+                    break;
     
 
-                   
+               case 33:
+                    printf("Enter the number of elements\n");
+                    scanf("%d",&k);
+                    printf("Enter the elements\n");
+                    for(i=0;i<k;i++)
+                    {
+                        scanf("%d",&alpharr[i]);
+                    }
+                    arrayToString(alpharr,k);
+                    break;
+               case 34:
+                    printf("Printing\n");
+                    k = sizeof(inor)/sizeof(inor[0]);
+                    printPostOrderFronInPre(inor,preor,k);
+                    printf("\n");
+                    break;
+               case 35:
+                     intTree = (tree_int*)newNode(1);
+                     intTree->left =  (tree_int*)newNode(2);
+                     intTree->right =(tree_int*)newNode(3);
+                     intTree->left->left = (tree_int*)newNode(4);
+#if 1
+                     intTree->right->right = (tree_int*)newNode(7);
+                     intTree->right->left = (tree_int*)newNode(6);
+                     intTree->right->left->left =(tree_int*)newNode(9);
+                     intTree->right->left->left->right =(tree_int*)newNode(10);
+
+                     intTree->right->right->right =(tree_int*)newNode(8);
+                     intTree->right->right->right->right =(tree_int*)newNode(22);
+                     intTree->right->right->right->right->right =(tree_int*)newNode(23);
+                     intTree->right->right->right->right->right->right =(tree_int*)newNode(24);
+                     intTree->right->right->right->right->right->right->right =(tree_int*)newNode(25);
+#endif                
+                     k=maximumOddDepth(intTree,1);
+                     if(k==INT_MIN)
+                     {
+                         printf("No leaft at odd depth\n");
+                     }
+                     else
+                        printf("Maximum odd depth is :%d\n",k);
+                    break;
+               case 36:
+                     intTree = (tree_int*)newNode(1);
+                     intTree->left =  (tree_int*)newNode(2);
+                     intTree->right =(tree_int*)newNode(3);
+                     intTree->right->right =(tree_int*)newNode(3);
+                     intTree->left->left = (tree_int*)newNode(4);
+
+                        k= 0;
+                     i = checkAllLeafsAreSameLevel(intTree,1,&k);
+                     if(i==1)
+                     {
+                         printf("All at same level\n");
+                     }
+                     else
+                     {
+                         printf("Not at same level\n");
+                     }
+                     break;
+              case 37:
+                     intTree = (tree_int*)newNode(1);
+                     intTree->left =  (tree_int*)newNode(2);
+                     intTree->right =(tree_int*)newNode(3);
+                     intTree->right->right =(tree_int*)newNode(3);
+                     intTree->left->left = (tree_int*)newNode(4);
+                     k=0;
+                     printLeftView(intTree,1,&k);
+                     break;
+              case 38:
+                     intTree = (tree_int*)newNode(1);
+                     intTree->left =  (tree_int*)newNode(2);
+                     intTree->right =(tree_int*)newNode(3);
+                     intTree->right->right =(tree_int*)newNode(8);
+                     intTree->left->left = (tree_int*)newNode(4);
+                     prune(intTree,10);
+                     preorderIterative(intTree); 
+                     break;
+
+              case 39:
+                     intTree = (tree_int*)newNode(1);
+                     intTree->left =  (tree_int*)newNode(2);
+                     intTree->left->left = (tree_int*)newNode(4);
+                     intTree->left->right = (tree_int*)newNode(5);
+                     intTree->left->left->left = (tree_int*)newNode(7);
+                     intTree->left->left->right = (tree_int*)newNode(8);
+
+                     intTree->right =(tree_int*)newNode(3);
+                     intTree->right->right =(tree_int*)newNode(6);
+                     intTree->right->right->left =(tree_int*)newNode(9);
+                     intTree->right->right->right =(tree_int*)newNode(10);
+                     convertBinaryTreeLeavesToList(intTree);
+                     break;
+             case 40:
+                     intTree = (tree_int*)newNode(1);
+                     intTree->left =  (tree_int*)newNode(2);
+                     intTree->left->left = (tree_int*)newNode(4);
+
+                     intTree->right =(tree_int*)newNode(3);
+                     intTree->right->right =(tree_int*)newNode(6);
+                     intTree->right->left =(tree_int*)newNode(5);
+                     intTree->right->left->left =(tree_int*)newNode(7);
+                     intTree->right->left->left->left =(tree_int*)newNode(9);
+                     intTree->right->right->right =(tree_int*)newNode(8);
+                     intTree->right->right->right->right =(tree_int*)newNode(10);
+                     DeepestLeftLeaf(intTree);
+                     break;
+             case 41:
+                     intTree = (tree_int*)newNode(1);
+                     intTree->left =  (tree_int*)newNode(2);
+                     intTree->left->left = (tree_int*)newNode(4);
+                     intTree->left->right = (tree_int*)newNode(5);
+                     intTree->left->left->left = (tree_int*)newNode(7);
+                     intTree->left->left->right = (tree_int*)newNode(8);
+
+                     intTree->right =(tree_int*)newNode(3);
+                     intTree->right->right =(tree_int*)newNode(6);
+                     intTree->right->right->left =(tree_int*)newNode(9);
+                     intTree->right->right->right =(tree_int*)newNode(10);
+                     ConvertTreeToListInorder(intTree);
+                     break;
+            case 42: 
+                      intTree = (tree_int*)newNode(1);
+                     intTree->left =  (tree_int*)newNode(2);
+                     intTree->left->left = (tree_int*)newNode(4);
+                     intTree->left->right = (tree_int*)newNode(5);
+
+                     intTree->right =(tree_int*)newNode(3);
+                     intTree->right->left =(tree_int*)newNode(13);
+                     intTree->right->right =(tree_int*)newNode(12);
+
+                     temp = (tree_int*)findLCA(intTree,13,12);
+                     if(temp)
+                         printf("LCA of 12 and 13 is %d\n",temp->data);
+                     else
+                         printf("LCA of 12 and 13 does not exist\n");
+                     break;
+            case 43:
+                     intTree=NULL;
+                     intTree=(tree_int*)insertToBST(intTree,9);
+                     intTree=(tree_int*)insertToBST(intTree,4);
+                     intTree=(tree_int*)insertToBST(intTree,5);
+                     intTree=(tree_int*)insertToBST(intTree,11);
+
+                     temp = (tree_int*)searchBST(intTree,4);
+                     if(temp==NULL)
+                     {
+                         printf("Given key  is not part of BST\n");
+                     }
+                     else
+                     {
+                         printf("Key exists at %p\n",temp);
+                     }
+                     break;
+                
 
 
        }

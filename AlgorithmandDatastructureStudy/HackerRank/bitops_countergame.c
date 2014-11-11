@@ -17,6 +17,7 @@ unsigned long long power(unsigned long long base, unsigned int exp)
      return result;
 
 }
+#if 0
 unsigned int maxbitset(unsigned long long n)
 {
     const unsigned long long  b[] = {0x2, 0xC, 0xF0, 0xFF00, 0xFFFF0000,0xFFFFFFFF00000000};
@@ -33,6 +34,7 @@ unsigned int maxbitset(unsigned long long n)
           } 
     }
 }
+#endif
 int getWinner(unsigned long long n,unsigned int w)
 {
 
@@ -64,7 +66,7 @@ int main()
     int res;
 
     scanf("%d",&t);
-    for(i=0;i<n;i++)
+    for(i=0;i<t;i++)
     {
         scanf("%llu",&n);
         if(n==1)
@@ -80,7 +82,6 @@ int main()
         {
             printf("Richard\n");
         }
-
-
     }
+    return 0;
 }

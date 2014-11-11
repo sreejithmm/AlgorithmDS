@@ -2596,17 +2596,17 @@ void printLeftView(tree_int* root,int level, int* maxlevel)
 tree_int* pruneUtil(tree_int* root, int k, int *sum)
 {
     int localsum;
+    int rightlocalsum;
+
     if (root == NULL)
         return NULL;
 
-    *sum+=root->data;
-    localsum = *sum;
-    root->left = pruneUtil(root->left,k,sum);
-    if(*sum <k)
-    {
-        *sum = localsum;
-        root->right = pruneUtil(root->right,k,sum);
-    }
+    localsum = *sum+root->data;
+    rightlocalsum = localsum;
+    root->left = pruneUtil(root->left,k,&localsum);
+    root->right = pruneUtil(root->right,k,&rightlocalsum);
+
+    *sum = max(localsum,rightlocalsum);
     if(*sum <k)
     {
         free(root);
@@ -2623,8 +2623,483 @@ void prune(tree_int* root,int k)
 
     root = pruneUtil(root,k,&sum);
 }
+tree_int* convertBinarTreeLeavesToListUtil(tree_int* root, tree_int** head)
+{
+    if(root==NULL)
+    {
+        return NULL;
+    }
+    if(root->left == NULL && root->right==NULL)
+    {
+        root->right = *head;
+        root->left = NULL;
+        if(*head!=NULL)
+        {
+            (*head)->left = root;
+        }
+        *head = root;
+        return NULL;
+    }
+    root->right = convertBinarTreeLeavesToListUtil(root->right, head);
+    root->left = convertBinarTreeLeavesToListUtil(root->left, head);
+    
+    return root;
+}
+void printListCreatedFromTree(tree_int* root)
+{
+    tree_int* prev=NULL;
+    if(root==NULL){
+        printf("DEBUG:printListCreatedFromTree: NULL list\n");
+        return;
+    }
+
+    printf("Forward direction:\n");
+    while(root!=NULL)
+    {
+        printf("%d ",root->data);
+        prev=root;
+        root = root->right;
+    }
+    printf("\nReverse direction:\n");
+    while(prev!=NULL)
+    {
+        printf("%d ",prev->data);
+        prev= prev->left;
+    }
+    printf("\n");
+    return;
+
+}
+tree_int* convertBinaryTreeLeavesToList(tree_int* root)
+{
+    tree_int* headList=NULL;
+    root = convertBinarTreeLeavesToListUtil(root,&headList);
+    printf("Binary tree after conversion\n");
+    preorderIterative(root);
+    printf("\nLinked list created\n");
+    printListCreatedFromTree(headList);
+    printf("\n");
+    return root;
+}
+
+int DeepestLeftLeafUtil(tree_int* root, int isleft,int level)
+{
+    int d;
+    if(root==NULL)
+        return 0;
+    if(root->left == NULL && root->right==NULL && isleft==1)
+    {
+        return level;
+    }
+
+    d = max(DeepestLeftLeafUtil(root->left,1,level+1),DeepestLeftLeafUtil(root->right,0,level+1));
+    return d;
+}
+
+int DeepestLeftLeaf(tree_int* root)
+{
+    int depth;
+    int isLeft=1;
+    int level =1 ;
+    if(root==NULL)
+        return 0;
+   
+    depth = DeepestLeftLeafUtil(root,isLeft,level);
+    printf("Deepest level : %d\n",depth);
+    return depth;
+}
+
+/* convert tree to list using Static */
+
+
+tree_int* ConvertTreeToListInorderUtil(tree_int* root,tree_int** head)
+{
+
+    static tree_int* prev=NULL;
+    if (root==NULL)
+        return NULL;
+    
+    
+
+     ConvertTreeToListInorderUtil(root->left,head);
+
+    if(prev == NULL)
+    {
+            *head = root;
+    }
+    else
+    {
+        root->left = prev;
+        prev->right = root;
+    }
+    prev = root;
+
+    ConvertTreeToListInorderUtil(root->right,head);
+    return root;
+}
+
+void ConvertTreeToListInorder(tree_int* root)
+{
+    tree_int* headList;
+    if(root == NULL)
+    {
+        printf("DEBUG:ConvertTreeToListInorder: Binary tree is non existant\n");
+    }
+    ConvertTreeToListInorderUtil(root,&headList);
+    printListCreatedFromTree(headList);
+    return;
+}
+
+
+tree_int*  findLCA(tree_int* root,int n1, int n2)
+{
+
+    tree_int* leftlca;
+    tree_int* rightlca;
+
+    if(root == NULL)
+        return NULL;
+
+    if(root->data == n1 || root->data == n2)
+    {
+        return root;
+    }
+
+    leftlca = findLCA(root->left,n1,n2);
+    rightlca = findLCA(root->right,n1,n2);
+
+    if(leftlca && rightlca)
+    {
+        return root;
+    }
+    return((leftlca!=NULL)?leftlca:rightlca);
+    
+}
+
+int findLevelUtil(tree_int* root,int val,int level)
+{
+    int dl,dr;
+    if(root==NULL)
+        return 0;
+    if(root->data == val)
+        return level;
+    dl= findLevelUtil(root->left,val,level+1);
+    dr= findLevelUtil(root->right,val,level+1);
+
+    return ((dl!=0)?dl:dr);
+
+}
+int findLevel(tree_int* root, int val)
+{
+    return(findLevelUtil(root,val,1));
+}
+int DistanceBetweenNodes(tree_int* root, int n1, int n2)
+{
+    tree_int* lca;
+    int d1,d2,d,lca2;
+
+    lca= findLCA(root,n1,n2);
+    lca2=findLevel(root,lca->data);
+    d1 = findLevel(root,n1);
+    d2= findLevel(root,n2);
+    if(d1==0 && d2==0)
+        return -1;
+    d= d1+d2-lca2;
+
+    return d;
+}
+
+
+int findIndexinInorTree(int in[],int level[],int levelstrt, int sidx, int eidx,int size)
+{
+    int i=-1;
+    int j=-1;
+    for(i=levelstrt;i<size;i++)
+        for(j=sidx;j<=eidx;j++)
+        {
+            if(in[j] == level[i])
+            {
+                return j;
+            }
+        }
+    return -1;
+}
+
+
+tree_int* ConstructTreeFromInandLevel
+        (int inor[],int levelor[], int strtidx, int endidx, int size,int levelstrt)
+{
+
+    int idx;
+    tree_int* node;
+    
+
+    if(strtidx == endidx)
+    {
+        node = (tree_int*)newNode(inor[strtidx]);
+    }
+    if(strtidx < 0 || strtidx >=size)
+    {
+        return NULL;
+    }
+    idx= findIndexinInorTree(inor,levelor,levelstrt,strtidx,endidx,size);
+    if(idx==-1)
+        return NULL;
+    node = (tree_int*)newNode(inor[idx]);
+
+    node->left = ConstructTreeFromInandLevel(inor,levelor,strtidx,idx-1,size,levelstrt+1);
+    node->right = ConstructTreeFromInandLevel(inor,levelor,idx+1,endidx,size,levelstrt+1);
+    return node;
+}
+
+tree_int* insertToBST(tree_int* root,int val)
+{
+    tree_int* node;
+    if(root==NULL)
+    {
+        node = (tree_int*)newNode(val);
+        root = node;
+    }
+    else
+    {
+
+        if(val < root->data)
+        {
+            root->left = insertToBST(root->left,val);
+        }
+        else
+        {
+            root->right = insertToBST(root->right,val);
+        }
+    }
+    return root;
+}
+
+
+tree_int* searchBST(tree_int* root, int key)
+{
+    tree_int* node;
+    if(root==NULL || root->data == key)
+        return root;
+    if(key<root->data)
+    {
+        node = (tree_int*)searchBST(root->left,key);
+    }
+    else
+    {
+        node = (tree_int*)searchBST(root->right,key);
+    }
+    return node;
+}
+tree_int* findInorderSuccessor(tree_int* node)
+{
+    if(node == NULL)
+        return NULL;
+    if(node->right != NULL)
+        node = node->right;
+    else
+        return NULL;
+    while(node->left !=NULL)
+    {
+        node = node->left;
+    }
+    return node;
+}
+tree_int* deleteNodeFromBST(tree_int* root,int key)
+{
+    tree_int* tmp;
+    if(root == NULL)
+        return NULL;
+
+
+    if(root->data < key)
+    {
+        root->right = deleteNodeFromBST(root->right,key);
+    }
+    else if(root->data > key)
+    {
+        root->left = deleteNodeFromBST(root->left,key);
+    }
+    else
+    {
+        if(root->right == NULL)
+        {
+            tmp = root->left;
+            free(root);
+            return tmp;
+        }
+        else if(root->left==NULL)
+        {
+            tmp = root->right;
+            free(root);
+            return tmp;
+        }
+
+        tmp = findInorderSuccessor(root);
+        root->data = tmp->data;
+        root->right = deleteNodeFromBST(root->right,root->data);
+        return root;
+    }
+
+    
+}
+
+
+int findMinimuminBST(tree_int* root)
+{
+    if (root==NULL)
+    {
+        return -1;
+    }
+    if(root->left == NULL)
+    {
+        return root->data;
+    }
+    return(findMinimuminBST(root->left));
+}
+
+
+void findInorderPreSuc(tree_int* root, int* pre, int* suc,int key)
+{
+    tree_int* tmp;
+    if(root == NULL)
+    {
+        return ;
+    }
+    if(root->data < key)
+    {
+        *pre=root->data;
+        findInorderPreSuc(root->right,pre,suc,key);
+    }
+    else if(root->data > key)
+    {
+        *suc = root->data;
+        findInorderPreSuc(root->left,pre,suc,key);
+    }
+    else if(root->data == key)
+    {
+        if(root->left != NULL)
+        {
+            tmp = root->left;
+            while(tmp->right != NULL)
+                tmp = tmp->right;
+            *pre = tmp->data;
+        }
+        if(root->right != NULL)
+        {
+            tmp = root->right;
+            while(tmp->left != NULL)
+            {
+                tmp = tmp->left;
+            }
+            *suc = tmp->data;
+             
+        }
+    }
+    
+    return;
+}
+
+
+int checkifBSTUtil(tree_int* root, int min,int max)
+{
+    if(root ==NULL)
+        return 1;
+
+    if(root->data > max && root->data < min)
+    {
+        return 0;
+    }
+    return ( checkifBSTUtil(root->left,min,root->data-1)
+             && checkifBSTUtil(root->right,root->data+1,max));
+
+}
+
+int checkifBST(tree_int* root)
+{
+    int min=INT_MIN;
+    int max=INT_MAX;
+    int result;
+
+    result = checkifBSTUtil(root,min,max);
+    
+    return result;
+}
 
 
 
 
+tree_int* findLCAofBST(tree_int* root,tree_int* n1,tree_int* n2)
+{
+    if(root==NULL)
+        return NULL;
+    if(root->data >n1->data && root->data > n2->data)
+    {
+        return(findLCAofBST(root->left,n1,n2));
+    }
+    else if((root->data <n1->data) && (root->data <n2->data))
+    {
+        return (findLCAofBST(root->right,n1,n2));
+    }
+    return root;
+}
+
+
+
+int findKthSmallestInBST(tree_int* root, int k)
+{
+    mystack* s=NULL;
+    tree_int* temp=root;
+    int n =0;
+    if(root==NULL)
+        return INT_MIN;
+
+    while(temp!=NULL)
+    {
+        push(&s,temp);
+        temp = temp->left;
+    }
+    while(s != NULL)
+    {
+        temp = pop(&s);
+        n++;
+        if(n==k)
+            return temp->data;
+        if(temp->right!=NULL)
+        {
+            temp=temp->right;
+            while(temp!=NULL)
+            {
+                push(&s,temp);
+                temp=temp->left;
+            }
+        }
+
+    }
+}
+
+
+void printBSTKeyInaRange(tree_int* root,int k1, int k2)
+{
+
+    if(root==NULL)
+        return;
+    if(root->data < k1)
+    {
+        printBSTKeyInaRange (root->right,k1,k2);
+    }
+    /*gfk soln - test it*/
+#if 0
+       if ( k1 <= root->data && k2 >= root->data )
+                printf("%d ", root->data );
+#endif 
+    if(root->data >k2)
+    {
+        printBSTKeyInaRange(root->left,k1,k2);
+    }
+/* in gfk soln, remove below line */
+    printf("%d ",root->data);
+    return;
+
+}
 
