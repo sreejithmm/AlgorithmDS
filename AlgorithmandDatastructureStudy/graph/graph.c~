@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+graph* createGraph(int nodes)
+{
+	
+	
+	
+
+}
+
+
