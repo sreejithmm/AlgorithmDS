@@ -83,3 +83,82 @@ printGraph (graph * gr)
   return;
 
 }
+
+myqueue* createQueue(int capa)
+{
+	myqueue* q = (myqueue*)malloc(sizeof(myqueue));
+	int *arr = (int*)calloc(capa,sizeof(int));
+	q->arr = arr;
+	q->strtidx = 0;
+	q->endidx= 0;
+	q->cap = capa;
+	q->size = 0;
+	return q;
+
+}
+
+void enqueue(myqueue* q, int num)
+{
+	if(q==NULL)
+		return;
+	if(q->arr == NULL)
+		return;
+
+	if(q->size == q->cap)
+	{
+		printf("Queue full..return\n");
+		return;
+	}
+
+	if(q->size == 0)
+	{
+		q->startidx=0;
+		q->endidx = 0;
+		q->size = 1;
+	}
+
+}
+
+void graph_doBSF(graph* gr,int origin)
+{
+	int temp= 0;
+	graphArrnode* node;
+	myqueue* q;
+
+	if(gr==NULL)
+	{
+		printf("Err!!Empty graph. \n");
+		return;
+	}
+	if(gr->num == 0 || (origin >=gr->num))
+	{
+		printf("ERR!! no elements in graph\n");
+		return;
+	}
+
+	q= createQueue(gr->num);
+	int *arr=(int*)calloc(qr->num,sizeof(int));
+	memset(arr,0,sizeof(int)*qr->num);
+	enqueue(q,origin);
+	arr[origin]=1;
+
+	while(!isQueueEmpty())
+	{
+		temp = dequeue(q);
+		printf("%d ",temp);
+		node = gr->ArrList[temp].head;
+		while(node!=NULL)
+		{
+			if(arr[node->dest] == 0)
+				enqueue(q,node->dest);
+
+		}
+
+	}
+	printf("\n");
+
+	return;
+	
+}
+
+

@@ -17,3 +17,11 @@ typedef struct _graph{
 	graphArrList* ArrList;
 	
 }graph;
+
+typedef struct {
+	int *arr;
+	int strtidx;
+	int endidx;
+	int cap;
+	int size;
+}myqueue;
