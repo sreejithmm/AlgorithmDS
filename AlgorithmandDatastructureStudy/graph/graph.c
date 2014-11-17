@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "graph.h"
+#include <limits.h>
+#include <string.h>
 
 graph *
 createGraph (int nodes)
@@ -89,12 +91,22 @@ myqueue* createQueue(int capa)
 	myqueue* q = (myqueue*)malloc(sizeof(myqueue));
 	int *arr = (int*)calloc(capa,sizeof(int));
 	q->arr = arr;
-	q->strtidx = 0;
-	q->endidx= 0;
+	q->front = 0;
+	q->rear= capa-1;
 	q->cap = capa;
 	q->size = 0;
 	return q;
 
+}
+int isQueueEmpty(myqueue* q)
+{
+	int t=0;
+	if(q)
+	{
+		if(q->size == 0)
+			t=1;
+	}
+	return t;
 }
 
 void enqueue(myqueue* q, int num)
@@ -109,13 +121,24 @@ void enqueue(myqueue* q, int num)
 		printf("Queue full..return\n");
 		return;
 	}
+	q->rear = (q->rear+1)%(q->cap);
+	q->arr[q->rear] = num;
+	q->size=+1;
+	return;
 
-	if(q->size == 0)
+}
+
+int dequeue(myqueue* q)
+{
+	int temp=INT_MIN;
+	if(!isQueueEmpty(q))
 	{
-		q->startidx=0;
-		q->endidx = 0;
-		q->size = 1;
+		temp = q->arr[q->front];
+		q->front = (q->front+1)%(q->cap);
+		q->size=-1;
+
 	}
+	return temp;
 
 }
 
@@ -137,12 +160,12 @@ void graph_doBSF(graph* gr,int origin)
 	}
 
 	q= createQueue(gr->num);
-	int *arr=(int*)calloc(qr->num,sizeof(int));
-	memset(arr,0,sizeof(int)*qr->num);
+	int *arr=(int*)calloc(gr->num,sizeof(int));
+	memset(arr,0,(sizeof(int)*gr->num));
 	enqueue(q,origin);
 	arr[origin]=1;
 
-	while(!isQueueEmpty())
+	while(!isQueueEmpty(q))
 	{
 		temp = dequeue(q);
 		printf("%d ",temp);

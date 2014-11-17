@@ -20,8 +20,8 @@ typedef struct _graph{
 
 typedef struct {
 	int *arr;
-	int strtidx;
-	int endidx;
+	int front;
+	int rear;
 	int cap;
 	int size;
 }myqueue;
