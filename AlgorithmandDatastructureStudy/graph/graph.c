@@ -123,7 +123,7 @@ void enqueue(myqueue* q, int num)
 	}
 	q->rear = (q->rear+1)%(q->cap);
 	q->arr[q->rear] = num;
-	q->size=+1;
+	q->size+=1;
 	return;
 
 }
@@ -135,7 +135,7 @@ int dequeue(myqueue* q)
 	{
 		temp = q->arr[q->front];
 		q->front = (q->front+1)%(q->cap);
-		q->size=-1;
+		q->size-=1;
 
 	}
 	return temp;
@@ -172,8 +172,11 @@ void graph_doBSF(graph* gr,int origin)
 		node = gr->ArrList[temp].head;
 		while(node!=NULL)
 		{
-			if(arr[node->dest] == 0)
+			if(arr[node->dest] == 0) {
 				enqueue(q,node->dest);
+				arr[node->dest] = 1;
+			}
+			node = node-> next;
 
 		}
 

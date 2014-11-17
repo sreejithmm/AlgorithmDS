@@ -25,7 +25,10 @@ int main()
 				addVertices(gr,1,4);
 				addVertices(gr,2,3);
 				addVertices(gr,3,4);
+
 				printGraph(gr);
+				printf("\nBFS\n");
+				graph_doBSF(gr,0);
 				break;
 		}
 
