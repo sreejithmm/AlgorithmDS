@@ -187,4 +187,12 @@ void graph_doBSF(graph* gr,int origin)
 	
 }
 
+int graph_IsBipartite(graph* gr)
 
+{
+}
+
+
+int graph_getDiameter(graph* gr)
+{
+}
