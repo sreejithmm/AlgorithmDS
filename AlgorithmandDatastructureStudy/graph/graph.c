@@ -187,12 +187,44 @@ void graph_doBSF(graph* gr,int origin)
 	
 }
 
-int graph_IsBipartite(graph* gr)
-
+int graph_IsBipartite(graph* gr,int origin)
 {
+	myqueue* q = NULL;
+	graphArrnode *node;
+	q= createQueue();
+	q= createQueue(gr->num);
+	int *arr=(int*)calloc(gr->num,sizeof(int));
+	memset(arr,0,(sizeof(int)*gr->num));
+	enqueue(q,origin);
+	arr[origin]=1;
+
+	while(!isQueueEmpty(q))
+	{
+		temp = dequeue(q);
+//		printf("%d ",temp);
+		node = gr->ArrList[temp].head;
+		while(node!=NULL)
+		{
+			if(arr[node->dest] == 0) {
+				enqueue(q,node->dest);
+				arr[node->dest] = arr[temp]+1;
+			}
+			else if(arr[node->dest] == arr[temp])
+			{
+				printf("Non bipartite\n");
+				return;
+
+			}
+			node = node-> next;
+
+		}
+
+	}
+	printf("Bipartite\n");
+
+
+
+
 }
 
 
-int graph_getDiameter(graph* gr)
-{
-}
