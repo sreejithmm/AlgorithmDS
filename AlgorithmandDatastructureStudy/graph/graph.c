@@ -253,4 +253,5 @@ void graph_doDFS(graph* gr, int origin)
 	bzero(arr,gr->num*sizeof(int));
 	doDFS(gr,origin,arr);
 	printf("\n");
+
 }
