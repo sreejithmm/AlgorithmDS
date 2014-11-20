@@ -28,7 +28,12 @@ int main()
 
 				printGraph(gr);
 				printf("\nBFS\n");
-				graph_doBSF(gr,0);
+				graph_doBFS(gr,0);
+				printf("\nDFS\n");
+				graph_doDFS(gr,0);
+
+				graph_IsBipartite(gr,0);
+
 				break;
 		}
 

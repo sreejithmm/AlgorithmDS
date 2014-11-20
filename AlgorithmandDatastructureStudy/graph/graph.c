@@ -142,7 +142,7 @@ int dequeue(myqueue* q)
 
 }
 
-void graph_doBSF(graph* gr,int origin)
+void graph_doBFS(graph* gr,int origin)
 {
 	int temp= 0;
 	graphArrnode* node;
@@ -187,11 +187,12 @@ void graph_doBSF(graph* gr,int origin)
 	
 }
 
-int graph_IsBipartite(graph* gr,int origin)
+void graph_IsBipartite(graph* gr,int origin)
 {
 	myqueue* q = NULL;
+	int temp;
 	graphArrnode *node;
-	q= createQueue();
+
 	q= createQueue(gr->num);
 	int *arr=(int*)calloc(gr->num,sizeof(int));
 	memset(arr,0,(sizeof(int)*gr->num));
@@ -227,4 +228,29 @@ int graph_IsBipartite(graph* gr,int origin)
 
 }
 
+void doDFS(graph* gr, int vert, int arr[])
+{
+	graphArrnode* node;
+	arr[vert] = 1;
+	printf("%d ",vert);
+	node = gr->ArrList[vert].head;
+	while(node !=NULL)
+	{
+		if(arr[node->dest] ==0)
+		{
+			doDFS(gr,node->dest,arr);
+		}
+		node = node->next;
+	}
+        
+}
 
+
+void graph_doDFS(graph* gr, int origin)
+{
+   
+	int *arr = (int*)calloc(gr->num,sizeof(int));
+	bzero(arr,gr->num*sizeof(int));
+	doDFS(gr,origin,arr);
+	printf("\n");
+}
