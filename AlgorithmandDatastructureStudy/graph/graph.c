@@ -255,3 +255,35 @@ void graph_doDFS(graph* gr, int origin)
 	printf("\n");
 
 }
+
+
+int isLoopPresentUtil(graph* gr, int vert, int arr[],int level)
+{
+	graphArrnode* node;
+	arr[vert] = level;
+	node = gr->ArrList[vert].head;
+	while(node !=NULL)
+	{
+		if(arr[node->dest] ==0)
+		{
+			isLoopPresentUtil(gr,node->dest,arr,level+1);
+		}
+		else if(arr[node->dest] != level-1)
+		{
+		    return 0;
+		}
+
+		node = node->next;
+	}
+	return 1;
+
+}
+int isLoopPresent(graph* gr,int origin)
+{
+	int level = 0;
+	int *arr = (int*)calloc(gr->num,sizeof(int));
+	bzero(arr,gr->num*sizeof(int));
+	return(isLoopPresentUtil(gr,origin,arr,level));
+
+
+}
