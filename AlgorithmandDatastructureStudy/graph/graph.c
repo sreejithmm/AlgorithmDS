@@ -287,3 +287,8 @@ int isLoopPresent(graph* gr,int origin)
 
 
 }
+
+int isDoubleEdgedGraph(graph* gr, int origin)
+{
+   
+}
