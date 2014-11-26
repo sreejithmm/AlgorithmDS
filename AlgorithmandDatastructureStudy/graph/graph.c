@@ -288,7 +288,50 @@ int isLoopPresent(graph* gr,int origin)
 
 }
 
+int min(int x,int y)
+{
+	if(x>y)
+		return y;
+	else
+		return x;
+}
+int isDoubleEdgedGraphUtil(graph* gr, int vert, int arr[],int time[],int arrtime)
+{
+	graphArrnode* node=NULL;
+	int parentConn;
+
+	arr[vert]=1;
+	node = gr->ArrList[vert].head;
+
+	time[vert]=arrtime;
+	
+
+	while(node!=NULL)
+	{
+		if(arr[node->dest]==0)
+		{
+			parentConn=min(parentConn,isDoubleEdgedGraphUtil(gr,node->dest,arr));
+			if(parentConn >= vert || parentConn == INT_MIN)
+			{
+				
+				return INT_MIN;
+			}
+			
+		}
+		else
+		{
+			parentconn=min(time[vert],time[node->dest]);
+		}
+		node = node->next
+	}
+	return parentconn;
+}
 int isDoubleEdgedGraph(graph* gr, int origin)
 {
+	int *arr=(int*)calloc(gr->num,sizeof(int));
+	bzero(arr,gr->num* sizeof(int));
+	int *time=(int*)calloc(gr->num,sizeof(int));
+	bzero(time,gr->num*sizeof(int));
+	isDoubleEdgedGraphUtil(gr,origin,arr,time,0);
    
 }
