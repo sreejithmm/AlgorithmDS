@@ -22,10 +22,8 @@ int getMinCoinsUtil(int a[],int n,int s, int sumarr[])
 	}
 	for(i=0;i<n;i++)
 	{
-		if(s-a[i] > 0)
-		{
 			temp= min(temp,getMinCoinsUtil(a,n,s-a[i],sumarr));
-		}
+		
 	}
 	sumarr[s-1]=temp+1;
 	return sumarr[s-1];
