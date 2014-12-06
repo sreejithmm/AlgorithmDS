@@ -342,13 +342,23 @@ int isDoubleEdgedGraph(graph* gr, int origin)
    
 }
 
+
+heap* createHeap(graph* gr, int origin)
+{
+	heap* h = (heap*)malloc(sizeof(heap));
+        bzero(h,sizeof(heap));
+		
+	insertToHeap
+}
+
 int getShortestPath(graph* gr, int origin,int destination)
 {
 	int shPath=INT_MAX;
 	int *Vert = (int*)calloc(gr->num,sizeof(int));
-        heap* h= createHeap(gr,0,INT_MAX);
-
-
+        heap* h= createHeap(gr,origin);
+	
+	shPath = getShortestPathUtil(gr,h,Vert);
+	return shPath;
 	
 }
 

@@ -28,15 +28,15 @@ typedef struct {
 	int size;
 }myqueue;
 
-struct edge{
+typedef struct edge{
 
 	int source;
 	int dest;
 	int length;
 }edge_st;
 
-struct heap{
+typedef struct heap{
 
-    struct edge_st* edge;
+     edge_st edge[100];
 
 }heap;
