@@ -37,6 +37,6 @@ typedef struct edge{
 
 typedef struct heap{
 
-     edge_st edge[100];
+     edge_st* edge[100];
 
 }heap;

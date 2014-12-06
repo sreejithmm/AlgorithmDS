@@ -343,12 +343,41 @@ int isDoubleEdgedGraph(graph* gr, int origin)
 }
 
 
-heap* createHeap(graph* gr, int origin)
+heap* createHeap(graph* gr, int origin,int* size)
 {
 	heap* h = (heap*)malloc(sizeof(heap));
+	int size=0;/*heap array size*/
+	edge_st* temp;
         bzero(h,sizeof(heap));
 		
-	insertToHeap
+	for(i=0;i<gr->num;i++)
+	{
+		temp = (edge_st)*malloc(sizeof(edge_st));
+		temp->source = i;
+		temp->length = (i==origin)?0:INT_MAX;
+		insertToHeap(h,temp,&size);
+	}
+	return h;
+}
+
+edge_st* getMinHeap(heap* h)
+{
+	if(h==NULL)
+		return NULL;
+	return h->edge[0];
+}
+
+void deleteMinHeap(heap* h,int *size)
+{
+	if(h==NULL)
+		return;
+	swap(h->edge[0],h->edge[size-1]);
+
+	*size = *size -1;
+
+	heapify(h);
+	
+	return;
 }
 
 int getShortestPath(graph* gr, int origin,int destination)
