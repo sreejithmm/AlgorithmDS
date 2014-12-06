@@ -19,7 +19,7 @@ createGraph (int nodes)
 }
 
 void
-addVertices (graph * gr, int src, int dest)
+addVertices (graph * gr, int src, int dest,int isDirected,float weight)
 {
   graphArrnode *node = NULL;
 
@@ -39,14 +39,20 @@ addVertices (graph * gr, int src, int dest)
 
   node = (graphArrnode *) malloc (sizeof (graphArrnode));
   node->dest = dest;
+  node->len = weight;
+  node->pathLen=0;
   node->next = gr->ArrList[src].head;
   gr->ArrList[src].head = node;
 
-  node = (graphArrnode *) malloc (sizeof (graphArrnode));
-  node->dest = src;
-  node->next = gr->ArrList[dest].head;
-  gr->ArrList[dest].head = node;
-
+  if(!isDirected) 
+  {
+  	node = (graphArrnode *) malloc (sizeof (graphArrnode));
+	node->dest = src;
+        node->len = weight;
+	node->pathLen=0;
+        node->next = gr->ArrList[dest].head;
+        gr->ArrList[dest].head = node;
+  }
 
 
 }
@@ -339,6 +345,10 @@ int isDoubleEdgedGraph(graph* gr, int origin)
 int getShortestPath(graph* gr, int origin,int destination)
 {
 	int shPath=INT_MAX;
+	int *Vert = (int*)calloc(gr->num,sizeof(int));
+        heap* h= createHeap();
+
+
 	
 }
 

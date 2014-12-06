@@ -1,8 +1,8 @@
 
 typedef struct graphArrnode{
 	int dest;
-	int len;
-	int pathLen;
+	float len;
+	float pathLen;
 	struct graphArrnode* next;
 }graphArrnode;
 
@@ -27,3 +27,16 @@ typedef struct {
 	int cap;
 	int size;
 }myqueue;
+
+struct edge{
+
+	int source;
+	int dest;
+	int length;
+}edge_st;
+
+struct heap{
+
+    struct edge_st* edge;
+
+}heap;
