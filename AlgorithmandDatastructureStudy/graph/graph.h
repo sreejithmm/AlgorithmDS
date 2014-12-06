@@ -1,6 +1,8 @@
 
 typedef struct graphArrnode{
 	int dest;
+	int len;
+	int pathLen;
 	struct graphArrnode* next;
 }graphArrnode;
 

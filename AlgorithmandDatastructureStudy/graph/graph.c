@@ -335,3 +335,10 @@ int isDoubleEdgedGraph(graph* gr, int origin)
 	isDoubleEdgedGraphUtil(gr,origin,arr,time,0);
    
 }
+
+int getShortestPath(graph* gr, int origin,int destination)
+{
+	int shPath=INT_MAX;
+	
+}
+
