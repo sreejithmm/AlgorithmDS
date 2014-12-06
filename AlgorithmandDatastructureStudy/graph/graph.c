@@ -346,7 +346,7 @@ int getShortestPath(graph* gr, int origin,int destination)
 {
 	int shPath=INT_MAX;
 	int *Vert = (int*)calloc(gr->num,sizeof(int));
-        heap* h= createHeap();
+        heap* h= createHeap(gr,0,INT_MAX);
 
 
 	
