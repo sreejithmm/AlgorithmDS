@@ -416,6 +416,12 @@ void calculateMoves(int LadderArr[],int SnakeArr[],int board[],int nL, int nS)
 		/* when adding a vertex, add path to all elements greater than the vertex */
 		/* keep moving till ladder Arr is finished */
 		int i;
+		graph* gr;
+		heap* h;
+		int moves;
+		int size=0;
+		int *vert;
+
 		LadderArr[2*nL]=1;
 		LadderArr[2*nL+1]=100;
 		nL=2*nL+2;
@@ -426,8 +432,12 @@ void calculateMoves(int LadderArr[],int SnakeArr[],int board[],int nL, int nS)
 		{
 			printf("%d ",LadderArr[i]);
 		}		
-
-
+		gr=makeGraphFromArray(LadderArr,nL);
+		gr->num=nL;
+		h= createHeap(gr,1,&size);
+		h->size=size;
+		vert=(int*)calloc(gr->num,sizeof(int));
+		moves=getShortestPathUtil(gr,h,vert,100);
 
 
 }
