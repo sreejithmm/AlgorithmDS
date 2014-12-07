@@ -39,8 +39,8 @@ int main()
 				break;
 			case 2:
 				gr=(graph*)createGraph(5);
-				addVertices(gr,0,1,1,1.0);
-				addVertices(gr,0,2,1,2.0);
+				addVertices(gr,0,1,1,3.0);
+				addVertices(gr,0,2,1,8.0);
 				addVertices(gr,1,3,1,1.0);
 				addVertices(gr,2,4,1,1.0);
 				addVertices(gr,3,4,1,2.0);

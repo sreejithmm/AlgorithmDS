@@ -463,23 +463,36 @@ void deleteMinHeap(heap* h)
 	return;
 }
 
-void modifyHeap(heap* h, int ref, int newval)
+void modifyHeap(heap* h, int ref, float newval)
 {
 	int i;
+	int parent;
+	int newval_t;
 	for(i=0; i<h->size; i++)
 	{
 		if(h->edge[i]->source == ref)
 		{
-			if(h->edge[i]->length==INT_MAX)
+			if(h->edge[i]->length > newval)
 			{
-				h->edge[i]->length = 0;
+
+				h->edge[i]->length = newval;
 			}
-			h->edge[i]->length = h->edge[i]->length+newval;
+			else
+			{
+				/*Do nothing*/
+				return;
+			}
 			break;
 		}
 	}
-	swapEdge(h,0,i);
-	heapify(h,0,h->size);
+	parent = getParent(i);
+	while(parent && (h->edge[i]->length < h->edge[parent]->length))
+	{
+		swapEdge(h,i,parent);
+		i=parent;
+		parent = getParent(i);
+
+	}
 
 }
 
@@ -489,6 +502,7 @@ float getShortestPathUtil(graph* gr, heap* h, float vert[],int destination)
 	edge_st* temp_ed;
 	int temp_id;
 	int temp_dest;
+	float temp_len;
 	graphArrnode* head;
 
 	while(h->size)
@@ -499,7 +513,8 @@ float getShortestPathUtil(graph* gr, heap* h, float vert[],int destination)
 		while(head)
 		{
 			temp_dest = head->dest;
-			modifyHeap(h,temp_dest,head->len);
+			temp_len = head->len+temp_ed->length;
+			modifyHeap(h,temp_dest,temp_len);
 			head = head->next;
 		}
 		vert[temp_id] = temp_ed->length;

@@ -32,7 +32,7 @@ typedef struct edge{
 
 	int source;
 	int dest;
-	int length;
+	float length;
 }edge_st;
 
 typedef struct heap{
