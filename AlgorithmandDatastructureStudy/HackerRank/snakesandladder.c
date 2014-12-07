@@ -49,6 +49,9 @@ typedef struct heap{
 }heap;
 
 
+
+void calculateMoves(int LadderArr[],int SnakeArr[],int board[],int nL, int nS);
+
 graph *
 createGraph (int nodes)
 {
@@ -356,7 +359,7 @@ int main()
 	while(nT)
 	{
 		scanf("%d,%d",&nL,&nS);
-		LadderArr=(int*)calloc(2*nL,sizeof(int));
+		LadderArr=(int*)calloc(2*nL+2,sizeof(int));
 		SnakeArr=(int*)calloc(nS,sizeof(int));
 		for(i=0;i<nL;i++)
 		{
@@ -398,7 +401,12 @@ int main()
 }
 
 
-void calculateMoves(int LadderArr[],int SnakeArr,int board,int nL, int nS)
+int cmpfunc (const void * a, const void * b)
+{
+	   return ( *(int*)a - *(int*)b );
+}
+
+void calculateMoves(int LadderArr[],int SnakeArr[],int board[],int nL, int nS)
 {
 
 		/*create a graph*/
@@ -407,12 +415,17 @@ void calculateMoves(int LadderArr[],int SnakeArr,int board,int nL, int nS)
 		/* sort the ladder arra */
 		/* when adding a vertex, add path to all elements greater than the vertex */
 		/* keep moving till ladder Arr is finished */
-		LadderArr[nL]=1;
-		LadderArr[nL+1]=100;
-		nL+=2;
+		int i;
+		LadderArr[2*nL]=1;
+		LadderArr[2*nL+1]=100;
+		nL=2*nL+2;
 
+		qsort(LadderArr,nL,sizeof(int),cmpfunc);
 
-		
+		for(i=0;i<nL;i++)
+		{
+			printf("%d ",LadderArr[i]);
+		}		
 
 
 
