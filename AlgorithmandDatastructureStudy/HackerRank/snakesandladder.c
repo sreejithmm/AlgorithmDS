@@ -26,13 +26,6 @@ typedef struct _graph{
 	
 }graph;
 
-typedef struct {
-	int *arr;
-	int front;
-	int rear;
-	int cap;
-	int size;
-}myqueue;
 
 typedef struct edge{
 
@@ -50,7 +43,7 @@ typedef struct heap{
 
 
 
-void calculateMoves(int LadderArr[],int SnakeArr[],int board[],int nL, int nS);
+int calculateMoves(int LadderArr[],int SnakeArr[],int board[],int nL, int nS);
 
 graph *
 createGraph (int nodes)
@@ -117,11 +110,15 @@ printGraph (graph * gr)
     }
   if (gr->num == 0)
     {
+#ifdef DEBUG
       printf ("Nothing to print\n");
+#endif
     }
   if (gr->ArrList == NULL)
     {
+#ifdef DEBUG
       printf ("ERR..No adjacency list found\n");
+#endif
       return;
     }
   for (i = 0; i < gr->num; i++)
@@ -329,22 +326,6 @@ float getShortestPathUtil(graph* gr, heap* h, float vert[],int destination)
 
 }
 
-float getShortestPath(graph* gr, int origin,int destination)
-{
-	float shPath=INT_MAX;
-	int size;
-	float *Vert = (float*)calloc(gr->num,sizeof(float));
-        heap* h= createHeap(gr,origin,&size);
-	printf("\ngetShortestPath: heap created with size=%d\n",size);
-	h->size = size;
-
-	shPath = getShortestPathUtil(gr,h,Vert,destination);
-	return shPath;
-	
-}
-
-
-
 
 int main()
 {
@@ -354,6 +335,8 @@ int main()
 	int *LadderArr;
 	int *SnakeArr;
 	int board[101]={1};
+	int moves;
+
 	scanf("%d",&nT);
 	
 	while(nT)
@@ -391,7 +374,8 @@ int main()
 		}
 #endif	
 
-		calculateMoves(LadderArr,SnakeArr,board,nL,nS);
+		moves=calculateMoves(LadderArr,SnakeArr,board,nL,nS);
+		printf("%d\n",moves);
 		nT--;
 	}
 
@@ -406,38 +390,94 @@ int cmpfunc (const void * a, const void * b)
 	   return ( *(int*)a - *(int*)b );
 }
 
-void calculateMoves(int LadderArr[],int SnakeArr[],int board[],int nL, int nS)
+int isOK(int target,int pos,int board[])
+{
+	if(pos > target)
+		return 0;
+	if(pos == target)
+	{
+		return 1;
+	}
+	if (board[pos]==0)
+	{
+		return 0;
+	}
+	return 1;
+
+
+}
+int getMaxMoves(int src, int dest, int board[])
+{
+	int moves=0;
+	int temp=src;
+	if(board[src]==dest || src==dest)
+		return moves;
+	do{
+		if(isOK(dest,src+6,board)) temp+=6;
+		else if(isOK(dest,src+5,board)) temp+=5;
+		else if(isOK(dest,src+4,board)) temp+=4;
+		else if(isOK(dest,src+3,board)) temp+=3;
+		else if(isOK(dest,src+2,board)) temp+=2;
+		else if(isOK(dest,src+1,board)) temp+=1;
+		moves++;
+	}while(temp!=dest);
+	return moves;
+}
+graph* makeGraphFromArray(int arr[],int size,int board[])
+{
+	graph* gr;
+	int i,j;
+	int k;
+	gr= createGraph(101);
+	for(i=0;i<size;i++)
+	{
+		for(j=i+1;j<size;j++)
+		{
+			k = getMaxMoves(arr[i],arr[j],board);
+			addVertices(gr,arr[i],arr[j],1,k);
+		}
+
+	}
+#ifdef DEBUG
+	printGraph(gr);
+#endif
+
+}
+
+int calculateMoves(int LadderArr[],int SnakeArr[],int board[],int nL, int nS)
 {
 
 		/*create a graph*/
 		/*each vertex is from the LadderArr[], including a 1 and 100 */
 		/*mark the board array with ladder elements */
-		/* sort the ladder arra */
+		/* sort the ladder array */
 		/* when adding a vertex, add path to all elements greater than the vertex */
 		/* keep moving till ladder Arr is finished */
 		int i;
 		graph* gr;
 		heap* h;
-		int moves;
+		float moves;
 		int size=0;
-		int *vert;
+		float *vert;
 
 		LadderArr[2*nL]=1;
 		LadderArr[2*nL+1]=100;
 		nL=2*nL+2;
 
 		qsort(LadderArr,nL,sizeof(int),cmpfunc);
-
+#ifdef DEBUG
 		for(i=0;i<nL;i++)
 		{
 			printf("%d ",LadderArr[i]);
-		}		
-		gr=makeGraphFromArray(LadderArr,nL);
+		}
+#endif		
+		gr=makeGraphFromArray(LadderArr,nL,board);
 		gr->num=nL;
 		h= createHeap(gr,1,&size);
 		h->size=size;
-		vert=(int*)calloc(gr->num,sizeof(int));
+		vert=(float*)calloc(gr->num,sizeof(float));
 		moves=getShortestPathUtil(gr,h,vert,100);
-
+		
+		return moves;
 
 }
