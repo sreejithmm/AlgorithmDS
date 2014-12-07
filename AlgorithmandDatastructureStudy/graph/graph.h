@@ -38,5 +38,6 @@ typedef struct edge{
 typedef struct heap{
 
      edge_st* edge[100];
+     int size;
 
 }heap;

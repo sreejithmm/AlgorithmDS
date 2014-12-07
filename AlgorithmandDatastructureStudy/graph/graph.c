@@ -424,7 +424,7 @@ void heapify(heap* h,int index,int size)
 /*original code */
 
 
-heap* createHeap(graph* gr, int origin,int* size)
+heap* createHeap(graph* gr, int origin,int* size_val)
 {
 	heap* h = (heap*)malloc(sizeof(heap));
 	int size=0;/*heap array size*/
@@ -438,6 +438,7 @@ heap* createHeap(graph* gr, int origin,int* size)
 		temp->length = (i==origin)?0:INT_MAX;
 		insertToHeap(h,temp,&size);
 	}
+	*size_val = size;
 	return h;
 }
 
@@ -448,25 +449,67 @@ edge_st* getMinHeap(heap* h)
 	return h->edge[0];
 }
 
-void deleteMinHeap(heap* h,int *size)
+void deleteMinHeap(heap* h)
 {
 	if(h==NULL)
 		return;
 	swap(h->edge[0],h->edge[size-1]);
 
-	*size = *size -1;
+	h->size = h->size -1;
 
-	heapify(h,0,*size);
-	
+	heapify(h,0,h->size);
+
 	return;
+}
+
+void modifyHeap(heap* h, int ref, int newval)
+{
+	int i;
+	for(i=0; i<h->size; i++)
+	{
+		if(h->edge[i].source == ref)
+		{
+			h->edge[i].length = newval;
+			break;
+		}
+	}
+	heapify(h,i,h->size);
+
+}
+
+int getShortestPathUtil(graph* gr, heap* h, int vert[])
+{
+
+	edge_st* temp_ed;
+	int temp_id;
+	int temp_dest;
+
+	while(h->size)
+	{
+		temp_ed = getMinHeap(h);
+		temp_id = temp_ed->source;
+		head = gr->ArrList[source].head;
+		while(head)
+		{
+			temp_dest = head->dest;
+			modifyHeap(h,temp_dest,head->len);
+
+		}
+
+
+	}
+
 }
 
 int getShortestPath(graph* gr, int origin,int destination)
 {
 	int shPath=INT_MAX;
+	int size;
 	int *Vert = (int*)calloc(gr->num,sizeof(int));
-        heap* h= createHeap(gr,origin);
-	
+        heap* h= createHeap(gr,origin,&size);
+	printf("getShortestPath: heap created with size=%d\n",size);
+	h->size = size;
+
 	shPath = getShortestPathUtil(gr,h,Vert);
 	return shPath;
 	
