@@ -358,52 +358,48 @@ int getRightChild(int index)
     return((2*index)+2);
 }
 
-int insert(int heap[],int num,int* size)
+int insertToHeap(heap* h,edge_st* edge,int* size)
 {
     int location = *size;
     int parentnode=getParent(location);
 
     while(location >0)
     {
-        if(heap[parentnode] < num)
+        if(h->edge[parentnode].length < edge->length)
         {
     
-            heap[location] = num;
+            h->edge[location] = edge;
             *size = *size + 1;
             return 0;
         }
-        heap[location]=heap[parentnode];
+        h->edge[location]=h->edge[parentnode];
         location = parentnode;
         parentnode = getParent(location);
     }
-    heap[0]=num;
+    h->edge[0]=temp;
     *size = *size + 1;
     return 0;
 }
 
-int getMin(int heap[])
-{
-    return heap[0];
-}
 
-int getMinValueIdx(int heap[],int lidx, int ridx)
+int getMinValueIdx(heap* h,int lidx, int ridx)
 {
-    if(heap[lidx] > heap[ridx])
+    if(h->edge[lidx].length > h->edge[ridx].length)
     {
         return ridx;
     }
     return lidx;
 }
-void swap(int *a, int *b)
+void swapEdge(heap* h,int idx1, int idx2)
 {
-    int t;
-    t = *a;
-    *a = *b;
-    *b = t;
+    edge_st* t;
+    t = h->edge[idx1];
+    h->edge[idx1] = h->edge[idx2];
+    h->edge[idx2] = t;
     return ;
 }
 
-void heapify(int heap[],int index,int size)
+void heapify(heap* h,int index,int size)
 {
 
     int lidx = getleftChild(index);
@@ -412,12 +408,12 @@ void heapify(int heap[],int index,int size)
 
     while(lidx <size && ridx < size)
     {
-        smallestidx = getMinValueIdx(heap,lidx,ridx);
-        if(heap[smallestidx] > heap[index])
+        smallestidx = getMinValueIdx(h,lidx,ridx);
+        if(h->edge[smallestidx].length > h->edge[index].length)
         {
             return ;
         }
-        swap(&heap[smallestidx],&heap[index]);
+        swapEdge(h,smallestidx,index);
         index = smallestidx;
         lidx = getleftChild(index);
         ridx = getRightChild(index);
@@ -460,7 +456,7 @@ void deleteMinHeap(heap* h,int *size)
 
 	*size = *size -1;
 
-	heapify(h);
+	heapify(h,0,*size);
 	
 	return;
 }
