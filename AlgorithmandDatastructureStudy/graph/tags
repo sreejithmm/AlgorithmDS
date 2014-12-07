@@ -1,0 +1,65 @@
+ArrList	graph.h	19
+Mtest	test.c	/^int main()$/
+_graph	graph.h	16
+addVertices	graph.c	/^addVertices (graph * gr, int src, int dest,int isD/
+all	makefile	/^all:$/
+arr	graph.h	24
+cap	graph.h	27
+createGraph	graph.c	/^createGraph (int nodes)$/
+createHeap	graph.c	/^heap* createHeap(graph* gr, int origin,int* size_v/
+createQueue	graph.c	/^myqueue* createQueue(int capa)$/
+deleteMinHeap	graph.c	/^void deleteMinHeap(heap* h)$/
+dequeue	graph.c	/^int dequeue(myqueue* q)$/
+dest	graph.h	3
+dest	graph.h	34
+doDFS	graph.c	/^void doDFS(graph* gr, int vert, int arr[])$/
+edge	graph.h	31
+edge	graph.h	40
+edge_st	graph.h	36
+enqueue	graph.c	/^void enqueue(myqueue* q, int num)$/
+front	graph.h	25
+getMinHeap	graph.c	/^edge_st* getMinHeap(heap* h)$/
+getMinValueIdx	graph.c	/^int getMinValueIdx(heap* h,int lidx, int ridx)$/
+getParent	graph.c	/^int getParent(int index)$/
+getRightChild	graph.c	/^int getRightChild(int index)$/
+getShortestPath	graph.c	/^int getShortestPath(graph* gr, int origin,int dest/
+getShortestPathUtil	graph.c	/^int getShortestPathUtil(graph* gr, heap* h, int ve/
+getleftChild	graph.c	/^int getleftChild(int index)$/
+graph	graph.h	21
+graphArrList	graph.h	9
+graphArrList	graph.h	12
+graphArrnode	graph.h	2
+graphArrnode	graph.h	7
+graph_IsBipartite	graph.c	/^void graph_IsBipartite(graph* gr,int origin)$/
+graph_doBFS	graph.c	/^void graph_doBFS(graph* gr,int origin)$/
+graph_doDFS	graph.c	/^void graph_doDFS(graph* gr, int origin)$/
+head	graph.h	11
+heap	graph.h	38
+heap	graph.h	43
+heapify	graph.c	/^void heapify(heap* h,int index,int size)$/
+insertToHeap	graph.c	/^int insertToHeap(heap* h,edge_st* ed,int* size)$/
+isDoubleEdgedGraph	graph.c	/^int isDoubleEdgedGraph(graph* gr, int origin)$/
+isDoubleEdgedGraphUtil	graph.c	/^int isDoubleEdgedGraphUtil(graph* gr, int vert, in/
+isLoopPresent	graph.c	/^int isLoopPresent(graph* gr,int origin)$/
+isLoopPresentUtil	graph.c	/^int isLoopPresentUtil(graph* gr, int vert, int arr/
+isQueueEmpty	graph.c	/^int isQueueEmpty(myqueue* q)$/
+len	graph.h	4
+length	graph.h	35
+min	graph.c	/^int min(int x,int y)$/
+modifyHeap	graph.c	/^void modifyHeap(heap* h, int ref, int newval)$/
+myqueue	graph.h	29
+next	graph.h	6
+num	graph.h	18
+num	log	9
+pathLen	graph.h	5
+printGraph	graph.c	/^printGraph (graph * gr)$/
+rear	graph.h	26
+size	graph.h	28
+size	graph.h	41
+source	graph.h	33
+swapEdge	graph.c	/^void swapEdge(heap* h,int idx1, int idx2)$/
+temp	log	12
+temp	log	15
+undeclared	log	/^graph.c:379:16: error: ‘temp’ undeclared (firs/
+undeclared	log	/^graph.c:456:26: error: ‘size’ undeclared (firs/
+y	simplegraph.exe	27

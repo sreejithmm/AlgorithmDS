@@ -478,11 +478,12 @@ void modifyHeap(heap* h, int ref, int newval)
 			break;
 		}
 	}
-	heapify(h,i,h->size);
+	swapEdge(h,0,i);
+	heapify(h,0,h->size);
 
 }
 
-int getShortestPathUtil(graph* gr, heap* h, int vert[],int destination)
+float getShortestPathUtil(graph* gr, heap* h, float vert[],int destination)
 {
 
 	edge_st* temp_ed;
@@ -515,13 +516,13 @@ int getShortestPathUtil(graph* gr, heap* h, int vert[],int destination)
 
 }
 
-int getShortestPath(graph* gr, int origin,int destination)
+float getShortestPath(graph* gr, int origin,int destination)
 {
-	int shPath=INT_MAX;
+	float shPath=INT_MAX;
 	int size;
-	int *Vert = (int*)calloc(gr->num,sizeof(int));
+	float *Vert = (float*)calloc(gr->num,sizeof(float));
         heap* h= createHeap(gr,origin,&size);
-	printf("getShortestPath: heap created with size=%d\n",size);
+	printf("\ngetShortestPath: heap created with size=%d\n",size);
 	h->size = size;
 
 	shPath = getShortestPathUtil(gr,h,Vert,destination);

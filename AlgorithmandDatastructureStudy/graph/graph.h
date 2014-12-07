@@ -41,3 +41,11 @@ typedef struct heap{
      int size;
 
 }heap;
+
+/* function definitions */
+void
+addVertices (graph * gr, int src, int dest,int isDirected,float weight);graph * createGraph (int nodes);
+float getShortestPath(graph* gr, int origin,int destination);
+
+
+
