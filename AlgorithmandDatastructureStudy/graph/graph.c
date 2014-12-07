@@ -469,7 +469,11 @@ void modifyHeap(heap* h, int ref, int newval)
 	{
 		if(h->edge[i].source == ref)
 		{
-			h->edge[i].length = newval;
+			if(h->edge[i].length==INT_MAX)
+			{
+				h->edge[i].length = 0;
+			}
+			h->edge[i].length = h->edge[i].length+newval;
 			break;
 		}
 	}
@@ -477,7 +481,7 @@ void modifyHeap(heap* h, int ref, int newval)
 
 }
 
-int getShortestPathUtil(graph* gr, heap* h, int vert[])
+int getShortestPathUtil(graph* gr, heap* h, int vert[],int destination)
 {
 
 	edge_st* temp_ed;
@@ -493,11 +497,19 @@ int getShortestPathUtil(graph* gr, heap* h, int vert[])
 		{
 			temp_dest = head->dest;
 			modifyHeap(h,temp_dest,head->len);
+			head = head->next;
+		}
+		vert[temp_id] = temp_ed->length;
 
+		deleteMinHeap(h);
+		if(temp_id == destination)
+		{
+			return vert[temp_id];
 		}
 
-
 	}
+	return vert[destination];
+
 
 }
 
@@ -510,7 +522,7 @@ int getShortestPath(graph* gr, int origin,int destination)
 	printf("getShortestPath: heap created with size=%d\n",size);
 	h->size = size;
 
-	shPath = getShortestPathUtil(gr,h,Vert);
+	shPath = getShortestPathUtil(gr,h,Vert,destination);
 	return shPath;
 	
 }
