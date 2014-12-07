@@ -1,0 +1,28 @@
+gcc  test.c  graph.c  -o simplegraph.exe -g -O0 -lm
+graph.c: In function ‘insertToHeap’:
+graph.c:379:16: error: ‘temp’ undeclared (first use in this function)
+     h->edge[0]=temp;
+                ^
+graph.c:379:16: note: each undeclared identifier is reported only once for each function it appears in
+graph.c: In function ‘createHeap’:
+graph.c:434:6: error: ‘i’ undeclared (first use in this function)
+  for(i=0;i<gr->num;i++)
+      ^
+graph.c:436:19: warning: dereferencing ‘void *’ pointer [enabled by default]
+   temp = (edge_st)*malloc(sizeof(edge_st));
+                   ^
+graph.c:436:3: error: invalid use of void expression
+   temp = (edge_st)*malloc(sizeof(edge_st));
+   ^
+graph.c: In function ‘deleteMinHeap’:
+graph.c:456:26: error: ‘size’ undeclared (first use in this function)
+  swap(h->edge[0],h->edge[size-1]);
+                          ^
+graph.c: In function ‘getShortestPathUtil’:
+graph.c:495:3: error: ‘head’ undeclared (first use in this function)
+   head = gr->ArrList[source].head;
+   ^
+graph.c:495:22: error: ‘source’ undeclared (first use in this function)
+   head = gr->ArrList[source].head;
+                      ^
+make: *** [all] Error 1

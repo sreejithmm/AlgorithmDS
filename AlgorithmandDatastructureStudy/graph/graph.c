@@ -316,7 +316,7 @@ int isDoubleEdgedGraphUtil(graph* gr, int vert, int arr[],int time[],int arrtime
 	{
 		if(arr[node->dest]==0)
 		{
-			parentConn=min(parentConn,isDoubleEdgedGraphUtil(gr,node->dest,arr));
+			parentConn=min(parentConn,isDoubleEdgedGraphUtil(gr,node->dest,arr,time,arrtime+1));
 			if(parentConn >= vert || parentConn == INT_MIN)
 			{
 				
@@ -326,11 +326,11 @@ int isDoubleEdgedGraphUtil(graph* gr, int vert, int arr[],int time[],int arrtime
 		}
 		else
 		{
-			parentconn=min(time[vert],time[node->dest]);
+			parentConn=min(time[vert],time[node->dest]);
 		}
-		node = node->next
+		node = node->next;
 	}
-	return parentconn;
+	return parentConn;
 }
 int isDoubleEdgedGraph(graph* gr, int origin)
 {
@@ -358,17 +358,17 @@ int getRightChild(int index)
     return((2*index)+2);
 }
 
-int insertToHeap(heap* h,edge_st* edge,int* size)
+int insertToHeap(heap* h,edge_st* ed,int* size)
 {
     int location = *size;
     int parentnode=getParent(location);
 
     while(location >0)
     {
-        if(h->edge[parentnode].length < edge->length)
+        if(h->edge[parentnode]->length < ed->length)
         {
     
-            h->edge[location] = edge;
+            h->edge[location] = ed;
             *size = *size + 1;
             return 0;
         }
@@ -376,7 +376,7 @@ int insertToHeap(heap* h,edge_st* edge,int* size)
         location = parentnode;
         parentnode = getParent(location);
     }
-    h->edge[0]=temp;
+    h->edge[0]=ed;
     *size = *size + 1;
     return 0;
 }
@@ -384,7 +384,7 @@ int insertToHeap(heap* h,edge_st* edge,int* size)
 
 int getMinValueIdx(heap* h,int lidx, int ridx)
 {
-    if(h->edge[lidx].length > h->edge[ridx].length)
+    if(h->edge[lidx]->length > h->edge[ridx]->length)
     {
         return ridx;
     }
@@ -409,7 +409,7 @@ void heapify(heap* h,int index,int size)
     while(lidx <size && ridx < size)
     {
         smallestidx = getMinValueIdx(h,lidx,ridx);
-        if(h->edge[smallestidx].length > h->edge[index].length)
+        if(h->edge[smallestidx]->length > h->edge[index]->length)
         {
             return ;
         }
@@ -426,6 +426,7 @@ void heapify(heap* h,int index,int size)
 
 heap* createHeap(graph* gr, int origin,int* size_val)
 {
+	int i;
 	heap* h = (heap*)malloc(sizeof(heap));
 	int size=0;/*heap array size*/
 	edge_st* temp;
@@ -433,7 +434,7 @@ heap* createHeap(graph* gr, int origin,int* size_val)
 		
 	for(i=0;i<gr->num;i++)
 	{
-		temp = (edge_st)*malloc(sizeof(edge_st));
+		temp = (edge_st*)malloc(sizeof(edge_st));
 		temp->source = i;
 		temp->length = (i==origin)?0:INT_MAX;
 		insertToHeap(h,temp,&size);
@@ -453,7 +454,7 @@ void deleteMinHeap(heap* h)
 {
 	if(h==NULL)
 		return;
-	swap(h->edge[0],h->edge[size-1]);
+	swapEdge(h,0,(h->size)-1);
 
 	h->size = h->size -1;
 
@@ -467,13 +468,13 @@ void modifyHeap(heap* h, int ref, int newval)
 	int i;
 	for(i=0; i<h->size; i++)
 	{
-		if(h->edge[i].source == ref)
+		if(h->edge[i]->source == ref)
 		{
-			if(h->edge[i].length==INT_MAX)
+			if(h->edge[i]->length==INT_MAX)
 			{
-				h->edge[i].length = 0;
+				h->edge[i]->length = 0;
 			}
-			h->edge[i].length = h->edge[i].length+newval;
+			h->edge[i]->length = h->edge[i]->length+newval;
 			break;
 		}
 	}
@@ -487,12 +488,13 @@ int getShortestPathUtil(graph* gr, heap* h, int vert[],int destination)
 	edge_st* temp_ed;
 	int temp_id;
 	int temp_dest;
+	graphArrnode* head;
 
 	while(h->size)
 	{
 		temp_ed = getMinHeap(h);
 		temp_id = temp_ed->source;
-		head = gr->ArrList[source].head;
+		head = gr->ArrList[temp_id].head;
 		while(head)
 		{
 			temp_dest = head->dest;
