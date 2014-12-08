@@ -45,6 +45,10 @@ typedef struct heap{
 
 int calculateMoves(int LadderArr[],int SnakeArr[],int board[],int nL, int nS);
 
+
+int resultarr[100];
+int tc;
+
 graph *
 createGraph (int nodes)
 {
@@ -227,7 +231,7 @@ heap* createHeap(graph* gr, int origin,int* size_val)
 	edge_st* temp;
         bzero(h,sizeof(heap));
 		
-	for(i=0;i<gr->num;i++)
+	for(i=1;i<gr->num;i++)
 	{
 		temp = (edge_st*)malloc(sizeof(edge_st));
 		temp->source = i;
@@ -331,16 +335,17 @@ int main()
 {
 
 	int nT,nL,nS;
-	int i,j=0,k;
+	int i,j=0,k,m=1;
 	int *LadderArr;
 	int *SnakeArr;
-	int board[101]={1};
+	int board[101]={0};
 	int moves;
 
 	scanf("%d",&nT);
-	
-	while(nT)
+		
+	while(m<=nT)
 	{
+		tc=m;
 		scanf("%d,%d",&nL,&nS);
 		LadderArr=(int*)calloc(2*nL+2,sizeof(int));
 		SnakeArr=(int*)calloc(nS,sizeof(int));
@@ -354,7 +359,7 @@ int main()
 		for(i=0;i<nS;i++)
 		{
 			scanf("%d,%d",&SnakeArr[j],&k);
-			board[SnakeArr[j]]=0;
+			board[SnakeArr[j]]=1;
 			j++;
 		}
 
@@ -375,8 +380,13 @@ int main()
 #endif	
 
 		moves=calculateMoves(LadderArr,SnakeArr,board,nL,nS);
-		printf("%d\n",moves);
-		nT--;
+		resultarr[m]=moves;
+		j=0;
+		m++;
+	}
+	for(i=1;i<=nT;i++)
+	{
+		printf("%d\n",resultarr[i]);
 	}
 
 	return 0;
@@ -398,7 +408,7 @@ int isOK(int target,int pos,int board[])
 	{
 		return 1;
 	}
-	if (board[pos]==0)
+	if (board[pos]==1)
 	{
 		return 0;
 	}
@@ -413,12 +423,12 @@ int getMaxMoves(int src, int dest, int board[])
 	if(board[src]==dest || src==dest)
 		return moves;
 	do{
-		if(isOK(dest,src+6,board)) temp+=6;
-		else if(isOK(dest,src+5,board)) temp+=5;
-		else if(isOK(dest,src+4,board)) temp+=4;
-		else if(isOK(dest,src+3,board)) temp+=3;
-		else if(isOK(dest,src+2,board)) temp+=2;
-		else if(isOK(dest,src+1,board)) temp+=1;
+		if(isOK(dest,temp+6,board)) temp+=6;
+		else if(isOK(dest,temp+5,board)) temp+=5;
+		else if(isOK(dest,temp+4,board)) temp+=4;
+		else if(isOK(dest,temp+3,board)) temp+=3;
+		else if(isOK(dest,temp+2,board)) temp+=2;
+		else if(isOK(dest,temp+1,board)) temp+=1;
 		moves++;
 	}while(temp!=dest);
 	return moves;
@@ -429,6 +439,7 @@ graph* makeGraphFromArray(int arr[],int size,int board[])
 	int i,j;
 	int k;
 	gr= createGraph(101);
+	gr->num=101;
 	for(i=0;i<size;i++)
 	{
 		for(j=i+1;j<size;j++)
@@ -439,8 +450,9 @@ graph* makeGraphFromArray(int arr[],int size,int board[])
 
 	}
 #ifdef DEBUG
-	printGraph(gr);
+//	printGraph(gr);
 #endif
+	return gr;
 
 }
 
@@ -472,7 +484,6 @@ int calculateMoves(int LadderArr[],int SnakeArr[],int board[],int nL, int nS)
 		}
 #endif		
 		gr=makeGraphFromArray(LadderArr,nL,board);
-		gr->num=nL;
 		h= createHeap(gr,1,&size);
 		h->size=size;
 		vert=(float*)calloc(gr->num,sizeof(float));
