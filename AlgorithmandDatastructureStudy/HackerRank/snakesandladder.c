@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <strings.h>
-#define DEBUG 
+//#define DEBUG 
 
 
 typedef struct graphArrnode{
@@ -284,6 +284,10 @@ void modifyHeap(heap* h, int ref, float newval)
 			break;
 		}
 	}
+#ifdef DEBUG
+	printf("Modify Heap: Source:%d Length:%f\n",h->edge[i]->source,h->edge[i]->length);
+#endif
+
 	parent = getParent(i);
 	while(parent && (h->edge[i]->length < h->edge[parent]->length))
 	{
@@ -308,10 +312,16 @@ float getShortestPathUtil(graph* gr, heap* h, float vert[],int destination)
 	{
 		temp_ed = getMinHeap(h);
 		temp_id = temp_ed->source;
+#ifdef DEBUG
+		printf("getShortestPathUtil: HeapSource: %d\n",temp_id);
+#endif
 		head = gr->ArrList[temp_id].head;
 		while(head)
 		{
 			temp_dest = head->dest;
+#ifdef DEBUG
+			printf("getSHortestPathUtil: Link Source %d\n",temp_dest);
+#endif
 			temp_len = head->len+temp_ed->length;
 			modifyHeap(h,temp_dest,temp_len);
 			head = head->next;
@@ -352,8 +362,8 @@ int main()
 		for(i=0;i<nL;i++)
 		{
 			scanf("%d,%d",&LadderArr[j++],&LadderArr[j++]);
-			board[LadderArr[--j]] = LadderArr[--j];
-			j+=2;
+			board[LadderArr[j-1]] = LadderArr[j-2];
+		//	j+=2;
 		}
 		j=0;
 		for(i=0;i<nS;i++)
@@ -420,8 +430,16 @@ int getMaxMoves(int src, int dest, int board[])
 {
 	int moves=0;
 	int temp=src;
+#ifdef DEBUG
+	printf("getMaxMoves: src=%d dest=%d board[src]=%d",src,dest,board[src]);
+#endif
 	if(board[src]==dest || src==dest)
+	{
+#ifdef DEBUG
+		printf("%d \n",moves);
+#endif
 		return moves;
+	}
 	do{
 		if(isOK(dest,temp+6,board)) temp+=6;
 		else if(isOK(dest,temp+5,board)) temp+=5;
@@ -431,6 +449,9 @@ int getMaxMoves(int src, int dest, int board[])
 		else if(isOK(dest,temp+1,board)) temp+=1;
 		moves++;
 	}while(temp!=dest);
+#ifdef DEBUG
+	printf("'%d\n",moves);
+#endif
 	return moves;
 }
 graph* makeGraphFromArray(int arr[],int size,int board[])
@@ -445,6 +466,9 @@ graph* makeGraphFromArray(int arr[],int size,int board[])
 		for(j=i+1;j<size;j++)
 		{
 			k = getMaxMoves(arr[i],arr[j],board);
+		#ifdef DEBUG
+			printf("addVertice: %d->%d: %d\n",arr[i],arr[j],k);
+		#endif
 			addVertices(gr,arr[i],arr[j],1,k);
 		}
 
