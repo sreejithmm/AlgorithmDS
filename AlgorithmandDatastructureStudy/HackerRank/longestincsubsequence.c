@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <limits.h>
 
+//#define DEBUG
+
 typedef unsigned long long ULL;
 
 typedef struct node {
@@ -30,26 +32,72 @@ ULL getCountForLongestSequence(ULL arr[], ULL num)
 	list *temp;
 	for(i=0;i<num;i++)
 	{
+#ifdef DEBUG
+		printf("i:%llu \n",i);
+#endif
+			lastIdx=i;
 		for(j=0;j<i  ;j++)
 		{
+#ifdef DEBUG
+			printf("arr[i]:%llu j:%llu l[j].largestVal:%llu l[j].count:%llu maxcount=%llu\n",
+					arr[i],j,l[j].largestVal,l[j].count,maxcount);
+#endif
+
 			if(arr[i] > l[j].largestVal && l[j].count >=maxcount)
 			{
+#ifdef DEBUG
+			printf("arr[%llu]:%llu j:%llu l[j].largestVal:%llu l[j].count:%llu maxcount=%llu\n",
+					i,arr[i],j,l[j].largestVal,l[j].count,maxcount);
+#endif		
 				lastIdx = j;
+
 				maxcount = l[j].count;
 
 			}
 		}
 
-		l[j].largestVal = arr[i];
-		l[j].count = l[j].count + 1;
+		maxcount = 0;
+		l[lastIdx].largestVal = arr[i];
+		l[lastIdx].count = l[lastIdx].count + 1;
+		count = max(count,l[lastIdx].count);
+#ifdef DEBUG
+		printf("l[%llu].count=%llu l[%llu].largestVal = %llu lastIdx=%llu \n",lastIdx,l[lastIdx].count,lastIdx,l[lastIdx].largestVal,lastIdx);
+#endif
+
 	}
-	for(i=0;i<num;i++)
-	{
-		count = max(count,l[i].count);
-	}
+//	for(i=0;i<num;i++)
+//	{
+//		count = max(count,l[i].count);
+//	}
 	return count;
 	
 
+
+}
+
+void readInput(ULL* num, ULL arr[])
+{
+
+#ifdef FILE_INPUT
+	FILE* fd=fopen("case.txt",rw);
+	fscanf(fd,"%llu",&num);
+	arr=(ULL*)calloc(num,sizeof(ULL));
+
+	for(i=0;i<num;i++)
+	{
+		fscanf(fd,"%llu",&arr[i]);
+	}
+	fclose(fd);
+
+#endif
+	scanf("%llu",&num);
+	
+	arr=(ULL*)calloc(num,sizeof(ULL));
+
+	for(i=0;i<num;i++)
+	{
+		scanf("%llu",&arr[i]);
+	}
 
 }
 
@@ -59,14 +107,7 @@ int main()
 	ULL *arr;
 	ULL count;
 
-	scanf("%llu",&num);
-	
-	arr=(ULL*)calloc(num,sizeof(ULL));
-
-	for(i=0;i<num;i++)
-	{
-		scanf("%llu",&arr[i]);
-	}
+	readInput(&num, arr);
 	count = getCountForLongestSequence(arr,num);
 	printf("%llu\n",count);
 
