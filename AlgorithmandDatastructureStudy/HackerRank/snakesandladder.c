@@ -1,3 +1,9 @@
+/*
+ *
+ *Sreejith MM
+ *https://www.hackerrank.com/challenges/the-quickest-way-up
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
