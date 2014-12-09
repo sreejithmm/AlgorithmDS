@@ -7,7 +7,8 @@
 #include <stdlib.h>
 #include <limits.h>
 
-//#define DEBUG
+#define DEBUG
+#define FILE_INPUT
 
 typedef unsigned long long ULL;
 
@@ -75,26 +76,27 @@ ULL getCountForLongestSequence(ULL arr[], ULL num)
 
 }
 
-void readInput(ULL* num, ULL arr[])
+void readInput(ULL* num, ULL* arr)
 {
+	ULL i;
 
 #ifdef FILE_INPUT
-	FILE* fd=fopen("case.txt",rw);
-	fscanf(fd,"%llu",&num);
-	arr=(ULL*)calloc(num,sizeof(ULL));
+	FILE* fd=fopen("case.txt","rw");
+	fscanf(fd,"%llu",num);
+	arr=(ULL*)calloc(*num,sizeof(ULL));
 
-	for(i=0;i<num;i++)
+	for(i=0;i<*num;i++)
 	{
 		fscanf(fd,"%llu",&arr[i]);
 	}
 	fclose(fd);
-
+	return;
 #endif
-	scanf("%llu",&num);
+	scanf("%llu",num);
 	
-	arr=(ULL*)calloc(num,sizeof(ULL));
+	arr=(ULL*)calloc(*num,sizeof(ULL));
 
-	for(i=0;i<num;i++)
+	for(i=0;i<*num;i++)
 	{
 		scanf("%llu",&arr[i]);
 	}
