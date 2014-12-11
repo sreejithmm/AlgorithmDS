@@ -25,3 +25,6 @@
 *.hex
 #swap
 .*.*.swp
+log
+*.txt
+.log.*
