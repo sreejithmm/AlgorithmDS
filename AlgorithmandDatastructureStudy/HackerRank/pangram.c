@@ -15,7 +15,7 @@ int occ[26]={0};
 void readLine(char str[])
 {
 	char ch;
-	while((ch=getchar()) != '\n')
+	while((ch=getchar()) != EOF)
 	{
 
 		ch = tolower(ch);
