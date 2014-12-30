@@ -1,0 +1,160 @@
+/*
+ *
+ *https://www.hackerrank.com/challenges/stockmax
+ *
+ */
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+	int nT;
+	int n;
+	int i, j, k, l = 0, m = 0;
+	int priceB = 0, priceS = 0, profit;
+	int arr[50000];
+	int maxarr[50000];
+
+	int result[10];
+
+	scanf("%d", &nT);
+	for (i = 0; i < nT; i++) {
+		scanf("%d", &n);
+
+		for (k = 0; k < n; k++) {
+			scanf("%d", &arr[k]);
+			if (arr[k] >= m) {
+				maxarr[k] = arr[k];
+			} else {
+				maxarr[k] = m;
+			}
+
+		}
+		for (k = 0; k < n; k++) {
+			if (arr[k] <= maxarr[k]) {
+				priceB += arr[k];
+				l++;
+			}
+		}
+	}
+}
+
+
+			    int constructSTforMax(int arr[], int start,
+						 int end, int *st,
+						 int stidx) {
+			    int mid; if (start == end) {
+			    st[stidx] = arr[start]; return arr[start];}
+			    mid = getmid(start, end);
+			    st[stidx] =
+			    max(constructSTforMax
+				(arr, start, mid, st, 2 * stidx + 1),
+				constructSTforMax(arr, mid + 1, end, st,
+						  2 * stidx + 2));
+			    return st[stidx];}
+
+			    int *constructSTForMaxUtil(int arr[], int n,
+						       int *segsize) {
+			    int stsize = 2 * n - 1; *segsize = stsize;
+			    int *st;
+			    st = (int *) calloc(stsize, sizeof(int));
+			    constructSTforMax(arr, 0, n - 1, st, 0);
+			    return st;}
+
+			    int getMaxOnaRangeUtil(int *st, int rangest,
+						   int rangeen, int strt,
+						   int end, int stidx) {
+			    int max2; int mid;
+			    if (rangest <= strt && rangeen >= end) {
+
+			    return st[stidx];}
+			    if (strt > rangeen || end < rangest) {
+			    return INT_MIN;}
+
+			    mid = getmid(strt, end);
+			    max2 =
+			    max(getMaxOnaRangeUtil
+				(st, rangest, rangeen, strt, mid,
+				 2 * stidx + 1), getMaxOnaRangeUtil(st,
+								    rangest,
+								    rangeen,
+								    mid +
+								    1, end,
+								    2 *
+								    stidx +
+								    2));
+			    return max2;}
+			    int getmaxbetween(int *st, int rangest,
+					      int rangeen, int size)
+			    {
+
+			    if (rangest < 0 && rangeen >= size) {
+			    return INT_MIN;}
+
+			    return (getMaxOnaRangeUtil
+				    (st, rangest, rangeen, 0, size - 1,
+				     0));}
+			    void updateArrayIndexUtilImpl(int *st,
+							  int strt,
+							  int end,
+							  int upidx,
+							  int stidx,
+							  int val) {
+			    int mid; if (upidx <= end && upidx >= strt) {
+			    if (st[stidx] < val) {
+
+			    st[stidx] = val;}
+
+			    }
+			    else
+			    {
+			    return;}
+			    if (upidx == strt && upidx == end) {
+			    st[stidx] = val; return;}
+			    mid = getmid(strt, end);
+			    updateArrayIndexUtilImpl(st, strt, mid, upidx,
+						     2 * stidx + 1, val);
+			    updateArrayIndexUtilImpl(st, mid + 1, end,
+						     upidx, 2 * stidx + 1,
+						     val); return;}
+
+			    void updateArrayIndexUtil(int arr[], int size,
+						      int *st, int upidx,
+						      int val) {
+			    if (upidx >= size)
+			    return;
+			    arr[upidx] = val;
+			    updateArrayIndexUtilImpl(st, 0, size - 1,
+						     upidx, 0, val);}
+			    int API_maxbetweenIndices(int arr[], int i,
+						      int j, int size) {
+			    int stsize; int *st; int max; int range;
+			    int strange; int enrange; int upidx; int val;
+			    st = constructSTForMaxUtil(arr, size, &stsize);
+			    printf("Get max\n");
+			    printf("Enter 2 ranges: [0 to %d]\n",
+				   size - 1);
+			    printf("Enter start range:\n");
+			    scanf("%d", &strange);
+			    printf("Enter end range:\n");
+			    scanf("%d", &enrange);
+			    max =
+			    getmaxbetween(st, strange, enrange, size);
+			    printf("Max:%d\n", max);
+			    printf
+			    ("Enter the array index to be updated\n");
+			    scanf("%d", &upidx);
+			    printf("Enter the value to be updated\n");
+			    scanf("%d", &val);
+			    updateArrayIndexUtil(arr, size, st, upidx,
+						 val); printf("Get max\n");
+			    printf("Enter 2 ranges: [0 to %d]\n",
+				   size - 1);
+			    printf("Enter start range:\n");
+			    scanf("%d", &strange);
+			    printf("Enter end range:\n");
+			    scanf("%d", &enrange);
+			    max =
+			    getmaxbetween(st, strange, enrange, size);
+			    printf("Max:%d\n", max); return max;}
