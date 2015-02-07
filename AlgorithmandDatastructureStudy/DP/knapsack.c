@@ -16,8 +16,8 @@ int knapsack(int matr[][6],int weight[], int value[], int capa,int num)
 	if(matr[num][capa] != 0)
 		return matr[num][capa];
 
-	return max(value[num]+knapsack(matr,weight,value,capa-weight[num],num-1),knapsack(matr,weight,value,capa,num-1));
-	
+	matr[num][capa] =  max(value[num]+knapsack(matr,weight,value,capa-weight[num],num-1),knapsack(matr,weight,value,capa,num-1));
+	return matr[num][capa];
 
 
 
