@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 void printArr(int arr[],int len)
 {
 	int i;
@@ -8,9 +8,11 @@ void printArr(int arr[],int len)
 	printf("\n");
 			
 }
-void insertionSort(int arr[],int len)
+unsigned long long shiftArr[10];
+unsigned long long insertionSort(unsigned long long arr[],unsigned long long len)
 {
-	int i,j,temp;
+	unsigned long long i,j,temp;
+	unsigned long long shift=0;
 	for(i=1;i<len;i++)
 	{
 		temp = arr[i];
@@ -21,10 +23,10 @@ void insertionSort(int arr[],int len)
 			{
 				arr[j+1] = arr[j];
 				arr[j]= temp;
+				shift++;
 			}
 			else
 			{
-				printArr(arr,len);
 				break;
 
 			}
@@ -32,39 +34,28 @@ void insertionSort(int arr[],int len)
 
 		}
 	}
+	return shift;	
 }
 int main()
 {
-	int arr[1000];
-	int len,i;
+	unsigned long long arr[100000];
+	unsigned long long len,i,j;
 	int temp;
-
-	scanf("%d",&len);
-	for(i=0;i<len;i++)
+	int nT,t;
+	scanf("%d",&nT);
+	t=nT;
+	for(j=0;j<nT;j++)
 	{
-		scanf("%d",&arr[i]);
-	}
-	insertionSort(arr,len);
-#if 0
-	temp = arr[len-1];
+		scanf("%llu",&len);
+		for(i=0;i<len;i++)
+		{
+			scanf("%llu",&arr[i]);
+		}
+	
+		shiftArr[j]=insertionSort(arr,len);
+		
 
-	for(i=len-1;i>0;i--)
-	{
-		if(arr[i-1] < temp)
-		{
-			arr[i] = temp;
-			printArr(arr,len);
-			break;
-		}
-		else
-		{
-			arr[i] = arr[i-1];
-			printArr(arr,len);
-		}
 	}
-	if(i==0 && arr[i] > temp) {
-		arr[i]=temp;
-		printArr(arr,len);
-	}
-#endif
+	for(i=0;i<t;i++)
+		printf("%llu\n",shiftArr[i]);
 }
