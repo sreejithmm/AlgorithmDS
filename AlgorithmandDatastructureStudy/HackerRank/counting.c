@@ -1,17 +1,30 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 int main()
 {
-	int inarr[1000000];
+	int* inarr;
 	int count [100]={0};
 	int newcount [100]={0};
 
 	int num,i,n;
-	char str[1000000][100]={'\0'};
-	int outarr[1000000]={0};
-	char outstr[1000000][100]={'\0'};
+	char**  str;
+	int* outarr;
+	char** outstr;
 
 	scanf("%d",&num);
+	
+	inarr = (int*)malloc(num * sizeof(int));
+	outarr =(int*)malloc(num*sizeof(int));
+	outstr = (char**)malloc(num * sizeof(char*));
+	str = (char**)malloc(num * sizeof(char*));
+
+	for(i=0;i<num;i++)
+	{
+		outstr[i]=(char*) malloc(sizeof(char)*10);
+		str[i]=(char*) malloc(sizeof(char)*10);
+	}
 	for(i=0;i<num;i++)
 	{
 		scanf("%d",&inarr[i]);
