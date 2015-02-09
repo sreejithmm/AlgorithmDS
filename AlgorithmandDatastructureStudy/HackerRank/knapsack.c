@@ -9,6 +9,22 @@ int max(int a, int b)
 		return b;
 }
 
+void printMatr(int num,int capa,int matr[][capa])
+{
+    int i,j;
+    printf("printMatrix\n\n");
+    for(i=0;i<=num;i++)
+    {
+        for(j=0;j<=capa;j++)
+        {
+            printf("%d ",matr[i][j]);
+        }
+        printf("\n");
+    }
+    printf("printMatrix\n\n");
+    return;
+}
+
 int knapsack(int arr[],int capa,int num)
 {
 	int i,j;
@@ -26,17 +42,20 @@ int knapsack(int arr[],int capa,int num)
 			{
 				matr[i][j] = 0;
 			}
-			else if(arr[i-1] <= capa)
+			else if(arr[i-1] <= j)
 			{	
-				matr[i][j] = max(arr[i-1] + matr[i][capa-arr[i-1]],matr[i-1][capa]);
+				matr[i][j] = max(arr[i-1] + matr[i][j-arr[i-1]],matr[i-1][j]);
 			}
-			else if(arr[i-1] > capa)
+			else if(arr[i-1] > j)
 			{
-				matr[i][j] = matr[i-1][capa];
+				matr[i][j] = matr[i-1][j];
 			}
+            //printf("matr[%d][%d]=%d\n",i,j,matr[i][j]);
 
 		}
 	}
+    printf("\n");
+    //printMatr(num,capa,matr);
 	return matr[num][capa];
 }
 
@@ -64,5 +83,6 @@ int main()
 		printf("%d ",result[i]);
 	}
 	printf("\n");
+    return;
 }
 
