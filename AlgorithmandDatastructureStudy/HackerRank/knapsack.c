@@ -1,3 +1,8 @@
+/*
+ * Author:Sreejith M M
+ * https://www.hackerrank.com/challenges/unbounded-knapsack
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
