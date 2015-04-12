@@ -39,6 +39,6 @@ typedef struct _setofstacks
 {
 	int threshold;
 	struct _mystacklist *curStack;
-	struct _playstack *head;
+	struct _platestack *head;
 
-}
+}setofstacks;

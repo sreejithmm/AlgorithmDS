@@ -658,4 +658,7 @@ int getMinSp(myspStack *spStack)
 
 
 
+void push_to_setofstacks(setofstacks* stack,int value)
+{
+}
 
