@@ -658,7 +658,14 @@ int getMinSp(myspStack *spStack)
 
 
 
-void push_to_setofstacks(setofstacks* stack,int value)
+void push_to_setofstacks(setofstacks** stack,int value,int threshold)
 {
+	if(stack == NULL)
+	{
+		*stack = (setofstack*)malloc(sizeof(setofstack));
+		(*stakc)->threshold = 10;
+		(*stack)->head = (platestack*)malloc(sizeof(playstack));
+	}
+
 }
 
