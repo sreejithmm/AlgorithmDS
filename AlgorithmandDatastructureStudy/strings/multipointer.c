@@ -32,6 +32,12 @@ int main()
 	char (*str2)[10]="myan";//"fdma","horrible","Mikeeerer",NULL,NULL,NULL,NULL,NULL,NULL};
 	char arr[10]="hello";
 
+	char*  str3[2][3] = {	{"seeping","danger","hsorsdsbo"},
+				{"maru","dolphinnger","tort"},
+		            };
+
+
+#if 0					
 	print_pointer_arith(str);
 	//print_pointer_arith_2(str2);
 
@@ -41,6 +47,17 @@ int main()
 	printf("%s\n",*(str2+1));
 	printf("%s\n",*(str2+2));
 	printf("%s\n",*(str2+3));
+#endif
+	printf("%s\n",**str3); //prints seeping
+	printf("%p\n",(str3)); //prints str3 values
+
+	printf("%p\n",(*str3)); //prints str3 values
+	printf("%p\n",(**str3));
+
+	printf("%p\n",str3+1); // skips the first array of strings and goes to address of mary
+	printf("%p\n",*(str3+1)); // same as above
+	printf("%s\n",**(str3+1)); //prints maru
+	
 
 	return 0;
 	

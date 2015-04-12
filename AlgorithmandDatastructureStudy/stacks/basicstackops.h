@@ -28,5 +28,17 @@ typedef struct _myspecialstructp
 }myspStack;
 
 
+typedef struct _plateStack {
 
+	int noofstacks;
+	struct _mystacklist *stack;
 
+}platestack;
+
+typedef struct _setofstacks
+{
+	int threshold;
+	struct _mystacklist *curStack;
+	struct _playstack *head;
+
+}
