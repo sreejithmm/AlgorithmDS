@@ -663,9 +663,20 @@ void push_to_setofstacks(setofstacks** stack,int value,int threshold)
 	if(stack == NULL)
 	{
 		*stack = (setofstack*)malloc(sizeof(setofstack));
-		(*stakc)->threshold = 10;
+		(*stack)->threshold = 10;
+
 		(*stack)->head = (platestack*)malloc(sizeof(playstack));
+		(*stack)->head->stack =(mystack*)malloc(sizeof(mystack));
+
+		(*stack)->head->noofstacks =1
+		(*stack)->head->stack->val = value;
+		(*stack)->head->stack->next = NULL;
+
 	}
+
+
+
+
 
 }
 
