@@ -13,7 +13,7 @@ def print_chars(string,val):
             sys.stdout.write(string[i])
     print ""
 
-string="Dhfufydk fudjdff kfiffjdj djdud uxucj cjxd uckcjdu sudu xhssyz hzu xjcjd duxjcud uxudj xhxuxhx ducj hash u uxhxd jccjuc."
+string="Dhfufydk fudjdff kfiffjdj djdud uxucj cjxd uckcjdu sudu xhssyz hzu xjcjd duxjcud uxudj xhxuxhx ducj hash u uxhxd jccjuc"
 
 
 print "Original string:",string
