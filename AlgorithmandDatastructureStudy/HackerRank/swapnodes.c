@@ -162,8 +162,9 @@ void rearrage_nodes(Tree* root, int k,int n, int height)
 	int i;
 	myqueue *q=createQueue();
 	Tree* node;
-	int level = 1;
+	int level = 1,j=1;
 	enqueue(q,root);
+	Tree* temp;
 
 	for(i=1;(i<n && k < height);i++)
 	{
@@ -171,11 +172,18 @@ void rearrage_nodes(Tree* root, int k,int n, int height)
 
 		if (node->level %k == 0)
 		{
-
+			temp = node->left;
+			node->left = node->right;
+			node->right = temp;
 		}
-
-
-
+		if(node->level > k)
+		{
+			j++;
+			k = j*k
+			if(k >= height)
+				break;
+		}
+		
 	}
 }
 int main()
