@@ -90,6 +90,7 @@ myqueue* createQueue()
     myqueue* q= (myqueue*)malloc(sizeof(myqueue));
     q->rear=NULL;
     q->front = NULL;
+    return q;
 
 }
 
