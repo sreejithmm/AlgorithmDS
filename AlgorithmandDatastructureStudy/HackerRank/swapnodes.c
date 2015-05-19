@@ -103,7 +103,7 @@ Tree* dequeue(myqueue *q)
 }
 
 
-Tree* tree_create(int *maxlevel)
+Tree* tree_create(int *maxlevel,*nodes)
 {
 	int i,j;
 	int n;
@@ -144,6 +144,7 @@ Tree* tree_create(int *maxlevel)
 	}
 	printf("maxlevel=%d\n",level );
 	*maxlevel = level;
+	*nodes = n;
 	return root;
 
 }
@@ -156,13 +157,35 @@ void print_inorder_of_tree(Tree *root)
     inorderTraverseInt(root->right);
 
 }
+void rearrage_nodes(Tree* root, int k,int n, int height)
+{
+	int i;
+	myqueue *q=createQueue();
+	Tree* node;
+	int level = 1;
+	enqueue(q,root);
+
+	for(i=1;(i<n && k < height);i++)
+	{
+		node = dequeue(q);
+
+		if (node->level %k == 0)
+		{
+
+		}
+
+
+
+	}
+}
 int main()
 {
 	Tree* tree;
 	int nT,int k;
 	int maxlevel;
+	int noofnodes;
 
-	tree = tree_create(&maxlevel);
+	tree = tree_create(&maxlevel,&noofnodes);
 	scanf("%d",&nT);
 	while(nT)
 	{
@@ -174,7 +197,7 @@ int main()
 		}
 		else
 		{
-			rearrage_nodes(tree,k);
+			rearrage_nodes(tree,k,noofnodes,maxlevel);
 		}
 		print_inorder_of_tree(tree);
 	}
