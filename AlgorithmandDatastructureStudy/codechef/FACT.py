@@ -10,5 +10,5 @@ nt=int(raw_input())
 while (nt):
 	no = int(raw_input())
 	facts = find_facts(no)
-	print no
+	print facts
 	nt = nt-1
