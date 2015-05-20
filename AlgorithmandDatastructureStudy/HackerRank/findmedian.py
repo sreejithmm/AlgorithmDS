@@ -36,3 +36,4 @@ def QSelect(arr,stidx,endidx,med):
 num = int(raw_input())
 arr=map(int,raw_input().split(" "))
 med = QSelect(arr,0,num-1,num/2)
+print med
