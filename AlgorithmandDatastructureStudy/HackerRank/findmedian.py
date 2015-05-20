@@ -1,6 +1,16 @@
 #find median
 #https://www.hackerrank.com/challenges/find-median
 
+def partition(arr,stidx,endidx):
+	pivot = endidx
+	indx = 0
+	mapidx =0
+	while(indx < pivot):
+		if(arr[indx] > arr[pivot]):
+				swap(arr[indx],arr[mapidx])
+				mapidx++
+	swap(arr[mapidx],arr[pivot])
+	return mapidx
 
 def QSelect(arr,stidx,endidx,med):
 	if(stidx>=endidx):
