@@ -21,31 +21,47 @@ ULL getshortestpath(ULL src, ULL dest)
 {
   ULL parent ;
   ULL path = 1;
+  ULL next;
+
   parent = getparent (src);
   if(parent == dest)
   {
     return path;
   }
-  parent = src;
-  while(parent != dest)
+  next = parent;
+
+  while(next != dest)
   {
 
-    if (leftchildof(parent) < dest)
-    {
-
-      parent = parent * 2;
-
-    }
-    else if(rightchildof(parent) < dest)
-    {
-      parent = parent * 2 + 1;
-
-    }
-    else
-    {
-      parent = getparent(parent);
-
-    }
+    // if (leftchildof(parent) < dest)
+    // {
+    //
+    //   parent = parent * 2;
+    //
+    // }
+    // else if(rightchildof(parent) < dest)
+    // {
+    //   parent = parent * 2 + 1;
+    //
+    // }
+    // else
+    // {
+    //   parent = getparent(parent);
+    //
+    // }
+     if(leftchildof(next)==dest || rightchildof(next==dest))
+     {
+       next = dest;
+     }
+     else if((dest > leftchildof(next) && dest > rightchildof(next))
+                || (dest<leftchildof(next) && dest < rightchildof(next)))
+      {
+        next = getparent(next);
+      }
+      else if(dest > leftchildof(next) && dest < rightchildof(next))
+      {
+        
+      }
     path++;
   }
   return path;
