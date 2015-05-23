@@ -1,2 +1,18 @@
-//http://www.codechef.com/problems/BINTREE
-//Bin tree implm
+#include <stdio.h>
+
+typedef unsinged long long ULL;
+
+int main()
+{
+  ULL n,i,j;
+
+  scanf("%llu",&n);
+
+  while(n)
+  {
+
+    n--
+  }
+
+
+}
