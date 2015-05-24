@@ -1,20 +1,13 @@
 #include <stdio.h>
+#include <math.h>
 
 typedef unsigned long long ULL;
 
-ULL getparent(ULL src)
-{
-  return (src/2);
-}
 
-ULL leftchildof(ULL indx)
+ULL get_level(ULL src)
 {
-  return (2*indx );
-}
-
-ULL rightchildof(ULL indx)
-{
-  return (2*indx + 1);
+  ULL level ;
+  level = (ULL)(log(src)/log(2));
 }
 
 ULL getshortestpath(ULL src, ULL dest)
@@ -22,48 +15,17 @@ ULL getshortestpath(ULL src, ULL dest)
   ULL parent ;
   ULL path = 1;
   ULL next;
+  ULL lca,left_level,right_level,lca_level;
 
-  parent = getparent (src);
-  if(parent == dest)
-  {
-    return path;
-  }
-  next = parent;
+  lca = getLCA(src,dest);
 
-  while(next != dest)
-  {
+  left_level = get_level(src);
+  right_level = get_level(dest);
 
-    // if (leftchildof(parent) < dest)
-    // {
-    //
-    //   parent = parent * 2;
-    //
-    // }
-    // else if(rightchildof(parent) < dest)
-    // {
-    //   parent = parent * 2 + 1;
-    //
-    // }
-    // else
-    // {
-    //   parent = getparent(parent);
-    //
-    // }
-     if(leftchildof(next)==dest || rightchildof(next==dest))
-     {
-       next = dest;
-     }
-     else if((dest > leftchildof(next) && dest > rightchildof(next))
-                || (dest<leftchildof(next) && dest < rightchildof(next)))
-      {
-        next = getparent(next);
-      }
-      else if(dest > leftchildof(next) && dest < rightchildof(next))
-      {
-        
-      }
-    path++;
-  }
+  lca_level = get_level(lca);
+
+  path = left_level+right_level-(2*lca_level);
+
   return path;
 }
 
