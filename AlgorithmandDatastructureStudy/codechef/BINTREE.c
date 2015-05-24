@@ -10,6 +10,12 @@ ULL get_level(ULL src)
   level = (ULL)(log(src)/log(2));
 }
 
+ULL getLCA(ULL src, ULL dest)
+{
+
+  while(
+}
+
 ULL getshortestpath(ULL src, ULL dest)
 {
   ULL parent ;
