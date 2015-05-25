@@ -8,21 +8,22 @@ ULL get_level(ULL src)
 {
   ULL level ;
   level = (ULL)(log(src)/log(2));
-  printf("\nget_level:i/p=%llu o/p=%llu",src,level);
   return level;
+
 }
 
 ULL getLCA(ULL src, ULL dest)
 {
 
-  while(src>>1 != dest>>1)
+  while(src != dest)
   {
-    src = src>>1;
-    dest =  dest>>1;
-
+    if(src > dest)
+      src = src>>1;
+    else
+      dest =  dest>>1;
   }
 
-  return (src>>1);
+  return (src);
 }
 
 ULL getshortestpath(ULL src, ULL dest)
@@ -33,32 +34,17 @@ ULL getshortestpath(ULL src, ULL dest)
   ULL lca,left_level,right_level,lca_level;
 
   lca = getLCA(src,dest);
-
   left_level = get_level(src);
   right_level = get_level(dest);
 
   lca_level = get_level(lca);
-
-  path = left_level+right_level-(2*lca_level);
+  path = left_level - lca_level;
+  path = path + right_level - lca_level;
+//  path = left_level+right_level-(2*lca_level);
 
   return path;
 }
 
-void getmaxmin(ULL a, ULL b, ULL *max, ULL *min)
-{
-  if (a > b)
-  {
-    *max = a;
-    *min = b;
-  }
-  else
-  {
-    *max = b;
-    *max = a;
-  }
-  return ;
-
-}
 int main()
 {
   ULL n,i,j;
@@ -70,7 +56,6 @@ int main()
   while(n)
   {
     scanf("%llu %llu",&i,&j);
-//    getmaxmin(i,j,&max,&min);
     spath = getshortestpath(i,j);
     printf("%llu\n",spath);
     n--;
