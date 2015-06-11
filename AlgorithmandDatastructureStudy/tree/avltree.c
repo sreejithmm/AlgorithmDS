@@ -4,6 +4,7 @@
 
 typedef struct _avltree{
 	int val;
+	int height;
 	struct _avltree* left;
 	struct _avltree* right;
 }Avltree;
@@ -13,10 +14,13 @@ typedef struct _avltree{
 void insertToAVLTree(Avltree** root, int val)
 {
 	Avltree* temp;
+	int balance;
+
 	if(root == NULL)
 	{
 		temp = (Avltree*)malloc(sizeof(Avltree));
 		temp->val = val;
+		temp->height = 1;
 		temp->left = NULL;
 		temp->right = NULL;
 		*root = temp;
@@ -31,6 +35,10 @@ void insertToAVLTree(Avltree** root, int val)
 		{
 			insertToAVLTree(&(root->right),val);
 		}
+		(*root)->height = max(calc_height((*root)->left),calc_height((*root)->right));
+		balance = getbalance(*root);
+		/* check the balancing of the tree */
+
 	}
 }
 int main()
