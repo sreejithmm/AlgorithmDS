@@ -12,7 +12,26 @@ typedef struct _avltree{
 
 void insertToAVLTree(Avltree** root, int val)
 {
-	
+	Avltree* temp;
+	if(root == NULL)
+	{
+		temp = (Avltree*)malloc(sizeof(Avltree));
+		temp->val = val;
+		temp->left = NULL;
+		temp->right = NULL;
+		*root = temp;
+	}
+	else
+	{
+		if(val < root->val)
+		{
+			insertToAVLTree(&(root->left),val);
+		}
+		else
+		{
+			insertToAVLTree(&(root->right),val);
+		}
+	}
 }
 int main()
 {
