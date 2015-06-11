@@ -35,11 +35,22 @@ void insertToAVLTree(Avltree** root, int val)
 		{
 			insertToAVLTree(&(root->right),val);
 		}
-		(*root)->height = max(calc_height((*root)->left),calc_height((*root)->right));
-		balance = getbalance(*root);
-		/* check the balancing of the tree */
+		temp = *root;
+	}
+
+	(*root)->height = max(calc_height((*root)->left),calc_height((*root)->right));
+	balance = getbalance(*root);
+	/* check the balancing of the tree */
+	if(balance > 1 && (temp->left->val > val))
+	{
+		*root = rotate_right(temp->left);
+	}
+	else if(balance > 1 && (temp->left->val < val))
+	{
+		*root = rotate_left()
 
 	}
+
 }
 int main()
 {
