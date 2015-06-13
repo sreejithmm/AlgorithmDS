@@ -9,9 +9,29 @@ typedef struct _avltree{
 	struct _avltree* right;
 }Avltree;
 
+int max(int a, int b)
+{
+	if (a>b)
+	{
+		return a;
+	}
+	else 
+	{
+		return b;
+	}
+}
 
+int calc_height(Avltree* node)
+{
+	return (node->height);
+}
 
-void insertToAVLTree(Avltree** root, int val)
+int getbalance(Avltree* node)
+{
+	return ((node->left->height) - (node->right->height));
+}
+
+Avltree* insertToAVLTree(Avltree* root, int val)
 {
 	Avltree* temp;
 	int balance;
@@ -23,33 +43,46 @@ void insertToAVLTree(Avltree** root, int val)
 		temp->height = 1;
 		temp->left = NULL;
 		temp->right = NULL;
-		*root = temp;
+		
 	}
 	else
 	{
 		if(val < root->val)
 		{
-			insertToAVLTree(&(root->left),val);
+			root->left = insertToAVLTree(root->left,val);
 		}
 		else
 		{
-			insertToAVLTree(&(root->right),val);
+			root->right = insertToAVLTree(root->right,val);
 		}
-		temp = *root;
+		temp = root;	
 	}
 
-	(*root)->height = max(calc_height((*root)->left),calc_height((*root)->right));
-	balance = getbalance(*root);
+	temp->height = max(calc_height(temp->left),calc_height(temp->right));
+	balance = getbalance(temp);
 	/* check the balancing of the tree */
 	if(balance > 1 && (temp->left->val > val))
 	{
-		*root = rotate_right(temp->left);
+		temp = rotate_right(temp);
 	}
 	else if(balance > 1 && (temp->left->val < val))
 	{
-		*root = rotate_left()
+		temp->left = rotate_left(temp->left);
+		temp  = rotate_right(temp);
 
 	}
+	else if(balance < 1 && (temp->right>val < val))
+	{
+		temp = rotate_left(temp);
+
+	}
+	else if(balance <1 && (temp->right->val > val))
+	{
+		temp->right = rotate_right(temp->right);
+		temp = rotate_left(temp);
+	}
+
+	return temp;
 
 }
 int main()
