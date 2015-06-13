@@ -40,7 +40,7 @@ Avltree* rotate_right(Avltree* node)
 	node->left = temp1;
 
 	node->left->height = max(calc_height(node->left->left),calc_height(node->left->right));
-	node->height = max(calc_height(node->left->height),calc_height(node->right->height));
+	node->height = max(calc_height(node->left),calc_height(node->right));
 
 	return node->left;
 
@@ -114,22 +114,32 @@ Avltree* insertToAVLTree(Avltree* root, int val)
 	return temp;
 
 }
+void print_pre_order(Avltree* node)
+{
+	while(node)
+	{
+		printf("%d ",node->val);
+		print_pre_order(node->left);
+		print_pre_order(node->right);
+	}
+}
 int main()
 {
 	int i;
 
 	Avltree *root;
 
-	insertToAVLTree(&root,10);
-	insertToAVLTree(&root,20);
-	insertToAVLTree(&root,30);
-	insertToAVLTree(&root,40);
-	insertToAVLTree(&root,50);
-	insertToAVLTree(&root,25);
+	root = insertToAVLTree(root,10);
+	root = insertToAVLTree(root,20);
+	root = insertToAVLTree(root,30);
+	root = insertToAVLTree(root,40);
+	root = insertToAVLTree(root,50);
+	root = insertToAVLTree(root,25);
 
 
 
 	print_pre_order(root);
+	printf("\n");
 
 	return 0;
 }
