@@ -31,7 +31,7 @@ int* plusOne(int* A, int n1, int *length_of_array) {
          int indx=0;
          int len = *length_of_array;
          int *result;
-         int sum =1;
+         int sum =0;
          int i=1;
          int leading_zero = A[0];
          int newlen=0;
