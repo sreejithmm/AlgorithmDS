@@ -31,6 +31,35 @@ int getbalance(Avltree* node)
 	return ((node->left->height) - (node->right->height));
 }
 
+Avltree* rotate_right(Avltree* node)
+{
+	Avltree* temp1;
+	Avltree* temp2;
+	temp1 = node->left->right;
+	node->left->right = node;
+	node->left = temp1;
+
+	node->left->height = max(calc_height(node->left->left),calc_height(node->left->right));
+	node->height = max(calc_height(node->left->height),calc_height(node->right->height));
+
+	return node->left;
+
+}
+
+Avltree* rotate_left(Avltree* node)
+{
+	Avltree* temp1 = node->right;
+	Avltree* temp2 = temp1->left;
+
+	temp1->left = node;
+	node->right = temp2;
+
+	temp1->height = max(calc_height(temp1->left),calc_height(temp1->right));
+	node->height = max(calc_height(node->left),calc_height(node->right));
+
+	return temp1;
+}
+
 Avltree* insertToAVLTree(Avltree* root, int val)
 {
 	Avltree* temp;
@@ -43,7 +72,7 @@ Avltree* insertToAVLTree(Avltree* root, int val)
 		temp->height = 1;
 		temp->left = NULL;
 		temp->right = NULL;
-		
+		return temp;	
 	}
 	else
 	{
