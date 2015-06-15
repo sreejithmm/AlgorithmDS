@@ -1,5 +1,7 @@
 
 
+#
+
 #include <stdio.h>
 
 /**
@@ -43,33 +45,44 @@
  void make_string(int* arr, char* str,int len)
  {
    int i;
+   char buf[50]={'\0'};
+
    for(i=0;i<len;i++)
    {
-     sprintf(str,"%d",arr[i]);
+     sprintf(buf,"%d",arr[i]);
+     strcat(str,buf);
+     memset(buf,'\0',50);
    }
 
  }
 
-char* largestNumber( int* A, int n1)
+char* largestNumber( const int* A, int n1)
 {
-	char str[50]={'\0'};
+	char* str=(char*)malloc(sizeof(char)*50);
 
 	/*sort the numbers */
-	qsort(A,n1,sizeof(A[0]),mycomp);
+	int i;
+	int * array = (int*)malloc(sizeof(int)*n1);
+	for(i=0;i<n1;i++)
+	{
+	    array[i]=A[i];
+	}
+	qsort(array,n1,sizeof(A[0]),mycomp);
 
-//  print_arr(A,n1);
+//  print_arr(array,n1);
 
-	make_string(A,str,n1);
+	make_string(array,str,n1);
 
   //printf("String = %s",str);
   return str;
+
 }
 
 int main()
 {
-  int array={8,89};
+  int array[]={8,89};
   int len = sizeof(array)/sizeof(array[0]);
 
-  printf("output = %s",largestNumber(array,));
+  printf("output = %s",largestNumber(array,len));
 
 }
