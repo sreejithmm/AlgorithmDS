@@ -34,4 +34,6 @@ char* largestNumber(const int* A, int n1)
 	/*sort the numbers */
 	qsort(A,n1,sizeof(A[0]),mycomp);
 
+	make_string(A,str);
+
 }
