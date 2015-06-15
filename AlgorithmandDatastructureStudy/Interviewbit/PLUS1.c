@@ -7,7 +7,7 @@
  * @Output Integer array. You need to malloc memory for result array, and fill result's length in length_of_array
  */
 
- int getlen(int sum)
+ int getlen(unsigned long long sum)
  {
    int count=1;
    if(sum == 0)
@@ -29,9 +29,9 @@ int* plusOne(int* A, int n1, int *length_of_array) {
          */
 
          int indx=0;
-         int len = *length_of_array;
+         int len = n1;
          int *result;
-         int sum =0;
+         unsigned  long long sum =0;
          int i=1;
          int leading_zero = A[0];
          int newlen=0;
@@ -39,20 +39,42 @@ int* plusOne(int* A, int n1, int *length_of_array) {
          for(indx =0; indx <len; indx++)
          {
             if(!leading_zero){
+
+              leading_zero = (A[indx+1]!=0)?1:0;
+              printf("leading_zero val = %d\n",leading_zero);
               continue;
-              leading_zero = (A[indx++])?1:0;
             }
              sum = A[indx]+ sum*i;
-             i=i*10;
+             printf("index=%d sum=%llu\n",indx,sum);
+            i= 10;
          }
+         printf("original nubmer = %llu\n",sum);
          sum = sum+1;
          newlen = getlen(sum);
+         printf("Newlen=%d\n",newlen);
          result = (int*)malloc(sizeof(int)*newlen);
          for(i=newlen-1; i>=0;i--)
          {
            result[i]=sum%10;
+           printf("result[%d]=%d",i,result[i]);
            sum = sum/10;
          }
          *length_of_array = newlen;
          return result;
+}
+int main()
+{
+  int array[]={0, 3, 7, 6, 4, 0, 5, 5, 5};
+  int len = sizeof(array)/sizeof(array[0]);
+
+  int newlen,i;
+  int *result;
+
+  result = plusOne(array,len,&newlen);
+  for(i=0;i<newlen;i++)
+  {
+    printf("%d ",result[i]);
+  }
+  printf("\n");
+  return 0;
 }
