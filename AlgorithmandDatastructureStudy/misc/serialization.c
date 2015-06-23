@@ -24,12 +24,21 @@ packet * create_packet(int * len)
 	{
 			printf("%d->Enter age,compartment,name in the order\n",i+1);
 			scanf("%d%d%s",&age,&compartment,name);
-			pArray[0].age = age;
-			pArray[0].compartment = compartment;
-			pArray[0].name = (char*)malloc(sizeof(char)*(strlen(name)+1));
+			pArray[i].age = age;
+			pArray[i].compartment = compartment;
+			pArray[i].name = (char*)malloc(sizeof(char)*(strlen(name)+1));
 			strcpy(pArray[0].name,name);
 
 	}
+
+
+
+	return pArray;
+}
+
+void send_packet(packet* pArray, int length)
+{
+	
 }
 int main()
 {
