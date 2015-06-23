@@ -38,7 +38,9 @@ packet * create_packet(int * len)
 
 void send_packet(packet* pArray, int length)
 {
-	
+
+	char *buf;
+
 }
 int main()
 {
