@@ -123,6 +123,78 @@ void print_pre_order(Avltree* node)
 		print_pre_order(node->right);
 	}
 }
+
+Avltree* delete_node(Avltree* node, int key)
+{
+	Avltree* temp=NULL;
+	int balance=0;
+
+	if(node == NULL)
+	{
+		return node;
+
+	}
+	if(key < node->val)
+		node->left = delete_node(node->left,key);
+	else if(key >node->val)
+		node->right = delete_node(node->right,key);
+	else
+	{
+		/* check if this is leaf node or only one child*/
+		if(node->left == NULL || node->right == NULL)
+		{
+				temp = node->left?node->left:node->right;
+				if(temp == NULL)
+				{
+					/* node is a leaf*/
+					temp = node;
+					free(node);
+					return NULL;
+				}
+				else
+				{
+					node->val = temp->val;
+					free(temp);
+					
+				}
+		}
+		else
+		{
+			/* find successor */
+			temp = node->right;
+			while(temp->left)
+			{
+				temp = temp->left;
+			}
+			node->val = temp->val;
+			free(temp);
+			
+		}
+	}
+	node->height = max(calc_height(node->left),calc_height(node->right))+1;
+	balance = getbalance(node);
+	if (balance > 1 && getbalance(node->left) >= 0)
+	{
+		node = rotate_right(node);
+	}
+	else if(balance  > 1 && getbalance(node->left) < 0)
+	{
+		node->left = rotate_left(node->left);
+		node = rotate_right(node);
+
+	}
+	else if(balance < 1 && getbalance(node->right) < 0)
+	{
+		node = rotate_left(node);
+	}
+	else if(balance <1 && getbalance(node->right) >= 0)
+	{
+		node->right = rotate_right(node->right);
+		node = rotate_left(node);
+	}
+	return node;
+
+}
 int main()
 {
 	int i;
@@ -140,6 +212,9 @@ int main()
 
 	print_pre_order(root);
 	printf("\n");
+
+
+	root = delete_node(root,50);
 
 	return 0;
 }
