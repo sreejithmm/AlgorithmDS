@@ -5,17 +5,16 @@
  *     struct ListNode *next;
  * };
  */
-
+typedef struct ListNode list;
 
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
     
-    int carry=0,val=0;
-    struct ListNode* result,*tmp,*node;
-    struct ListNode test;
-    tmp = (struct Listnode*) malloc(sizeof(test));
+    int val=0;
+    struct ListNode* result,*tmp;
+    tmp = (struct Listnode*) malloc(sizeof(list));
     result = tmp;
+    
     while(l1 || l2){
-        val = carry;
         if(l1){
             val = val + l1->val;
             l1 = l1->next;
@@ -25,18 +24,18 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
             l2 = l2->next;
         }
 
-        node = (struct Listnode*)malloc(sizeof(test));
-        node->val = val%10;
-        node->next = NULL;
-        tmp->next = node;
-        tmp = node;
-        carry = val / 10;
+        tmp->next = (struct Listnode*)malloc(sizeof(list));
+        tmp = tmp->next;
+
+        tmp->val = val%10;
+        tmp->next = NULL;
+        val = val / 10;
     }
-    if(carry){
-        node = (struct Listnode*)malloc(sizeof(test));
-        node->val = carry;
-        node->next = NULL;
-        tmp->next = node;
+    if(val){
+        tmp->next = (struct Listnode*)malloc(sizeof(list));
+        tmp = tmp->next;
+        tmp->val = val;
+        tmp->next = NULL;
 
     }
     return result->next;
