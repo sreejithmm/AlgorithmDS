@@ -1,11 +1,5 @@
-#include <stdio.h>
 
-int getParent(int index)
-{
 
-    return((index-1)/2);
-
-}
 int getleftChild(int index)
 {
     return((2*index)+1);
@@ -15,37 +9,15 @@ int getRightChild(int index)
     return((2*index)+2);
 }
 
-int insert(int heap[],int num,int* size)
-{
-    int location = *size;
-    int parentnode=getParent(location);
-
-    while(location >0)
-    {
-        if(heap[parentnode] < num)
-        {
-    
-            heap[location] = num;
-            *size = *size + 1;
-            return 0;
-        }
-        heap[location]=heap[parentnode];
-        location = parentnode;
-        parentnode = getParent(location);
-    }
-    heap[0]=num;
-    *size = *size + 1;
-    return 0;
-}
 
 int getMin(int heap[])
 {
     return heap[0];
 }
 
-int getMinValueIdx(int heap[],int lidx, int ridx)
+int getMaxValueIdx(int heap[],int lidx, int ridx)
 {
-    if(heap[lidx] > heap[ridx])
+    if(heap[lidx] < heap[ridx])
     {
         return ridx;
     }
@@ -65,17 +37,17 @@ void heapify(int heap[],int index,int size)
 
     int lidx = getleftChild(index);
     int ridx = getRightChild(index);
-    int smallestidx;
+    int highestidx;
 
     while(lidx <size && ridx < size)
     {
-        smallestidx = getMinValueIdx(heap,lidx,ridx);
-        if(heap[smallestidx] > heap[index])
+        highestidx = getMaxValueIdx(heap,lidx,ridx);
+        if(heap[highestidx] < heap[index])
         {
             return ;
         }
-        swap(&heap[smallestidx],&heap[index]);
-        index = smallestidx;
+        swap(&heap[highestidx],&heap[index]);
+        index = highestidx;
         lidx = getleftChild(index);
         ridx = getRightChild(index);
 
@@ -106,14 +78,4 @@ void heapSort(int heap[], int size)
     
 }
 
-void printHeap(int heap[],int size)
-{
-    int i;
-
-    for(i=0;i<size;i++)
-    {
-        printf("%d ",heap[i]);
-    }
-    printf("\n");
-}
 
