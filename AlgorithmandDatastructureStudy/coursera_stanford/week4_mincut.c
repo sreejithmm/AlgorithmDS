@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <inttypes.h>
+#include <errno.h>
+#include <string.h>
 
 typedef unsigned long long uint64_t;
 FILE * output;
@@ -98,12 +102,126 @@ uint64_t get_median(uint64_t arr[],uint64_t start,uint64_t mid, uint64_t end) {
       fprintf(output,"median of %llu %llu %llu is %llu::median index = %llu\n",arr[start],arr[mid],arr[end],arr[median],median);
       return median;
 }
+void
+addVertices (graph * gr, int src, int dest,int isDirected,float weight)
+{
+  graphArrnode *node = NULL;
+
+  if (gr == NULL){
+      return;
+   }
+
+  if (gr->ArrList == NULL) {
+      gr->ArrList = (graphArrList *) malloc (gr->num * sizeof (graphArrList));
+   }
+
+  node = (graphArrnode *) malloc (sizeof (graphArrnode));
+  node->dest = dest;
+  node->len = weight;
+  node->pathLen=0;
+  node->next = gr->ArrList[src].head;
+  gr->ArrList[src].head = node;
+
+  if(!isDirected) 
+  {
+  	node = (graphArrnode *) malloc (sizeof (graphArrnode));
+	node->dest = src;
+        node->len = weight;
+	node->pathLen=0;
+        node->next = gr->ArrList[dest].head;
+        gr->ArrList[dest].head = node;
+  }
+
+
+}
+
+void
+printGraph (graph * gr)
+{
+  int i;
+  graphArrnode *temp;
+
+  if (gr == NULL)
+    {
+      return;
+    }
+  if (gr->num == 0)
+    {
+      printf ("Nothing to print\n");
+    }
+  if (gr->ArrList == NULL)
+    {
+      printf ("ERR..No adjacency list found\n");
+      return;
+    }
+  for (i = 0; i < gr->num; i++)
+    {
+      temp = gr->ArrList[i].head;
+      printf ("\n");
+      printf ("%d :", i);
+      while (temp != NULL)
+	{
+
+	  printf ("%d ", temp->dest);
+	  temp = temp->next;
+	}
+    }
+  return;
+
+}
+
+graph* create_graph(graph*gr , int num_size, FILE* fd){
+
+    char *buffer = NULL;
+    int i ;
+    unsigned int line = 0;
+    char strnum[4] = {'\0'};
+    int l = 0;
+    size_t size = 1000;
+    int lsize = 0;
+    
+
+
+    unsigned long index = 0;
+    char* endptr;
+
+    if(gr == NULL) {
+        fprintf(output,"NULL graph sent\n")
+        return NULL;
+    }
+    
+    gr->num = num_size; 
+    buffer = (char*) malloc(1000 * sizeof(char));
+    do{
+        lsize = getline(&buffer,&size,fd);
+
+        fprintf(output,"%s\n",buffer);
+
+    
+        for(i=0; 1==sscanf(buffer + i, "%s%n", strnum, &l); i = i + l){
+            fprintf(output,"%s ",strnum);
+            index  = strtol(strnum,&endptr,10);
+        }
+
+        fprintf(output,"\n");
+    } while(lsize > 0) ;
+
+
+
+    return NULL;
+}
+
+
+
+
+
 
 
 
 int main(){
     FILE * fd;
     int i = 0;
+    graph * gr = NULL;
 #ifndef TEST
     uint64_t num_array[10000];
 #else
@@ -113,39 +231,23 @@ int main(){
 
     output = fopen("out.txt","w");
 #ifndef TEST
-    fd = fopen("QuickSort.txt","r");
+    fd = fopen("week4_mincut.txt","r");
 #else
     fd = fopen("test.txt","r");
 #endif
 
-#ifndef TEST
-    for(i=0;i<10000;i++){
-#else
-    for(i=0;i<10;i++){
-#endif
-        fscanf(fd,"%llu\n",&num_array[i]);
-#ifdef TEST
-        fprintf(output,"%llu ",num_array[i]);
-        
-#endif
-    }
+
+    /* read mincut.txt to graph*/
+    /* first node is going to be 
+        free in this case */
+
+    gr = (graph*)malloc(sizeof(graph)*201);
+
+    gr = create_graph(gr,201,fd);
+
     fprintf(output,"\n");
     /* close input file */
     fclose(fd);
-#ifndef TEST
-    comparisons = quicksort(num_array,10000,0,9999);
-#else
-    comparisons = quicksort(num_array,10,0,9);
-#endif
-    printf("Total comparisons = %llu\n",comparisons);
-#ifdef TEST
-    for(i=0;i<10;i++) {
-        fprintf(output,"%llu ",num_array[i]);
-
-    }
-    fprintf(output,"\n");
-#endif
-    /*close debug file */
     fclose(output);
 
 
