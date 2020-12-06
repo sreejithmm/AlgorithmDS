@@ -6,6 +6,60 @@ FILE * output;
 
 //#define TEST 1
 #define MEDIAN_
+
+
+
+typedef struct graphArrnode{
+	uint64_t dest;
+	uint64_t len;
+	uint64_t pathLen;
+	struct graphArrnode* next;
+}graphArrnode;
+
+typedef struct graphArrList 
+{
+	graphArrnode * head;
+}graphArrList;
+
+
+
+typedef struct _graph{
+	
+	uint64_t num;
+	graphArrList* ArrList;
+	
+}graph;
+
+typedef struct {
+	uint64_t *arr;
+	uint64_t front;
+	uint64_t rear;
+	uint64_t cap;
+	uint64_t size;
+}myqueue;
+
+typedef struct edge{
+
+	uint64_t source;
+	uint64_t dest;
+	uint64_t length;
+}edge_st;
+
+typedef struct heap{
+
+     edge_st* edge[100];
+     uint64_t size;
+
+}heap;
+
+/* function definitions */
+void addVertices (graph * gr, uint64_t src, uint64_t dest,uint64_t isDirected,uint64_t weight);
+graph * createGraph (uint64_t nodes);
+uint64_t getShortestPath(graph* gr, uint64_t origin,uint64_t destination);
+
+
+
+
 void dump_array(uint64_t arr[]) {
 
     uint64_t index ;
