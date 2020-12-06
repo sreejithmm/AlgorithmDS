@@ -141,31 +141,19 @@ printGraph (graph * gr)
   int i;
   graphArrnode *temp;
 
-  if (gr == NULL)
-    {
-      return;
-    }
-  if (gr->num == 0)
-    {
-      printf ("Nothing to print\n");
-    }
-  if (gr->ArrList == NULL)
-    {
+  if (gr->ArrList == NULL) {
       printf ("ERR..No adjacency list found\n");
       return;
-    }
-  for (i = 0; i < gr->num; i++)
-    {
+  }
+  for (i = 0; i < gr->num; i++) {
       temp = gr->ArrList[i].head;
       printf ("\n");
       printf ("%d :", i);
-      while (temp != NULL)
-	{
-
-	  printf ("%d ", temp->dest);
-	  temp = temp->next;
+      while (temp != NULL) {
+       printf ("%d ", temp->dest);
+	   temp = temp->next;
 	}
-    }
+}
   return;
 
 }
@@ -179,28 +167,44 @@ graph* create_graph(graph*gr , int num_size, FILE* fd){
     int l = 0;
     size_t size = 1000;
     int lsize = 0;
-    
+    graphArrnode * nd = NULL;
 
 
-    unsigned long index = 0;
+    unsigned long index = 0,vertex = 0;
     char* endptr;
 
     if(gr == NULL) {
         fprintf(output,"NULL graph sent\n")
         return NULL;
     }
-    
+
     gr->num = num_size; 
+    gr->ArrList = (graphArrList *) malloc (gr->num * sizeof (graphArrList));
+    for (i = 0; i < nodes; i++) {
+      gr->ArrList[i].head = NULL;
+    }
+
     buffer = (char*) malloc(1000 * sizeof(char));
     do{
         lsize = getline(&buffer,&size,fd);
 
         fprintf(output,"%s\n",buffer);
-
+        vertex++;
     
         for(i=0; 1==sscanf(buffer + i, "%s%n", strnum, &l); i = i + l){
             fprintf(output,"%s ",strnum);
             index  = strtol(strnum,&endptr,10);
+            if(i==0) continue;
+            node = (graphArrnode *) malloc (sizeof (graphArrnode));
+            node->dest = index;
+            node->next = NULL;
+            if(i==1) {
+                gr->ArrList[vertex].head = nd;
+                
+            }else{
+                nd->next = node;
+            }
+            
         }
 
         fprintf(output,"\n");
