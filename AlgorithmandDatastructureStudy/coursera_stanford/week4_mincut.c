@@ -210,15 +210,28 @@ graph* create_graph(graph*gr , int num_size, FILE* fd){
         fprintf(output,"\n");
     } while(lsize > 0) ;
 
+    return gr;
 
-
-    return NULL;
 }
 
 
 
 
+int calculate_mincut(graph* gr) {
+#ifndef TEST
+    
+    int index = rand() %201;
+    int max_vertices = 201;
+#else 
+    int index = rand() %10;
+    int max_vertices = 10;
 
+#endif
+
+    while (num_vertices > 2){
+        
+    }
+}
 
 
 
@@ -226,6 +239,8 @@ int main(){
     FILE * fd;
     int i = 0;
     graph * gr = NULL;
+    int mincut = 0;
+
 #ifndef TEST
     uint64_t num_array[10000];
 #else
@@ -250,6 +265,11 @@ int main(){
     gr = create_graph(gr,201,fd);
 
     fprintf(output,"\n");
+
+
+    /*create_mincut*/
+    mincut = calculate_mincut(gr);
+    
     /* close input file */
     fclose(fd);
     fclose(output);
