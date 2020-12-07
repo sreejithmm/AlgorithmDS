@@ -185,8 +185,9 @@ graph* create_graph(graph*gr , int num_size, FILE* fd){
     }
 
     buffer = (char*) malloc(1000 * sizeof(char));
+    lsize = getline(&buffer,&size,fd);
+
     do{
-        lsize = getline(&buffer,&size,fd);
 
         fprintf(output,"%s\n",buffer);
         vertex++;
@@ -199,13 +200,15 @@ graph* create_graph(graph*gr , int num_size, FILE* fd){
             node->dest = index;
             node->next = NULL;
             if(i==1) {
-                gr->ArrList[vertex].head = nd;
+                gr->ArrList[vertex].head = node;
                 
             }else{
                 nd->next = node;
             }
+            nd = node;
             
         }
+        lsize = getline(&buffer,&size,fd);
 
         fprintf(output,"\n");
     } while(lsize > 0) ;
@@ -227,9 +230,24 @@ int calculate_mincut(graph* gr) {
     int max_vertices = 10;
 
 #endif
+    uint64_t merge_vertice =0 ;
+    num_vertices = max_vertices;
+    graphArrnode *grapharrnode = NULL,grnode = NULL;
 
     while (num_vertices > 2){
-        
+        merge_vertice = gr->ArrList[index].head->dest;
+        grapharrnode = gr->ArrList[index].head
+        fprintf(output,"Merging %llu and %llu\n",index, gr->ArrList[index].head->dest);
+        while(grapharrnode->next) {
+                grapharrnode = grapharrnode->next;
+        }
+        grapharrnode->next = gr->ArrList[merge_vertice].head;
+        while(grapharrnode->next){
+            grnode = grapharrnode->next;
+            if(grnode->dest == index)
+
+        }
+
     }
 }
 
