@@ -244,10 +244,16 @@ int calculate_mincut(graph* gr) {
         grapharrnode->next = gr->ArrList[merge_vertice].head;
         while(grapharrnode->next){
             grnode = grapharrnode->next;
-            if(grnode->dest == index)
+            if(grnode->dest == index) {
+                grnode = grnode->next;
+                free(grapharrnode->next);
+                grapharrnode->next = grnode;
+
+            }
 
         }
-
+        gr->ArrList[merge_vertice].head = NULL;
+        num_vertices --;
     }
 }
 
