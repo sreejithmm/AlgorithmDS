@@ -103,7 +103,7 @@ uint64_t get_median(uint64_t arr[],uint64_t start,uint64_t mid, uint64_t end) {
       return median;
 }
 void
-addVertices (graph * gr, int src, int dest,int isDirected,float weight)
+addVertices (graph * gr, uint64_t src, uint64_t dest,uint64_t isDirected,uint64_t weight)
 {
   graphArrnode *node = NULL;
 
@@ -150,7 +150,7 @@ printGraph (graph * gr)
       printf ("\n");
       printf ("%d :", i);
       while (temp != NULL) {
-       printf ("%d ", temp->dest);
+       printf ("%llu ", temp->dest);
 	   temp = temp->next;
 	}
 }
@@ -168,19 +168,20 @@ graph* create_graph(graph*gr , int num_size, FILE* fd){
     size_t size = 1000;
     int lsize = 0;
     graphArrnode * nd = NULL;
+    graphArrnode* node = NULL;
 
 
     unsigned long index = 0,vertex = 0;
     char* endptr;
 
     if(gr == NULL) {
-        fprintf(output,"NULL graph sent\n")
+        fprintf(output,"NULL graph sent\n");
         return NULL;
     }
 
     gr->num = num_size; 
     gr->ArrList = (graphArrList *) malloc (gr->num * sizeof (graphArrList));
-    for (i = 0; i < nodes; i++) {
+    for (i = 0; i < num_size; i++) {
       gr->ArrList[i].head = NULL;
     }
 
@@ -231,13 +232,15 @@ int calculate_mincut(graph* gr) {
 
 #endif
     uint64_t merge_vertice =0 ;
-    num_vertices = max_vertices;
-    graphArrnode *grapharrnode = NULL,grnode = NULL;
+    uint64_t num_vertices = max_vertices;
+    graphArrnode *grapharrnode = NULL;
+    graphArrnode* grnode = NULL;
+    uint64_t cuts=0;
 
     while (num_vertices > 2){
         merge_vertice = gr->ArrList[index].head->dest;
-        grapharrnode = gr->ArrList[index].head
-        fprintf(output,"Merging %llu and %llu\n",index, gr->ArrList[index].head->dest);
+        grapharrnode = gr->ArrList[index].head;
+        fprintf(output,"Merging %d and %llun",index, gr->ArrList[index].head->dest);
         while(grapharrnode->next) {
                 grapharrnode = grapharrnode->next;
         }
@@ -256,6 +259,16 @@ int calculate_mincut(graph* gr) {
         num_vertices --;
         index = rand() %201;
     }
+    index = 1;
+    while(!gr->ArrList[index].head){
+        index++;
+    }
+    grnode = gr->ArrList[index].head;
+    while(!grnode) {
+        grnode = grnode->next;
+        cuts++;
+    }
+    return cuts;
 }
 
 
