@@ -254,6 +254,7 @@ int calculate_mincut(graph* gr) {
         }
         gr->ArrList[merge_vertice].head = NULL;
         num_vertices --;
+        index = rand() %201;
     }
 }
 
@@ -294,6 +295,7 @@ int main(){
     /*create_mincut*/
     mincut = calculate_mincut(gr);
     
+    printf("Mincut = %d\n",mincut);
     /* close input file */
     fclose(fd);
     fclose(output);
