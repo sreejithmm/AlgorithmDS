@@ -1,11 +1,11 @@
 #https://www.codechef.com/UADPIP01/problems/FIBONUM
 
 def main():
-    tests = input()
+    tests = int(input())
     while (tests):
         n = input()
         print(n)
-        tests -=1  
+        tests = tests-1
         
 
 def fib():
