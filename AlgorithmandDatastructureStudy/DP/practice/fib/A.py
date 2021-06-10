@@ -7,8 +7,10 @@ from io import BytesIO, IOBase
  
  
 def main():
-    sys.stdin = open('input.txt', 'r+')
-    sys.stdout = open('output.txt', 'w+')
+    cwd = os.getcwd()  # Get the current working directory (cwd)    
+    files = os.listdir(cwd)  # Get all the files in that directory
+    sys.stdin = open('input.txt', 'r')
+    sys.stdout = open('output.txt', 'w')
 
 
 
