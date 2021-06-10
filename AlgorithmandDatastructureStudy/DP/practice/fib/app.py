@@ -1,4 +1,19 @@
-line1 = input()
-line2 = input()
-arr1 = line1.split()
-print(arr1[0] + ' ' + arr1[1])
+#https://www.codechef.com/UADPIP01/problems/FIBONUM
+
+def main():
+    tests = input()
+    while (tests):
+        n = input()
+        print(n)
+        tests -=1  
+        
+
+def fib():
+    pass
+
+
+if __name__ == "__main__":
+    main()
+    
+
+
