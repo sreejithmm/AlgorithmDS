@@ -51,7 +51,7 @@ class FastIO(IOBase):
         print("readline")
 
         return self.buffer.readline()
-
+ 
     def flush(self):
         if self.writable:
             os.write(self._fd, self.buffer.getvalue())
