@@ -122,123 +122,847 @@ DEBUG:root:fib entry = 3
 DEBUG:root:fib entry = 2
 DEBUG:root:fib entry = 1
 DEBUG:root:fib entry = 0
+CRITICAL:root:dp[2]=1
 DEBUG:root:fib entry = 1
+CRITICAL:root:dp[3]=2
 DEBUG:root:fib entry = 2
+DEBUG:root:dp is not none-1
+CRITICAL:root:dp[4]=3
 DEBUG:root:fib entry = 3
+DEBUG:root:dp is not none-2
+CRITICAL:root:dp[5]=5
 DEBUG:root:fib entry = 4
+DEBUG:root:dp is not none-3
+CRITICAL:root:dp[6]=8
 DEBUG:root:fib entry = 5
+DEBUG:root:dp is not none-5
+CRITICAL:root:dp[7]=13
 DEBUG:root:fib entry = 6
+DEBUG:root:dp is not none-8
+CRITICAL:root:dp[8]=21
 DEBUG:root:fib entry = 7
+DEBUG:root:dp is not none-13
+CRITICAL:root:dp[9]=34
 DEBUG:root:fib entry = 8
+DEBUG:root:dp is not none-21
+CRITICAL:root:dp[10]=55
 DEBUG:root:fib entry = 9
+DEBUG:root:dp is not none-34
+CRITICAL:root:dp[11]=89
 DEBUG:root:fib entry = 10
+DEBUG:root:dp is not none-55
+CRITICAL:root:dp[12]=144
 DEBUG:root:fib entry = 11
+DEBUG:root:dp is not none-89
+CRITICAL:root:dp[13]=233
 DEBUG:root:fib entry = 12
+DEBUG:root:dp is not none-144
+CRITICAL:root:dp[14]=377
 DEBUG:root:fib entry = 13
+DEBUG:root:dp is not none-233
+CRITICAL:root:dp[15]=610
 DEBUG:root:fib entry = 14
+DEBUG:root:dp is not none-377
+CRITICAL:root:dp[16]=987
 DEBUG:root:fib entry = 15
+DEBUG:root:dp is not none-610
+CRITICAL:root:dp[17]=1597
 DEBUG:root:fib entry = 16
+DEBUG:root:dp is not none-987
+CRITICAL:root:dp[18]=2584
 DEBUG:root:fib entry = 17
+DEBUG:root:dp is not none-1597
+CRITICAL:root:dp[19]=4181
 DEBUG:root:fib entry = 18
+DEBUG:root:dp is not none-2584
+CRITICAL:root:dp[20]=6765
 DEBUG:root:fib entry = 19
+DEBUG:root:dp is not none-4181
+CRITICAL:root:dp[21]=10946
 DEBUG:root:fib entry = 20
+DEBUG:root:dp is not none-6765
+CRITICAL:root:dp[22]=17711
 DEBUG:root:fib entry = 21
+DEBUG:root:dp is not none-10946
+CRITICAL:root:dp[23]=28657
 DEBUG:root:fib entry = 22
+DEBUG:root:dp is not none-17711
+CRITICAL:root:dp[24]=46368
 DEBUG:root:fib entry = 23
+DEBUG:root:dp is not none-28657
+CRITICAL:root:dp[25]=75025
 DEBUG:root:fib entry = 24
+DEBUG:root:dp is not none-46368
+CRITICAL:root:dp[26]=121393
 DEBUG:root:fib entry = 25
+DEBUG:root:dp is not none-75025
+CRITICAL:root:dp[27]=196418
 DEBUG:root:fib entry = 26
+DEBUG:root:dp is not none-121393
+CRITICAL:root:dp[28]=317811
 DEBUG:root:fib entry = 27
+DEBUG:root:dp is not none-196418
+CRITICAL:root:dp[29]=514229
 DEBUG:root:fib entry = 28
+DEBUG:root:dp is not none-317811
+CRITICAL:root:dp[30]=832040
 DEBUG:root:fib entry = 29
+DEBUG:root:dp is not none-514229
+CRITICAL:root:dp[31]=1346269
 DEBUG:root:fib entry = 30
+DEBUG:root:dp is not none-832040
+CRITICAL:root:dp[32]=2178309
 DEBUG:root:fib entry = 31
+DEBUG:root:dp is not none-1346269
+CRITICAL:root:dp[33]=3524578
 DEBUG:root:fib entry = 32
+DEBUG:root:dp is not none-2178309
+CRITICAL:root:dp[34]=5702887
 DEBUG:root:fib entry = 33
+DEBUG:root:dp is not none-3524578
+CRITICAL:root:dp[35]=9227465
 DEBUG:root:fib entry = 34
+DEBUG:root:dp is not none-5702887
+CRITICAL:root:dp[36]=14930352
 DEBUG:root:fib entry = 35
+DEBUG:root:dp is not none-9227465
+CRITICAL:root:dp[37]=24157817
 DEBUG:root:fib entry = 36
+DEBUG:root:dp is not none-14930352
+CRITICAL:root:dp[38]=39088169
 DEBUG:root:fib entry = 37
+DEBUG:root:dp is not none-24157817
+CRITICAL:root:dp[39]=63245986
 DEBUG:root:fib entry = 38
+DEBUG:root:dp is not none-39088169
+CRITICAL:root:dp[40]=102334155
 DEBUG:root:fib entry = 39
+DEBUG:root:dp is not none-63245986
+CRITICAL:root:dp[41]=165580141
 DEBUG:root:fib entry = 40
+DEBUG:root:dp is not none-102334155
+CRITICAL:root:dp[42]=267914296
 DEBUG:root:fib entry = 41
+DEBUG:root:dp is not none-165580141
+CRITICAL:root:dp[43]=433494437
 DEBUG:root:fib entry = 42
+DEBUG:root:dp is not none-267914296
+CRITICAL:root:dp[44]=701408733
 DEBUG:root:fib entry = 43
+DEBUG:root:dp is not none-433494437
+CRITICAL:root:dp[45]=1134903170
 DEBUG:root:fib entry = 44
+DEBUG:root:dp is not none-701408733
+CRITICAL:root:dp[46]=1836311903
 DEBUG:root:fib entry = 45
+DEBUG:root:dp is not none-1134903170
+CRITICAL:root:dp[47]=2971215073
 DEBUG:root:fib entry = 46
+DEBUG:root:dp is not none-1836311903
+CRITICAL:root:dp[48]=4807526976
 DEBUG:root:fib entry = 47
+DEBUG:root:dp is not none-2971215073
+CRITICAL:root:dp[49]=7778742049
 DEBUG:root:fib entry = 48
+DEBUG:root:dp is not none-4807526976
+CRITICAL:root:dp[50]=12586269025
 DEBUG:root:fib entry = 49
+DEBUG:root:dp is not none-7778742049
+CRITICAL:root:dp[51]=20365011074
 DEBUG:root:fib entry = 50
+DEBUG:root:dp is not none-12586269025
+CRITICAL:root:dp[52]=32951280099
 DEBUG:root:fib entry = 51
+DEBUG:root:dp is not none-20365011074
+CRITICAL:root:dp[53]=53316291173
 DEBUG:root:fib entry = 52
+DEBUG:root:dp is not none-32951280099
+CRITICAL:root:dp[54]=86267571272
 DEBUG:root:fib entry = 53
+DEBUG:root:dp is not none-53316291173
+CRITICAL:root:dp[55]=139583862445
 DEBUG:root:fib entry = 54
+DEBUG:root:dp is not none-86267571272
+CRITICAL:root:dp[56]=225851433717
 DEBUG:root:fib entry = 55
+DEBUG:root:dp is not none-139583862445
+CRITICAL:root:dp[57]=365435296162
 DEBUG:root:fib entry = 56
+DEBUG:root:dp is not none-225851433717
+CRITICAL:root:dp[58]=591286729879
 DEBUG:root:fib entry = 57
+DEBUG:root:dp is not none-365435296162
+CRITICAL:root:dp[59]=956722026041
 DEBUG:root:fib entry = 58
+DEBUG:root:dp is not none-591286729879
+CRITICAL:root:dp[60]=1548008755920
 DEBUG:root:fib entry = 59
+DEBUG:root:dp is not none-956722026041
+CRITICAL:root:dp[61]=2504730781961
 DEBUG:root:fib entry = 60
+DEBUG:root:dp is not none-1548008755920
+CRITICAL:root:dp[62]=4052739537881
 DEBUG:root:fib entry = 61
+DEBUG:root:dp is not none-2504730781961
+CRITICAL:root:dp[63]=6557470319842
 DEBUG:root:fib entry = 62
+DEBUG:root:dp is not none-4052739537881
+CRITICAL:root:dp[64]=10610209857723
 DEBUG:root:fib entry = 63
+DEBUG:root:dp is not none-6557470319842
+CRITICAL:root:dp[65]=17167680177565
 DEBUG:root:fib entry = 64
+DEBUG:root:dp is not none-10610209857723
+CRITICAL:root:dp[66]=27777890035288
 DEBUG:root:fib entry = 65
+DEBUG:root:dp is not none-17167680177565
+CRITICAL:root:dp[67]=44945570212853
 DEBUG:root:fib entry = 66
+DEBUG:root:dp is not none-27777890035288
+CRITICAL:root:dp[68]=72723460248141
 DEBUG:root:fib entry = 67
+DEBUG:root:dp is not none-44945570212853
+CRITICAL:root:dp[69]=117669030460994
 DEBUG:root:fib entry = 68
+DEBUG:root:dp is not none-72723460248141
+CRITICAL:root:dp[70]=190392490709135
 DEBUG:root:fib entry = 69
+DEBUG:root:dp is not none-117669030460994
+CRITICAL:root:dp[71]=308061521170129
 DEBUG:root:fib entry = 70
+DEBUG:root:dp is not none-190392490709135
+CRITICAL:root:dp[72]=498454011879264
 DEBUG:root:fib entry = 71
+DEBUG:root:dp is not none-308061521170129
+CRITICAL:root:dp[73]=806515533049393
 DEBUG:root:fib entry = 72
+DEBUG:root:dp is not none-498454011879264
+CRITICAL:root:dp[74]=1304969544928657
 DEBUG:root:fib entry = 73
+DEBUG:root:dp is not none-806515533049393
+CRITICAL:root:dp[75]=2111485077978050
 DEBUG:root:fib entry = 74
+DEBUG:root:dp is not none-1304969544928657
+CRITICAL:root:dp[76]=3416454622906707
 DEBUG:root:fib entry = 75
+DEBUG:root:dp is not none-2111485077978050
+CRITICAL:root:dp[77]=5527939700884757
 DEBUG:root:fib entry = 76
+DEBUG:root:dp is not none-3416454622906707
+CRITICAL:root:dp[78]=8944394323791464
 DEBUG:root:fib entry = 77
+DEBUG:root:dp is not none-5527939700884757
+CRITICAL:root:dp[79]=14472334024676221
 DEBUG:root:fib entry = 78
+DEBUG:root:dp is not none-8944394323791464
+CRITICAL:root:dp[80]=23416728348467685
 DEBUG:root:fib entry = 79
+DEBUG:root:dp is not none-14472334024676221
+CRITICAL:root:dp[81]=37889062373143906
 DEBUG:root:fib entry = 80
+DEBUG:root:dp is not none-23416728348467685
+CRITICAL:root:dp[82]=61305790721611591
 DEBUG:root:fib entry = 81
+DEBUG:root:dp is not none-37889062373143906
+CRITICAL:root:dp[83]=99194853094755497
 DEBUG:root:fib entry = 82
+DEBUG:root:dp is not none-61305790721611591
+CRITICAL:root:dp[84]=160500643816367088
 DEBUG:root:fib entry = 83
+DEBUG:root:dp is not none-99194853094755497
+CRITICAL:root:dp[85]=259695496911122585
 DEBUG:root:fib entry = 84
+DEBUG:root:dp is not none-160500643816367088
+CRITICAL:root:dp[86]=420196140727489673
 DEBUG:root:fib entry = 85
+DEBUG:root:dp is not none-259695496911122585
+CRITICAL:root:dp[87]=679891637638612258
 DEBUG:root:fib entry = 86
+DEBUG:root:dp is not none-420196140727489673
+CRITICAL:root:dp[88]=1100087778366101931
 DEBUG:root:fib entry = 87
+DEBUG:root:dp is not none-679891637638612258
+CRITICAL:root:dp[89]=1779979416004714189
 DEBUG:root:fib entry = 88
+DEBUG:root:dp is not none-1100087778366101931
+CRITICAL:root:dp[90]=2880067194370816120
 DEBUG:root:fib entry = 89
+DEBUG:root:dp is not none-1779979416004714189
+CRITICAL:root:dp[91]=4660046610375530309
 DEBUG:root:fib entry = 90
+DEBUG:root:dp is not none-2880067194370816120
+CRITICAL:root:dp[92]=7540113804746346429
 DEBUG:root:fib entry = 91
+DEBUG:root:dp is not none-4660046610375530309
+CRITICAL:root:dp[93]=12200160415121876738
 DEBUG:root:fib entry = 92
+DEBUG:root:dp is not none-7540113804746346429
+CRITICAL:root:dp[94]=19740274219868223167
 DEBUG:root:fib entry = 93
+DEBUG:root:dp is not none-12200160415121876738
+CRITICAL:root:dp[95]=31940434634990099905
 DEBUG:root:fib entry = 94
+DEBUG:root:dp is not none-19740274219868223167
+CRITICAL:root:dp[96]=51680708854858323072
 DEBUG:root:fib entry = 95
+DEBUG:root:dp is not none-31940434634990099905
+CRITICAL:root:dp[97]=83621143489848422977
 DEBUG:root:fib entry = 96
+DEBUG:root:dp is not none-51680708854858323072
+CRITICAL:root:dp[98]=135301852344706746049
 DEBUG:root:fib entry = 97
+DEBUG:root:dp is not none-83621143489848422977
+CRITICAL:root:dp[99]=218922995834555169026
 DEBUG:root:fib entry = 98
+DEBUG:root:dp is not none-135301852344706746049
+CRITICAL:root:dp[100]=354224848179261915075
 DEBUG:root:fib entry = 99
+DEBUG:root:dp is not none-218922995834555169026
+CRITICAL:root:dp[101]=573147844013817084101
 DEBUG:root:fib entry = 100
+DEBUG:root:dp is not none-354224848179261915075
+CRITICAL:root:dp[102]=927372692193078999176
 DEBUG:root:fib entry = 101
+DEBUG:root:dp is not none-573147844013817084101
+CRITICAL:root:dp[103]=1500520536206896083277
 DEBUG:root:fib entry = 102
+DEBUG:root:dp is not none-927372692193078999176
+CRITICAL:root:dp[104]=2427893228399975082453
 DEBUG:root:fib entry = 103
+DEBUG:root:dp is not none-1500520536206896083277
+CRITICAL:root:dp[105]=3928413764606871165730
 DEBUG:root:fib entry = 104
+DEBUG:root:dp is not none-2427893228399975082453
+CRITICAL:root:dp[106]=6356306993006846248183
 DEBUG:root:fib entry = 105
+DEBUG:root:dp is not none-3928413764606871165730
+CRITICAL:root:dp[107]=10284720757613717413913
 DEBUG:root:fib entry = 106
+DEBUG:root:dp is not none-6356306993006846248183
+CRITICAL:root:dp[108]=16641027750620563662096
 DEBUG:root:fib entry = 107
+DEBUG:root:dp is not none-10284720757613717413913
+CRITICAL:root:dp[109]=26925748508234281076009
 DEBUG:root:fib entry = 108
+DEBUG:root:dp is not none-16641027750620563662096
+CRITICAL:root:dp[110]=43566776258854844738105
 DEBUG:root:fib entry = 109
+DEBUG:root:dp is not none-26925748508234281076009
+CRITICAL:root:dp[111]=70492524767089125814114
 DEBUG:root:fib entry = 110
+DEBUG:root:dp is not none-43566776258854844738105
+CRITICAL:root:dp[112]=114059301025943970552219
 DEBUG:root:fib entry = 111
+DEBUG:root:dp is not none-70492524767089125814114
+CRITICAL:root:dp[113]=184551825793033096366333
 DEBUG:root:fib entry = 112
+DEBUG:root:dp is not none-114059301025943970552219
+CRITICAL:root:dp[114]=298611126818977066918552
 DEBUG:root:fib entry = 113
+DEBUG:root:dp is not none-184551825793033096366333
+CRITICAL:root:dp[115]=483162952612010163284885
 DEBUG:root:fib entry = 114
+DEBUG:root:dp is not none-298611126818977066918552
+CRITICAL:root:dp[116]=781774079430987230203437
 DEBUG:root:fib entry = 115
+DEBUG:root:dp is not none-483162952612010163284885
+CRITICAL:root:dp[117]=1264937032042997393488322
 DEBUG:root:fib entry = 116
+DEBUG:root:dp is not none-781774079430987230203437
+CRITICAL:root:dp[118]=2046711111473984623691759
 DEBUG:root:fib entry = 117
+DEBUG:root:dp is not none-1264937032042997393488322
+CRITICAL:root:dp[119]=3311648143516982017180081
 DEBUG:root:fib entry = 118
+DEBUG:root:dp is not none-2046711111473984623691759
+CRITICAL:root:dp[120]=5358359254990966640871840
 DEBUG:root:fib entry = 119
+DEBUG:root:dp is not none-3311648143516982017180081
+CRITICAL:root:dp[121]=8670007398507948658051921
 DEBUG:root:fib entry = 120
+DEBUG:root:dp is not none-5358359254990966640871840
+CRITICAL:root:dp[122]=14028366653498915298923761
+WARNING:root:start of test:122
+DEBUG:root:fib entry = 122
+DEBUG:root:fib entry = 121
+DEBUG:root:fib entry = 120
+DEBUG:root:fib entry = 119
+DEBUG:root:fib entry = 118
+DEBUG:root:fib entry = 117
+DEBUG:root:fib entry = 116
+DEBUG:root:fib entry = 115
+DEBUG:root:fib entry = 114
+DEBUG:root:fib entry = 113
+DEBUG:root:fib entry = 112
+DEBUG:root:fib entry = 111
+DEBUG:root:fib entry = 110
+DEBUG:root:fib entry = 109
+DEBUG:root:fib entry = 108
+DEBUG:root:fib entry = 107
+DEBUG:root:fib entry = 106
+DEBUG:root:fib entry = 105
+DEBUG:root:fib entry = 104
+DEBUG:root:fib entry = 103
+DEBUG:root:fib entry = 102
+DEBUG:root:fib entry = 101
+DEBUG:root:fib entry = 100
+DEBUG:root:fib entry = 99
+DEBUG:root:fib entry = 98
+DEBUG:root:fib entry = 97
+DEBUG:root:fib entry = 96
+DEBUG:root:fib entry = 95
+DEBUG:root:fib entry = 94
+DEBUG:root:fib entry = 93
+DEBUG:root:fib entry = 92
+DEBUG:root:fib entry = 91
+DEBUG:root:fib entry = 90
+DEBUG:root:fib entry = 89
+DEBUG:root:fib entry = 88
+DEBUG:root:fib entry = 87
+DEBUG:root:fib entry = 86
+DEBUG:root:fib entry = 85
+DEBUG:root:fib entry = 84
+DEBUG:root:fib entry = 83
+DEBUG:root:fib entry = 82
+DEBUG:root:fib entry = 81
+DEBUG:root:fib entry = 80
+DEBUG:root:fib entry = 79
+DEBUG:root:fib entry = 78
+DEBUG:root:fib entry = 77
+DEBUG:root:fib entry = 76
+DEBUG:root:fib entry = 75
+DEBUG:root:fib entry = 74
+DEBUG:root:fib entry = 73
+DEBUG:root:fib entry = 72
+DEBUG:root:fib entry = 71
+DEBUG:root:fib entry = 70
+DEBUG:root:fib entry = 69
+DEBUG:root:fib entry = 68
+DEBUG:root:fib entry = 67
+DEBUG:root:fib entry = 66
+DEBUG:root:fib entry = 65
+DEBUG:root:fib entry = 64
+DEBUG:root:fib entry = 63
+DEBUG:root:fib entry = 62
+DEBUG:root:fib entry = 61
+DEBUG:root:fib entry = 60
+DEBUG:root:fib entry = 59
+DEBUG:root:fib entry = 58
+DEBUG:root:fib entry = 57
+DEBUG:root:fib entry = 56
+DEBUG:root:fib entry = 55
+DEBUG:root:fib entry = 54
+DEBUG:root:fib entry = 53
+DEBUG:root:fib entry = 52
+DEBUG:root:fib entry = 51
+DEBUG:root:fib entry = 50
+DEBUG:root:fib entry = 49
+DEBUG:root:fib entry = 48
+DEBUG:root:fib entry = 47
+DEBUG:root:fib entry = 46
+DEBUG:root:fib entry = 45
+DEBUG:root:fib entry = 44
+DEBUG:root:fib entry = 43
+DEBUG:root:fib entry = 42
+DEBUG:root:fib entry = 41
+DEBUG:root:fib entry = 40
+DEBUG:root:fib entry = 39
+DEBUG:root:fib entry = 38
+DEBUG:root:fib entry = 37
+DEBUG:root:fib entry = 36
+DEBUG:root:fib entry = 35
+DEBUG:root:fib entry = 34
+DEBUG:root:fib entry = 33
+DEBUG:root:fib entry = 32
+DEBUG:root:fib entry = 31
+DEBUG:root:fib entry = 30
+DEBUG:root:fib entry = 29
+DEBUG:root:fib entry = 28
+DEBUG:root:fib entry = 27
+DEBUG:root:fib entry = 26
+DEBUG:root:fib entry = 25
+DEBUG:root:fib entry = 24
+DEBUG:root:fib entry = 23
+DEBUG:root:fib entry = 22
+DEBUG:root:fib entry = 21
+DEBUG:root:fib entry = 20
+DEBUG:root:fib entry = 19
+DEBUG:root:fib entry = 18
+DEBUG:root:fib entry = 17
+DEBUG:root:fib entry = 16
+DEBUG:root:fib entry = 15
+DEBUG:root:fib entry = 14
+DEBUG:root:fib entry = 13
+DEBUG:root:fib entry = 12
+DEBUG:root:fib entry = 11
+DEBUG:root:fib entry = 10
+DEBUG:root:fib entry = 9
+DEBUG:root:fib entry = 8
+DEBUG:root:fib entry = 7
+DEBUG:root:fib entry = 6
+DEBUG:root:fib entry = 5
+DEBUG:root:fib entry = 4
+DEBUG:root:fib entry = 3
+DEBUG:root:fib entry = 2
+DEBUG:root:fib entry = 1
+DEBUG:root:fib entry = 0
+CRITICAL:root:dp[2]=1
+DEBUG:root:fib entry = 1
+CRITICAL:root:dp[3]=2
+DEBUG:root:fib entry = 2
+DEBUG:root:dp is not none-1
+CRITICAL:root:dp[4]=3
+DEBUG:root:fib entry = 3
+DEBUG:root:dp is not none-2
+CRITICAL:root:dp[5]=5
+DEBUG:root:fib entry = 4
+DEBUG:root:dp is not none-3
+CRITICAL:root:dp[6]=8
+DEBUG:root:fib entry = 5
+DEBUG:root:dp is not none-5
+CRITICAL:root:dp[7]=13
+DEBUG:root:fib entry = 6
+DEBUG:root:dp is not none-8
+CRITICAL:root:dp[8]=21
+DEBUG:root:fib entry = 7
+DEBUG:root:dp is not none-13
+CRITICAL:root:dp[9]=34
+DEBUG:root:fib entry = 8
+DEBUG:root:dp is not none-21
+CRITICAL:root:dp[10]=55
+DEBUG:root:fib entry = 9
+DEBUG:root:dp is not none-34
+CRITICAL:root:dp[11]=89
+DEBUG:root:fib entry = 10
+DEBUG:root:dp is not none-55
+CRITICAL:root:dp[12]=144
+DEBUG:root:fib entry = 11
+DEBUG:root:dp is not none-89
+CRITICAL:root:dp[13]=233
+DEBUG:root:fib entry = 12
+DEBUG:root:dp is not none-144
+CRITICAL:root:dp[14]=377
+DEBUG:root:fib entry = 13
+DEBUG:root:dp is not none-233
+CRITICAL:root:dp[15]=610
+DEBUG:root:fib entry = 14
+DEBUG:root:dp is not none-377
+CRITICAL:root:dp[16]=987
+DEBUG:root:fib entry = 15
+DEBUG:root:dp is not none-610
+CRITICAL:root:dp[17]=1597
+DEBUG:root:fib entry = 16
+DEBUG:root:dp is not none-987
+CRITICAL:root:dp[18]=2584
+DEBUG:root:fib entry = 17
+DEBUG:root:dp is not none-1597
+CRITICAL:root:dp[19]=4181
+DEBUG:root:fib entry = 18
+DEBUG:root:dp is not none-2584
+CRITICAL:root:dp[20]=6765
+DEBUG:root:fib entry = 19
+DEBUG:root:dp is not none-4181
+CRITICAL:root:dp[21]=10946
+DEBUG:root:fib entry = 20
+DEBUG:root:dp is not none-6765
+CRITICAL:root:dp[22]=17711
+DEBUG:root:fib entry = 21
+DEBUG:root:dp is not none-10946
+CRITICAL:root:dp[23]=28657
+DEBUG:root:fib entry = 22
+DEBUG:root:dp is not none-17711
+CRITICAL:root:dp[24]=46368
+DEBUG:root:fib entry = 23
+DEBUG:root:dp is not none-28657
+CRITICAL:root:dp[25]=75025
+DEBUG:root:fib entry = 24
+DEBUG:root:dp is not none-46368
+CRITICAL:root:dp[26]=121393
+DEBUG:root:fib entry = 25
+DEBUG:root:dp is not none-75025
+CRITICAL:root:dp[27]=196418
+DEBUG:root:fib entry = 26
+DEBUG:root:dp is not none-121393
+CRITICAL:root:dp[28]=317811
+DEBUG:root:fib entry = 27
+DEBUG:root:dp is not none-196418
+CRITICAL:root:dp[29]=514229
+DEBUG:root:fib entry = 28
+DEBUG:root:dp is not none-317811
+CRITICAL:root:dp[30]=832040
+DEBUG:root:fib entry = 29
+DEBUG:root:dp is not none-514229
+CRITICAL:root:dp[31]=1346269
+DEBUG:root:fib entry = 30
+DEBUG:root:dp is not none-832040
+CRITICAL:root:dp[32]=2178309
+DEBUG:root:fib entry = 31
+DEBUG:root:dp is not none-1346269
+CRITICAL:root:dp[33]=3524578
+DEBUG:root:fib entry = 32
+DEBUG:root:dp is not none-2178309
+CRITICAL:root:dp[34]=5702887
+DEBUG:root:fib entry = 33
+DEBUG:root:dp is not none-3524578
+CRITICAL:root:dp[35]=9227465
+DEBUG:root:fib entry = 34
+DEBUG:root:dp is not none-5702887
+CRITICAL:root:dp[36]=14930352
+DEBUG:root:fib entry = 35
+DEBUG:root:dp is not none-9227465
+CRITICAL:root:dp[37]=24157817
+DEBUG:root:fib entry = 36
+DEBUG:root:dp is not none-14930352
+CRITICAL:root:dp[38]=39088169
+DEBUG:root:fib entry = 37
+DEBUG:root:dp is not none-24157817
+CRITICAL:root:dp[39]=63245986
+DEBUG:root:fib entry = 38
+DEBUG:root:dp is not none-39088169
+CRITICAL:root:dp[40]=102334155
+DEBUG:root:fib entry = 39
+DEBUG:root:dp is not none-63245986
+CRITICAL:root:dp[41]=165580141
+DEBUG:root:fib entry = 40
+DEBUG:root:dp is not none-102334155
+CRITICAL:root:dp[42]=267914296
+DEBUG:root:fib entry = 41
+DEBUG:root:dp is not none-165580141
+CRITICAL:root:dp[43]=433494437
+DEBUG:root:fib entry = 42
+DEBUG:root:dp is not none-267914296
+CRITICAL:root:dp[44]=701408733
+DEBUG:root:fib entry = 43
+DEBUG:root:dp is not none-433494437
+CRITICAL:root:dp[45]=1134903170
+DEBUG:root:fib entry = 44
+DEBUG:root:dp is not none-701408733
+CRITICAL:root:dp[46]=1836311903
+DEBUG:root:fib entry = 45
+DEBUG:root:dp is not none-1134903170
+CRITICAL:root:dp[47]=2971215073
+DEBUG:root:fib entry = 46
+DEBUG:root:dp is not none-1836311903
+CRITICAL:root:dp[48]=4807526976
+DEBUG:root:fib entry = 47
+DEBUG:root:dp is not none-2971215073
+CRITICAL:root:dp[49]=7778742049
+DEBUG:root:fib entry = 48
+DEBUG:root:dp is not none-4807526976
+CRITICAL:root:dp[50]=12586269025
+DEBUG:root:fib entry = 49
+DEBUG:root:dp is not none-7778742049
+CRITICAL:root:dp[51]=20365011074
+DEBUG:root:fib entry = 50
+DEBUG:root:dp is not none-12586269025
+CRITICAL:root:dp[52]=32951280099
+DEBUG:root:fib entry = 51
+DEBUG:root:dp is not none-20365011074
+CRITICAL:root:dp[53]=53316291173
+DEBUG:root:fib entry = 52
+DEBUG:root:dp is not none-32951280099
+CRITICAL:root:dp[54]=86267571272
+DEBUG:root:fib entry = 53
+DEBUG:root:dp is not none-53316291173
+CRITICAL:root:dp[55]=139583862445
+DEBUG:root:fib entry = 54
+DEBUG:root:dp is not none-86267571272
+CRITICAL:root:dp[56]=225851433717
+DEBUG:root:fib entry = 55
+DEBUG:root:dp is not none-139583862445
+CRITICAL:root:dp[57]=365435296162
+DEBUG:root:fib entry = 56
+DEBUG:root:dp is not none-225851433717
+CRITICAL:root:dp[58]=591286729879
+DEBUG:root:fib entry = 57
+DEBUG:root:dp is not none-365435296162
+CRITICAL:root:dp[59]=956722026041
+DEBUG:root:fib entry = 58
+DEBUG:root:dp is not none-591286729879
+CRITICAL:root:dp[60]=1548008755920
+DEBUG:root:fib entry = 59
+DEBUG:root:dp is not none-956722026041
+CRITICAL:root:dp[61]=2504730781961
+DEBUG:root:fib entry = 60
+DEBUG:root:dp is not none-1548008755920
+CRITICAL:root:dp[62]=4052739537881
+DEBUG:root:fib entry = 61
+DEBUG:root:dp is not none-2504730781961
+CRITICAL:root:dp[63]=6557470319842
+DEBUG:root:fib entry = 62
+DEBUG:root:dp is not none-4052739537881
+CRITICAL:root:dp[64]=10610209857723
+DEBUG:root:fib entry = 63
+DEBUG:root:dp is not none-6557470319842
+CRITICAL:root:dp[65]=17167680177565
+DEBUG:root:fib entry = 64
+DEBUG:root:dp is not none-10610209857723
+CRITICAL:root:dp[66]=27777890035288
+DEBUG:root:fib entry = 65
+DEBUG:root:dp is not none-17167680177565
+CRITICAL:root:dp[67]=44945570212853
+DEBUG:root:fib entry = 66
+DEBUG:root:dp is not none-27777890035288
+CRITICAL:root:dp[68]=72723460248141
+DEBUG:root:fib entry = 67
+DEBUG:root:dp is not none-44945570212853
+CRITICAL:root:dp[69]=117669030460994
+DEBUG:root:fib entry = 68
+DEBUG:root:dp is not none-72723460248141
+CRITICAL:root:dp[70]=190392490709135
+DEBUG:root:fib entry = 69
+DEBUG:root:dp is not none-117669030460994
+CRITICAL:root:dp[71]=308061521170129
+DEBUG:root:fib entry = 70
+DEBUG:root:dp is not none-190392490709135
+CRITICAL:root:dp[72]=498454011879264
+DEBUG:root:fib entry = 71
+DEBUG:root:dp is not none-308061521170129
+CRITICAL:root:dp[73]=806515533049393
+DEBUG:root:fib entry = 72
+DEBUG:root:dp is not none-498454011879264
+CRITICAL:root:dp[74]=1304969544928657
+DEBUG:root:fib entry = 73
+DEBUG:root:dp is not none-806515533049393
+CRITICAL:root:dp[75]=2111485077978050
+DEBUG:root:fib entry = 74
+DEBUG:root:dp is not none-1304969544928657
+CRITICAL:root:dp[76]=3416454622906707
+DEBUG:root:fib entry = 75
+DEBUG:root:dp is not none-2111485077978050
+CRITICAL:root:dp[77]=5527939700884757
+DEBUG:root:fib entry = 76
+DEBUG:root:dp is not none-3416454622906707
+CRITICAL:root:dp[78]=8944394323791464
+DEBUG:root:fib entry = 77
+DEBUG:root:dp is not none-5527939700884757
+CRITICAL:root:dp[79]=14472334024676221
+DEBUG:root:fib entry = 78
+DEBUG:root:dp is not none-8944394323791464
+CRITICAL:root:dp[80]=23416728348467685
+DEBUG:root:fib entry = 79
+DEBUG:root:dp is not none-14472334024676221
+CRITICAL:root:dp[81]=37889062373143906
+DEBUG:root:fib entry = 80
+DEBUG:root:dp is not none-23416728348467685
+CRITICAL:root:dp[82]=61305790721611591
+DEBUG:root:fib entry = 81
+DEBUG:root:dp is not none-37889062373143906
+CRITICAL:root:dp[83]=99194853094755497
+DEBUG:root:fib entry = 82
+DEBUG:root:dp is not none-61305790721611591
+CRITICAL:root:dp[84]=160500643816367088
+DEBUG:root:fib entry = 83
+DEBUG:root:dp is not none-99194853094755497
+CRITICAL:root:dp[85]=259695496911122585
+DEBUG:root:fib entry = 84
+DEBUG:root:dp is not none-160500643816367088
+CRITICAL:root:dp[86]=420196140727489673
+DEBUG:root:fib entry = 85
+DEBUG:root:dp is not none-259695496911122585
+CRITICAL:root:dp[87]=679891637638612258
+DEBUG:root:fib entry = 86
+DEBUG:root:dp is not none-420196140727489673
+CRITICAL:root:dp[88]=1100087778366101931
+DEBUG:root:fib entry = 87
+DEBUG:root:dp is not none-679891637638612258
+CRITICAL:root:dp[89]=1779979416004714189
+DEBUG:root:fib entry = 88
+DEBUG:root:dp is not none-1100087778366101931
+CRITICAL:root:dp[90]=2880067194370816120
+DEBUG:root:fib entry = 89
+DEBUG:root:dp is not none-1779979416004714189
+CRITICAL:root:dp[91]=4660046610375530309
+DEBUG:root:fib entry = 90
+DEBUG:root:dp is not none-2880067194370816120
+CRITICAL:root:dp[92]=7540113804746346429
+DEBUG:root:fib entry = 91
+DEBUG:root:dp is not none-4660046610375530309
+CRITICAL:root:dp[93]=12200160415121876738
+DEBUG:root:fib entry = 92
+DEBUG:root:dp is not none-7540113804746346429
+CRITICAL:root:dp[94]=19740274219868223167
+DEBUG:root:fib entry = 93
+DEBUG:root:dp is not none-12200160415121876738
+CRITICAL:root:dp[95]=31940434634990099905
+DEBUG:root:fib entry = 94
+DEBUG:root:dp is not none-19740274219868223167
+CRITICAL:root:dp[96]=51680708854858323072
+DEBUG:root:fib entry = 95
+DEBUG:root:dp is not none-31940434634990099905
+CRITICAL:root:dp[97]=83621143489848422977
+DEBUG:root:fib entry = 96
+DEBUG:root:dp is not none-51680708854858323072
+CRITICAL:root:dp[98]=135301852344706746049
+DEBUG:root:fib entry = 97
+DEBUG:root:dp is not none-83621143489848422977
+CRITICAL:root:dp[99]=218922995834555169026
+DEBUG:root:fib entry = 98
+DEBUG:root:dp is not none-135301852344706746049
+CRITICAL:root:dp[100]=354224848179261915075
+DEBUG:root:fib entry = 99
+DEBUG:root:dp is not none-218922995834555169026
+CRITICAL:root:dp[101]=573147844013817084101
+DEBUG:root:fib entry = 100
+DEBUG:root:dp is not none-354224848179261915075
+CRITICAL:root:dp[102]=927372692193078999176
+DEBUG:root:fib entry = 101
+DEBUG:root:dp is not none-573147844013817084101
+CRITICAL:root:dp[103]=1500520536206896083277
+DEBUG:root:fib entry = 102
+DEBUG:root:dp is not none-927372692193078999176
+CRITICAL:root:dp[104]=2427893228399975082453
+DEBUG:root:fib entry = 103
+DEBUG:root:dp is not none-1500520536206896083277
+CRITICAL:root:dp[105]=3928413764606871165730
+DEBUG:root:fib entry = 104
+DEBUG:root:dp is not none-2427893228399975082453
+CRITICAL:root:dp[106]=6356306993006846248183
+DEBUG:root:fib entry = 105
+DEBUG:root:dp is not none-3928413764606871165730
+CRITICAL:root:dp[107]=10284720757613717413913
+DEBUG:root:fib entry = 106
+DEBUG:root:dp is not none-6356306993006846248183
+CRITICAL:root:dp[108]=16641027750620563662096
+DEBUG:root:fib entry = 107
+DEBUG:root:dp is not none-10284720757613717413913
+CRITICAL:root:dp[109]=26925748508234281076009
+DEBUG:root:fib entry = 108
+DEBUG:root:dp is not none-16641027750620563662096
+CRITICAL:root:dp[110]=43566776258854844738105
+DEBUG:root:fib entry = 109
+DEBUG:root:dp is not none-26925748508234281076009
+CRITICAL:root:dp[111]=70492524767089125814114
+DEBUG:root:fib entry = 110
+DEBUG:root:dp is not none-43566776258854844738105
+CRITICAL:root:dp[112]=114059301025943970552219
+DEBUG:root:fib entry = 111
+DEBUG:root:dp is not none-70492524767089125814114
+CRITICAL:root:dp[113]=184551825793033096366333
+DEBUG:root:fib entry = 112
+DEBUG:root:dp is not none-114059301025943970552219
+CRITICAL:root:dp[114]=298611126818977066918552
+DEBUG:root:fib entry = 113
+DEBUG:root:dp is not none-184551825793033096366333
+CRITICAL:root:dp[115]=483162952612010163284885
+DEBUG:root:fib entry = 114
+DEBUG:root:dp is not none-298611126818977066918552
+CRITICAL:root:dp[116]=781774079430987230203437
+DEBUG:root:fib entry = 115
+DEBUG:root:dp is not none-483162952612010163284885
+CRITICAL:root:dp[117]=1264937032042997393488322
+DEBUG:root:fib entry = 116
+DEBUG:root:dp is not none-781774079430987230203437
+CRITICAL:root:dp[118]=2046711111473984623691759
+DEBUG:root:fib entry = 117
+DEBUG:root:dp is not none-1264937032042997393488322
+CRITICAL:root:dp[119]=3311648143516982017180081
+DEBUG:root:fib entry = 118
+DEBUG:root:dp is not none-2046711111473984623691759
+CRITICAL:root:dp[120]=5358359254990966640871840
+DEBUG:root:fib entry = 119
+DEBUG:root:dp is not none-3311648143516982017180081
+CRITICAL:root:dp[121]=8670007398507948658051921
+DEBUG:root:fib entry = 120
+DEBUG:root:dp is not none-5358359254990966640871840
+CRITICAL:root:dp[122]=14028366653498915298923761

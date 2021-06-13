@@ -7,15 +7,18 @@ dp[0]= 0
 dp[1] = 1
 
 def main():
-    tests = int(input())
+    tests = input()
+    tests = int(tests)
     logging.basicConfig(filename='logger.log', encoding='utf-8', level=logging.DEBUG)
     while (tests):
-        n = int(input())
+ #       n = int(input())
+        n = input()
+        n = int(n)
         logging.warning('start of test:%d',n)
         val = fib(n)
         tests = tests-1
         print(val)
-    
+    return 0
 
         
 
@@ -28,10 +31,11 @@ def fib(n):
     if (n==0):
         return 0
     if(dp[n] is not None):
+        logging.debug('dp is not none-%d',dp[n])
         return dp[n]
     if( n-2 >= 0):
             total =  (fib(n-1)+fib(n-2))
-
+    logging.fatal('dp[%d]=%d',n,total)
     dp[n] = total
     return total
 
