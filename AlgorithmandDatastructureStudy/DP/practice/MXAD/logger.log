@@ -1,4 +1,8 @@
-WARNING:root:start of test:1
-WARNING:root:start of test:1
-WARNING:root:start of test:1
-WARNING:root:start of test:1
+WARNING:root:start of test:2 - number of integers:
+WARNING:root:[1, 2]
+WARNING:root:start of test:2 - number of integers:
+WARNING:root:[1, 2]
+WARNING:root:start of test:2 - number of integers:
+WARNING:root:[1, 2]
+WARNING:root:start of test:2 - number of integers:
+INFO:root:[1, 2]
