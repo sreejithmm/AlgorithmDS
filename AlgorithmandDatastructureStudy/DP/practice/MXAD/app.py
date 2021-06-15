@@ -29,27 +29,32 @@ inp    =lambda: int(input())
 # stdint =lambda: int(stdin.readline())
 # stdpr  =lambda x: stdout.write(str(x))
 logl   = lambda l: logging.info(str(l))
+logw   = lambda l: logging.warning(str(l))
 
 mod=1000000007
 
-dp=[None]*1000
-dp[0]= 0
-dp[1] = 1
-
-def mxad(numbers,n,i):
+def mxad(numbers,n,i,dp):
     if(i<0):
+        logw("i is less than 0")
         return 0
     else:
-        if(dp[i] is not None):
+        logging.warning('enter else')
+        logl(numbers)
+        logw('i='+str(i))
+        
+        if(dp[i] != -1):
             return dp[i]
-        for j in range(1,i):
-            dp[i] = max(dp[i],numbers[i] + mxad(numers,n,i-j))
-    
+        else:
+            total = max(dp[i],numbers[i]+ mxad(numbers,n,i-2,dp),mxad(numbers,n,i-1,dp))
+            logging.warning('dp[%d] is %d',i,dp[i])
+    logging.info("total = %d i is %d",total,i)
+    dp[i] = total
     return dp[i]
 
 def main():
     tests = input()
     tests = int(tests)
+    dp=[-1]*1000
     logging.basicConfig(filename='logger.log', encoding='utf-8', level=logging.DEBUG)
     while (tests):
         n = input()
@@ -57,7 +62,10 @@ def main():
         logging.warning('start of test:%d - number of integers:',n)
         numbers = list(map(int, input().split()))
         logl(numbers)
-        sum = mxad(numbers,n,n-1)
+        sum = mxad(numbers,n,n-1,dp)
+        print(sum)
+        dp=[-1]*1000
+        logl(dp)
         tests= tests-1
 
     return 0
