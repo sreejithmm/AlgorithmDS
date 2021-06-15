@@ -28,3 +28,7 @@
 log
 *.txt
 .log.*
+*.log
+*.vscode
+input.txt
+output.txt
