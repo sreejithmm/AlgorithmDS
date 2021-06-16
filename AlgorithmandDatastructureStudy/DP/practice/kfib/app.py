@@ -35,9 +35,11 @@ ninf = -math.inf
 
 def log2ddp(dp):
     for row in range(100000):
-    for col in range(100000):
-        if(dp[row][col] != ninf ):
-            print(dp[row][col],end=' ')
+        for col in range(100000):
+            if(dp[row][col] != ninf ):
+                logging.warning(dp[row][col])
+                logging.warning(" ")
+        logging.warning("\n")
     print()
 
 def kfib(n,k,dp):
@@ -63,6 +65,5 @@ def main():
         print (val%mod)
         tests = tests-1
     return 0
-    
 if __name__ =="__main__":
     main()
