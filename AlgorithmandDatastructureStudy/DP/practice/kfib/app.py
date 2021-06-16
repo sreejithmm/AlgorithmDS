@@ -30,14 +30,27 @@ logw   = lambda l: logging.warning(str(l))
 mod=1000000007
 
 
+def kfib(n,k,dp):
+    if(n<=1 or k<=0):
+        return 0
+    if(n<=k):
+        return 1
+    if(dp[n][k] != 0):
+        return dp[n][k]
+    for j in range(1,k):
+        dp[n][k] = dp[n][k] + kfib(n-j,k) 
+    
+    return dp[n][k]
+
 def main():
     tests = input()
-    tests = int(tests)
+    tests = 1
+    dp = [[0]*100000 for i in range(100000)]
     logging.basicConfig(filename='logger.log', encoding='utf-8', level=logging.DEBUG)
     while (tests):
-        n = input()
-        n = int(n)
+        n,k = inp()
         logging.warning('start of test:%d',n)
+        val = kfib(n,k,dp)
         tests = tests-1
     return 0
 if __name__ =="__main__":
