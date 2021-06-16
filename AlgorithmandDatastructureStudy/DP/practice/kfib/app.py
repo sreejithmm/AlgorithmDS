@@ -1,6 +1,8 @@
 #https://www.codechef.com/UADPIP01/problems/MXAD
+#https://www.codechef.com/UADPIP01/problems/MXAD
 import numpy as np
 import logging
+import math
 
 logging.basicConfig(filename='logger.log', encoding='utf-8', level=logging.DEBUG)
 
@@ -28,7 +30,15 @@ inp    =lambda: int(input())
 logl   = lambda l: logging.info(str(l))
 logw   = lambda l: logging.warning(str(l))
 mod=1000000007
+pinf = math.inf
+ninf = -math.inf
 
+def log2ddp(dp):
+    for row in range(100000):
+    for col in range(100000):
+        if(dp[row][col] != ninf ):
+            print(dp[row][col],end=' ')
+    print()
 
 def kfib(n,k,dp):
     if(n<=1 or k<=0):
@@ -45,13 +55,14 @@ def kfib(n,k,dp):
 def main():
     tests = input()
     tests = 1
-    dp = [[0]*100000 for i in range(100000)]
-    logging.basicConfig(filename='logger.log', encoding='utf-8', level=logging.DEBUG)
+    dp = [[ninf]*100000 for i in range(100000)]
     while (tests):
         n,k = inp()
         logging.warning('start of test:%d',n)
         val = kfib(n,k,dp)
+        print (val%mod)
         tests = tests-1
     return 0
+    
 if __name__ =="__main__":
     main()
