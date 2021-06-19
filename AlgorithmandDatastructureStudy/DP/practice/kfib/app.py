@@ -51,7 +51,7 @@ def kfib(n,k,dp):
         return dp[n][k]
     for j in range(1,k):
         dp[n][k] = dp[n][k] + kfib(n-j,k) 
-    
+    log2ddp(dp)
     return dp[n][k]
 
 def main():
@@ -66,6 +66,6 @@ def main():
         tests = tests-1
     return 0
 
-    
+
 if __name__ =="__main__":
     main()
