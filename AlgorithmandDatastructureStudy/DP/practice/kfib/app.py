@@ -64,6 +64,7 @@ def main():
         val = kfib(n,k,dp)
         print (val%mod)
         tests = tests-1
+        print(tests)
     return 0
 
 
