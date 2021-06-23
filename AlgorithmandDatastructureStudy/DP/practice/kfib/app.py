@@ -4,7 +4,10 @@ import numpy as np
 import logging
 import math
 
-logging.basicConfig(filename='logger.log', encoding='utf-8', level=logging.DEBUG)
+#encoding works only in python3.9 onwards
+#logging.basicConfig(filename='logger.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='logger.log', level=logging.DEBUG)
+
 
 import sys
 import math
@@ -15,6 +18,7 @@ from collections import defaultdict as dd
 from bisect import bisect_left as bl,bisect_right as br
 sys.setrecursionlimit(100000000)
 inp    =lambda: int(input())
+
 # strng  =lambda: input().strip()
 # jn     =lambda x,l: x.join(map(str,l))
 # strl   =lambda: list(input().strip())
@@ -50,20 +54,24 @@ def kfib(n,k,dp):
     if(dp[n][k] != 0):
         return dp[n][k]
     for j in range(1,k):
-        dp[n][k] = dp[n][k] + kfib(n-j,k) 
+        dp[n][k] = dp[n][k] + kfib(n-j,k,dp) 
     log2ddp(dp)
     return dp[n][k]
 
 def main():
-    tests = input()
     tests = 1
-    dp = [[ninf]*100000 for i in range(100000)]
+ #   dp = [[ninf]*100000 for i in range(100000)]
+    dp = [[ninf]*100000]*100000
+    print(tests)
     while (tests):
-        n,k = inp()
+        n, k = input().split()
+        n = int(n)
+        k = int(k)
         logging.warning('start of test:%d',n)
         val = kfib(n,k,dp)
         print (val%mod)
         tests = tests-1
+        print(tests)
         print(tests)
     return 0
 
