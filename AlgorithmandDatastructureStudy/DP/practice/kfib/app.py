@@ -71,9 +71,8 @@ def main():
         val = kfib(n,k,dp)
         print (val%mod)
         tests = tests-1
-        print(tests)
-        print(tests)
     return 0
+
 
 
 if __name__ =="__main__":
