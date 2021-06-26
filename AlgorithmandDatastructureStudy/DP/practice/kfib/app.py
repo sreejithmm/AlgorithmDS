@@ -62,19 +62,17 @@ def kfib(n,k,dp):
         logl(k)
         dp[n][k] = 1
         return 1
-    if(dp[n][k] != ninf):
+    if(dp[n][k] != 0):
         logw("inside dp is non zero")
         return dp[n][k]
     for j in range(1,k):
-         dp[n][k] = dp[n][k] + kfib(n-j,k,dp) 
-    print(dp[n][k])
+         dp[n][k] = dp[n][k]+kfib(n-j,k,dp) 
     return dp[n][k]
 
 def main():
     tests = 1
  #   dp = [[ninf]*100000 for i in range(100000)]
-    dp = [[ninf]*10]*10
-    print(tests)
+    dp = [[0]*10]*10
     while (tests):
         n, k = input().split()
         n = int(n)
@@ -82,7 +80,6 @@ def main():
         logging.warning('start of test:%d',n)
         val = kfib(n,k,dp)
         print (val%mod)
-        print(dp)
         tests = tests-1
     return 0
 
