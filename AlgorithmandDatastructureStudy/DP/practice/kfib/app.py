@@ -33,6 +33,7 @@ inp    =lambda: int(input())
 # stdpr  =lambda x: stdout.write(str(x))
 logl   = lambda l: logging.info(str(l))
 logw   = lambda l: logging.warning(str(l))
+logi   = lambda l: logging.warning(l)
 mod=1000000007
 pinf = math.inf
 ninf = -math.inf
@@ -48,14 +49,24 @@ def log2ddp(dp):
 
 def kfib(n,k,dp):
     if(n<=1 or k<=0):
+        logw("inside first if")
+        logl(n)
+        logl(k)
+        dp[n][k] = 0
+
         return 0
     if(n<=k):
+        logw("inside second if")
+        logl(n)
+        logl(k)
+        dp[n][k] = 1
         return 1
-    if(dp[n][k] != 0):
+    if(dp[n][k] != ninf):
+        logw("inside dp is non zero")
         return dp[n][k]
     for j in range(1,k):
-        dp[n][k] = dp[n][k] + kfib(n-j,k,dp) 
-    log2ddp(dp)
+         dp[n][k] = dp[n][k] + kfib(n-j,k,dp) 
+    print(dp)
     return dp[n][k]
 
 def main():
