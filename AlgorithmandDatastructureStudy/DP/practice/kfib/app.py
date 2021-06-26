@@ -48,6 +48,8 @@ def log2ddp(dp):
     print()
 
 def kfib(n,k,dp):
+    logl(n)
+    logl(k)
     if(n<=1 or k<=0):
         logw("inside first if")
         logl(n)
@@ -66,13 +68,13 @@ def kfib(n,k,dp):
         return dp[n][k]
     for j in range(1,k):
          dp[n][k] = dp[n][k] + kfib(n-j,k,dp) 
-    print(dp)
+    print(dp[n][k])
     return dp[n][k]
 
 def main():
     tests = 1
  #   dp = [[ninf]*100000 for i in range(100000)]
-    dp = [[ninf]*100000]*100000
+    dp = [[ninf]*10]*10
     print(tests)
     while (tests):
         n, k = input().split()
@@ -81,6 +83,7 @@ def main():
         logging.warning('start of test:%d',n)
         val = kfib(n,k,dp)
         print (val%mod)
+        print(dp)
         tests = tests-1
     return 0
 
