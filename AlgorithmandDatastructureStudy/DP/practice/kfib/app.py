@@ -48,6 +48,7 @@ def log2ddp(dp):
     print()
 
 def kfib(n,k,dp):
+    logging.warning("enter kfib for j:%d n=%d k = %d",j,n,k)
     logl(n)
     logl(k)
     if(n<=1 or k<=0):
@@ -66,6 +67,8 @@ def kfib(n,k,dp):
         logw("inside dp is non zero")
         return dp[n][k]
     for j in range(1,k):
+         logging.warning("execute for j:%d n=%d k = %d",j,n,k)
+
          dp[n][k] = dp[n][k]+kfib(n-j,k,dp) 
     return dp[n][k]
 
