@@ -48,7 +48,7 @@ def log2ddp(dp):
     print()
 
 def kfib(n,k,dp):
-    logging.warning("enter kfib for j:%d n=%d k = %d",j,n,k)
+    logging.warning("enter kfib for  n=%d k = %d",n,k)
     logl(n)
     logl(k)
     if(n<=1 or k<=0):
