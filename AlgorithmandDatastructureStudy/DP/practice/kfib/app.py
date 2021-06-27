@@ -60,9 +60,10 @@ def kfib(n,k,x,dp):
         logw("inside second if")
         dp[n] = 1
         return 1
-    for j in range(1,x):
+    for j in range(1,k):
          logging.warning("execute for j:%d n=%d k = %d",j,n,k)
-         dp[n] = dp[n]+kfib(n-j,k,x,dp) 
+ #        dp[n] = dp[n-1]+kfib(n-j,k,x,dp) 
+          dp[n] = dp[n]+kfib(n-j,k,x,dp) 
     logging.warning("dp[%d] = %d",n,dp[n])
     return dp[n]
 
