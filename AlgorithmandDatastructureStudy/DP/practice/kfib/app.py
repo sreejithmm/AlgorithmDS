@@ -47,43 +47,44 @@ def log2ddp(dp):
         logging.warning("\n")
     print()
 
-def kfib(n,k,dp):
-    logging.warning("enter kfib for  n=%d k = %d",n,k)
-    logl(n)
-    logl(k)
-    if(n<=1 or k<=0):
+def kfib(n,k,x,dp):
+    logging.warning("enter kfib for  n=%d k = %d , x= %d",n,k,x)
+    if(n<x or x<0):
         logw("inside first if")
-        logl(n)
-        logl(k)
-        dp[n][k] = 0
-        return 0
+        return dp[n]
+    logging.warning("index = %d",n)
+    if(dp[n] != 0):
+        logw("inside dp is non zero")
+        return dp[n]
     if(n<=k):
         logw("inside second if")
-        logl(n)
-        logl(k)
-        dp[n][k] = 1
+        dp[n] = 1
         return 1
-    if(dp[n][k] != 0):
-        logw("inside dp is non zero")
-        return dp[n][k]
-    for j in range(1,k):
+    for j in range(1,x):
          logging.warning("execute for j:%d n=%d k = %d",j,n,k)
-
-         dp[n][k] = dp[n][k]+kfib(n-j,k,dp) 
-    return dp[n][k]
+         dp[n] = dp[n]+kfib(n-j,k,x,dp) 
+    logging.warning("dp[%d] = %d",n,dp[n])
+    return dp[n]
 
 def main():
     tests = 1
  #   dp = [[ninf]*100000 for i in range(100000)]
-    dp = [[0]*10]*10
+ #   dp = [[0]*10]*10
+    dp = [0]*10
     while (tests):
         n, k = input().split()
         n = int(n)
         k = int(k)
+        x = n-k
+        for j in range(0,k):
+            dp[j] = 1
+        print(dp)
+
         logging.warning('start of test:%d',n)
-        val = kfib(n,k,dp)
+        val = kfib(n,k,x,dp)
         print (val%mod)
         tests = tests-1
+        print(dp)
     return 0
 
 
