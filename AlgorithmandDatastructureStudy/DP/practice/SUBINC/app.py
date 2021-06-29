@@ -46,19 +46,34 @@ def log2ddp(dp):
         logging.warning("\n")
     print()
 
-def subinc():
-    pass
+def subinc(arr,sidx,didx,dp):
+    val = 0
+    if(sidx<0):
+        return 0
+    if(dp[sidx][didx] != 0):
+        return dp[sidx][didx]
+    if(sidx== didx):
+        return 1
+    if((sidx+1 == didx)):
+        if(arr[sidx] < arr[didx]):
+            val +=1
+    val+=subinc(arr,sidx+1,didx,dp)+subinc(arr,sdix,didx-1,dp)
+    dp[sidx][didx] = val
+    return val
 
 def main():
     tests = int(input())
-    dp = [0]*10
+    dp = [[0]*10]*10
+    a  = [0]*10
     while (tests):
-        n, k = input().split()
-        n = int(n)
-        k = int(k)
+        n = input()
+        for i in range(0,n):
+            a[i] = int(input())
         logging.warning('start of test:%d',n)
-        subinc()
+        val = subinc(a,0,n-1,dp)
+        print(val)
         tests = tests-1
+        dp = [[0]*10]*10
     return 0
 
 
