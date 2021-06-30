@@ -53,6 +53,7 @@ def subinc(arr,sidx,didx,dp):
     if(dp[sidx][didx] != 0):
         return dp[sidx][didx]
     if(sidx== didx):
+        logging.warning("counting as subarray index=%d",sidx)
         return 1
     if((sidx+1 == didx)):
         if(arr[sidx] < arr[didx]):
