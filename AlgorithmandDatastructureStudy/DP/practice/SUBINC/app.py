@@ -57,7 +57,7 @@ def subinc(arr,sidx,didx,dp):
     if((sidx+1 == didx)):
         if(arr[sidx] < arr[didx]):
             val +=1
-    val+=subinc(arr,sidx+1,didx,dp)+subinc(arr,sdix,didx-1,dp)
+    val+=subinc(arr,sidx+1,didx,dp)+subinc(arr,sidx,didx-1,dp)
     dp[sidx][didx] = val
     return val
 
@@ -66,10 +66,16 @@ def main():
     dp = [[0]*10]*10
     a  = [0]*10
     while (tests):
-        n = input()
-        for i in range(0,n):
-            a[i] = int(input())
+        n = inp()
+        string = input()
+        user_string = string.split()
+        logging.warning(string)
+ #       a = int(string.split())
+        for i in range(len(user_string)):
+            logging.warning("%d %d",i,int(user_string[i]))
+            a[i] = int(user_string[i])
         logging.warning('start of test:%d',n)
+        logging.info(a)
         val = subinc(a,0,n-1,dp)
         print(val)
         tests = tests-1
