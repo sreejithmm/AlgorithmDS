@@ -1,24 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
 typedef struct list {
     int num;
     char command;
     struct list * next;
 }LIST;
 
-LIST* skip(LIST * start , int length, LIST** prev){
+LIST* skip(LIST * start , int length){
 
     int skipl ;
     int i = 0;
     LIST* ret=start;
+    printf("%s(): start = %p length = %d\n",__FUNCTION__,start,length);
     if(start){
         skipl = length;
-        for(i=0;i<skipl;i++){
-            *prev = ret;
-            ret = start->next;
+        for(i=0;(i<skipl && ret!= NULL);i++){
+            ret = ret->next;
         }
     }
     return ret;
@@ -31,6 +29,31 @@ void print_list(LIST* node) {
         node = node->next;
     }
     printf("NULL\n");
+}
+
+
+
+LIST* reverse (LIST* start, int length,LIST ** current,LIST ** real_prev) {
+    LIST * prev, *curr, * next;
+    LIST ** temp;
+    int i = 0;
+
+    curr = start;
+    next = NULL;
+    prev = NULL;
+    temp = &(curr->next );
+
+    for(i=0;i<length;i++){
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    } 
+
+    *temp = curr;
+    *current = curr;
+    return prev;
+
 }
 
 int main () {
@@ -70,7 +93,15 @@ int main () {
         switch(cmd){
             case 's':
                 printf("Skip %d nodes including current node\n",temp->num);
-                temp = skip(temp,temp->num,&prev);
+                temp = skip(temp,temp->num);
+                if(prev) {
+                    prev->next = temp;
+                }else{
+                    printf("Resetting Head \n");
+                    Head = temp;
+                }
+                prev = temp;
+                temp = temp->next;
                 break;
             case 'r':
                 printf("reverse %d nodes from current node \n",temp->num); 
@@ -81,6 +112,7 @@ int main () {
                 } else {
                     Head = reverse(temp,temp->num,&temp,&prev);
                 }
+                temp = temp->next;
                 break;
             default:
                 printf("Unknown command. Skip the node\n");
@@ -90,31 +122,8 @@ int main () {
         }
 
     }
-    printf("List after all operations\n")
+    printf("List after all operations\n");
     print_list(Head);
     return 0;
-
-}
-
-LIST* reverse (LIST* start, int length,LIST ** current,LIST ** real_prev) {
-    LIST * prev, *curr, * next;
-    LIST ** temp;
-    int i = 0;
-
-    curr = start;
-    next = NULL;
-    prev = NULL;
-    temp = &(curr->next );
-
-    for(i=0;i<length;i++){
-        next = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = next;
-    } 
-
-    *temp = curr;
-    *current = curr;
-    return prev;
 
 }
