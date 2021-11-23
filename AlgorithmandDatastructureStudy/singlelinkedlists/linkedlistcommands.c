@@ -49,7 +49,7 @@ LIST* reverse (LIST* start, int length,LIST ** current,LIST ** real_prev) {
         prev = curr;
         curr = next;
     } 
-
+    *real_prev = start;
     *temp = curr;
     *current = curr;
     return prev;
@@ -96,12 +96,15 @@ int main () {
                 temp = skip(temp,temp->num);
                 if(prev) {
                     prev->next = temp;
+                    prev = temp;
+
                 }else{
                     printf("Resetting Head \n");
                     Head = temp;
+                    if(Head) {
+                        printf("Current Head = %c %d\n",Head->command,Head->num);
+                    }
                 }
-                prev = temp;
-                temp = temp->next;
                 break;
             case 'r':
                 printf("reverse %d nodes from current node \n",temp->num); 
@@ -111,8 +114,13 @@ int main () {
                     tmp_prev->next = reverse(temp,temp->num,&temp,&prev);
                 } else {
                     Head = reverse(temp,temp->num,&temp,&prev);
+                    printf("Head after reversal \n");
+                    if(Head) {
+                        printf("Head - %c %d\n",Head->command,Head->num);
+                    }
                 }
-                temp = temp->next;
+                if (temp)
+                    printf("After reversal temp = %c %d",temp->command,temp->num);
                 break;
             default:
                 printf("Unknown command. Skip the node\n");
