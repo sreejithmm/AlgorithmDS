@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Stalker FPS</title>
+    <style>
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            font-family: Arial, sans-serif;
+        }
+        canvas { 
+            display: block; 
+        }
+        #ui {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 24px;
+            pointer-events: none;
+        }
+        #healthBar {
+            position: absolute;
+            bottom: 50px;
+            left: 20px;
+            width: 200px;
+            height: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #healthFill {
+            height: 100%;
+            width: 100%;
+            background-color: #0f0;
+            transition: width 0.3s;
+        }
+        #gameOver, #gameWin {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 48px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            display: none;
+        }
+        #restart {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        #restart:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div id="crosshair">+</div>
+    <div id="ui">
+        <div>AMMO: <span id="ammo">10</span></div>
+    </div>
+    <div id="healthBar">
+        <div id="healthFill"></div>
+    </div>
+    <div id="gameOver">
+        GAME OVER
+        <br>
+        <button id="restart">Restart</button>
+    </div>
+    <div id="gameWin">
+        YOU SURVIVED!
+        <br>
+        <button id="restartWin">Play Again</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Game variables
+        let camera, scene, renderer;
+        let player = { 
+            health: 100,
+            ammo: 10,
+            speed: 0.1,
+            canShoot: true
+        };
+        let enemy = {
+            mesh: null,
+            health: 100,
+            speed: 0.03,
+            state: 'patrol', // patrol, chase, teleport
+            lastTeleport: 0,
+            teleportCooldown: 5000, // 5 seconds
+            patrolPoints: [],
+            currentPatrolPoint: 0,
+            detectionRange: 15
+        };
+        let healthBoost = {
+            mesh: null,
+            collected: false,
+            value: 50
+        };
+        let moveForward = false;
+        let moveBackward = false;
+        let moveLeft = false;
+        let moveRight = false;
+        let canJump = false;
+        let prevTime = performance.now();
+        let velocity = new THREE.Vector3();
+        let direction = new THREE.Vector3();
+        let gameActive = true;
+        let bullets = [];
+        
+        // Initialize the game
+        init();
+        animate();
+        
+        function init() {
+            // Create scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000033);
+            scene.fog = new THREE.FogExp2(0x000033, 0.02);
+            
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.y = 1.6; // Player height
+            
+            // Create renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            document.body.appendChild(renderer.domElement);
+            
+            // Add lighting
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 1, 1).normalize();
+            directionalLight.castShadow = true;
+            scene.add(directionalLight);
+            
+            const pointLight = new THREE.PointLight(0xff00ff, 1, 50);
+            pointLight.position.set(0, 10, 0);
+            pointLight.castShadow = true;
+            scene.add(pointLight);
+            
+            // Create floor
+            const floorGeometry = new THREE.PlaneGeometry(100, 100, 10, 10);
+            const floorMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x333333, 
+                roughness: 0.8,
+                metalness: 0.2
+            });
+            const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+            floor.rotation.x = -Math.PI / 2;
+            floor.receiveShadow = true;
+            scene.add(floor);
+            
+            // Create some environment objects
+            createEnvironment();
+            
+            // Create enemy
+            createEnemy();
+            
+            // Create health boost
+            createHealthBoost();
+            
+            // Set up keyboard controls
+            document.addEventListener('keydown', onKeyDown);
+            document.addEventListener('keyup', onKeyUp);
+            document.addEventListener('click', onMouseClick);
+            document.addEventListener('mousemove', onMouseMove);
+            document.getElementById('restart').addEventListener('click', restartGame);
+            document.getElementById('restartWin').addEventListener('click', restartGame);
+            
+            // Lock pointer for FPS controls
+            renderer.domElement.addEventListener('click', function() {
+                renderer.domElement.requestPointerLock();
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize);
+            
+            // Set initial health display
+            updateHealthBar();
+        }
+        
+        function createEnvironment() {
+            // Create some platforms and walls
+            const geometryBox = new THREE.BoxGeometry(5, 3, 5);
+            const materialBox = new THREE.MeshStandardMaterial({ 
+                color: 0x444466,
+                roughness: 0.7,
+                metalness: 0.3
+            });
+            
+            // Create some boxes for cover
+            for (let i = 0; i < 15; i++) {
+                const box = new THREE.Mesh(geometryBox, materialBox);
+                box.position.x = Math.random() * 60 - 30;
+                box.position.z = Math.random() * 60 - 30;
+                if (Math.abs(box.position.x) < 5 && Math.abs(box.position.z) < 5) continue; // Don't place too close to player
+                box.position.y = 1.5;
+                box.castShadow = true;
+                box.receiveShadow = true;
+                scene.add(box);
+                
+                // Add this as a patrol point for the enemy
+                if (i % 3 === 0) {
+                    enemy.patrolPoints.push(new THREE.Vector3(box.position.x, 0, box.position.z));
+                }
+            }
+            
+            // Add a central structure
+            const centerGeometry = new THREE.CylinderGeometry(2, 3, 8, 16);
+            const centerMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x3333aa,
+                roughness: 0.6,
+                metalness: 0.4,
+                emissive: 0x0000ff,
+                emissiveIntensity: 0.2
+            });
+            const centerColumn = new THREE.Mesh(centerGeometry, centerMaterial);
+            centerColumn.position.set(0, 4, -15);
+            centerColumn.castShadow = true;
+            centerColumn.receiveShadow = true;
+            scene.add(centerColumn);
+            
+            // Add some floating platforms
+            const platformGeometry = new THREE.BoxGeometry(4, 0.5, 4);
+            const platformMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x6666aa,
+                roughness: 0.5,
+                metalness: 0.5
+            });
+            
+            for (let i = 0; i < 5; i++) {
+                const platform = new THREE.Mesh(platformGeometry, platformMaterial);
+                platform.position.x = Math.random() * 40 - 20;
+                platform.position.y = Math.random() * 3 + 3;
+                platform.position.z = Math.random() * 40 - 20;
+                platform.castShadow = true;
+                platform.receiveShadow = true;
+                scene.add(platform);
+                
+                // Add this as a patrol point for the enemy
+                enemy.patrolPoints.push(new THREE.Vector3(platform.position.x, 0, platform.position.z));
+            }
+        }
+        
+        function createEnemy() {
+            // Create enemy body
+            const enemyGeometry = new THREE.ConeGeometry(1, 2.5, 8);
+            const enemyMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x0000ff,
+                roughness: 0.3,
+                metalness: 0.7,
+                emissive: 0x330000,
+                emissiveIntensity: 0.5,
+                transparent: true,
+                opacity: 0.8
+            });
+            enemy.mesh = new THREE.Mesh(enemyGeometry, enemyMaterial);
+            enemy.mesh.position.set(15, 1.5, 15);
+            enemy.mesh.castShadow = true;
+            enemy.mesh.receiveShadow = true;
+            scene.add(enemy.mesh);
+            
+            // Create enemy eyes
+            const eyeGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+            const eyeMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0xff0000,
+                emissive: 0xff0000,
+                emissiveIntensity: 1
+            });
+            
+            const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+            leftEye.position.set(0.3, 0.5, 0.8);
+            enemy.mesh.add(leftEye);
+            
+            const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+            rightEye.position.set(-0.3, 0.5, 0.8);
+            enemy.mesh.add(rightEye);
+            
+            // Define patrol points if none exist yet
+            if (enemy.patrolPoints.length === 0) {
+                enemy.patrolPoints = [
+                    new THREE.Vector3(15, 0, 15),
+                    new THREE.Vector3(-15, 0, 15),
+                    new THREE.Vector3(-15, 0, -15),
+                    new THREE.Vector3(15, 0, -15)
+                ];
+            }
+        }
+        
+        function createHealthBoost() {
+            const healthGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+            const healthMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x00ff00,
+                emissive: 0x00ff00,
+                emissiveIntensity: 0.8,
+                transparent: true,
+                opacity: 0.8
+            });
+            healthBoost.mesh = new THREE.Mesh(healthGeometry, healthMaterial);
+            healthBoost.mesh.position.set(-10, 1, -10);
+            healthBoost.mesh.castShadow = true;
+            scene.add(healthBoost.mesh);
+        }
+        
+        function onKeyDown(event) {
+            if (!gameActive) return;
+            
+            switch (event.code) {
+                case 'ArrowUp':
+                case 'KeyW':
+                    moveForward = true;
+                    break;
+                case 'ArrowLeft':
+                case 'KeyA':
+                    moveLeft = true;
+                    break;
+                case 'ArrowDown':
+                case 'KeyS':
+                    moveBackward = true;
+                    break;
+                case 'ArrowRight':
+                case 'KeyD':
+                    moveRight = true;
+                    break;
+                case 'Space':
+                    if (canJump) {
+                        velocity.y = 10;
+                    }
+                    canJump = false;
+                    break;
+                case 'KeyE':
+                    tryCollectHealthBoost();
+                    break;
+            }
+        }
+        
+        function onKeyUp(event) {
+            switch (event.code) {
+                case 'ArrowUp':
+                case 'KeyW':
+                    moveForward = false;
+                    break;
+                case 'ArrowLeft':
+                case 'KeyA':
+                    moveLeft = false;
+                    break;
+                case 'ArrowDown':
+                case 'KeyS':
+                    moveBackward = false;
+                    break;
+                case 'ArrowRight':
+                case 'KeyD':
+                    moveRight = false;
+                    break;
+            }
+        }
+        
+        function onMouseMove(event) {
+            if (!gameActive || !document.pointerLockElement) return;
+            
+            const movementX = event.movementX || 0;
+            const movementY = event.movementY || 0;
+            
+            // Rotate the camera based on mouse movement
+            camera.rotation.y -= movementX * 0.002;
+            camera.rotation.x -= movementY * 0.002;
+            
+            // Limit vertical camera rotation
+            camera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, camera.rotation.x));
+        }
+        
+        function onMouseClick() {
+            if (!gameActive || !document.pointerLockElement) return;
+            
+            if (player.ammo > 0 && player.canShoot) {
+                shootBullet();
+                player.ammo--;
+                document.getElementById('ammo').textContent = player.ammo;
+                
+                player.canShoot = false;
+                setTimeout(() => {
+                    player.canShoot = true;
+                }, 500); // 0.5 second cooldown between shots
+            }
+        }
+        
+        function shootBullet() {
+            // Create bullet
+            const bulletGeometry = new THREE.SphereGeometry(0.1, 8, 8);
+            const bulletMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+            const bullet = new THREE.Mesh(bulletGeometry, bulletMaterial);
+            
+            // Position bullet at camera
+            bullet.position.copy(camera.position);
+            
+            // Set bullet direction from camera
+            const bulletDirection = new THREE.Vector3(0, 0, -1);
+            bulletDirection.applyQuaternion(camera.quaternion);
+            bullet.userData.velocity = bulletDirection.multiplyScalar(0.7);
+            
+            bullet.userData.timeCreated = performance.now();
+            
+            scene.add(bullet);
+            bullets.push(bullet);
+        }
+        
+        function updateBullets() {
+            for (let i = bullets.length - 1; i >= 0; i--) {
+                const bullet = bullets[i];
+                
+                // Move bullet
+                bullet.position.add(bullet.userData.velocity);
+                
+                // Check collision with enemy
+                if (bullet.position.distanceTo(enemy.mesh.position) < 1.5) {
+                    enemy.health -= 20;
+                    scene.remove(bullet);
+                    bullets.splice(i, 1);
+                    
+                    // Enemy killed
+                    if (enemy.health <= 0) {
+                        enemy.mesh.visible = false;
+                        gameWin();
+                    }
+                    
+                    // Enemy becomes aware of player
+                    if (enemy.state === 'patrol') {
+                        enemy.state = 'chase';
+                    }
+                    
+                    continue;
+                }
+                
+                // Remove bullets after 2 seconds
+                if (performance.now() - bullet.userData.timeCreated > 2000) {
+                    scene.remove(bullet);
+                    bullets.splice(i, 1);
+                }
+            }
+        }
+        
+        function updateEnemy() {
+            if (enemy.health <= 0) return;
+            
+            const distanceToPlayer = enemy.mesh.position.distanceTo(camera.position);
+            
+            // Check if player is in detection range
+            if (distanceToPlayer < enemy.detectionRange && enemy.state === 'patrol') {
+                enemy.state = 'chase';
+            }
+            
+            // Enemy AI state machine
+            switch (enemy.state) {
+                case 'patrol':
+                    // Move towards current patrol point
+                    const patrolPoint = enemy.patrolPoints[enemy.currentPatrolPoint];
+                    const patrolDirection = new THREE.Vector3(
+                        patrolPoint.x - enemy.mesh.position.x,
+                        0,
+                        patrolPoint.z - enemy.mesh.position.z
+                    ).normalize();
+                    
+                    // Move enemy
+                    enemy.mesh.position.x += patrolDirection.x * enemy.speed;
+                    enemy.mesh.position.z += patrolDirection.z * enemy.speed;
+                    
+                    // Point enemy towards patrol point
+                    enemy.mesh.lookAt(new THREE.Vector3(patrolPoint.x, enemy.mesh.position.y, patrolPoint.z));
+                    
+                    // Check if reached patrol point
+                    if (enemy.mesh.position.distanceTo(new THREE.Vector3(patrolPoint.x, enemy.mesh.position.y, patrolPoint.z)) < 1) {
+                        enemy.currentPatrolPoint = (enemy.currentPatrolPoint + 1) % enemy.patrolPoints.length;
+                    }
+                    break;
+                    
+                case 'chase':
+                    // Move towards player
+                    const chaseDirection = new THREE.Vector3(
+                        camera.position.x - enemy.mesh.position.x,
+                        0,
+                        camera.position.z - enemy.mesh.position.z
+                    ).normalize();
+                    
+                    // Move enemy
+                    enemy.mesh.position.x += chaseDirection.x * enemy.speed;
+                    enemy.mesh.position.z += chaseDirection.z * enemy.speed;
+                    
+                    // Point enemy towards player
+                    enemy.mesh.lookAt(new THREE.Vector3(camera.position.x, enemy.mesh.position.y, camera.position.z));
+                    
+                    // Check for teleport
+                    const currentTime = performance.now();
+                    if (currentTime - enemy.lastTeleport > enemy.teleportCooldown) {
+                        // 10% chance to teleport when cooldown is ready
+                        if (Math.random() < 0.1) {
+                            enemy.state = 'teleport';
+                            enemy.lastTeleport = currentTime;
+                            
+                            // Make enemy temporarily invisible during teleport
+                            enemy.mesh.visible = false;
+                            setTimeout(() => {
+                                if (enemy.health > 0) {
+                                    // Teleport to a position near the player
+                                    const teleportAngle = Math.random() * Math.PI * 2;
+                                    const teleportDistance = 5 + Math.random() * 5;
+                                    enemy.mesh.position.x = camera.position.x + Math.cos(teleportAngle) * teleportDistance;
+                                    enemy.mesh.position.z = camera.position.z + Math.sin(teleportAngle) * teleportDistance;
+                                    enemy.mesh.visible = true;
+                                    enemy.state = 'chase';
+                                }
+                            }, 1000);
+                        }
+                    }
+                    
+                    // Attack player if close enough
+                    if (distanceToPlayer < 2) {
+                        takeDamage(10);
+                    }
+                    break;
+                    
+                case 'teleport':
+                    // Handled by timeout in chase state
+                    break;
+            }
+        }
+        
+        function takeDamage(amount) {
+            player.health -= amount;
+            updateHealthBar();
+            
+            if (player.health <= 0) {
+                gameOver();
+            }
+        }
+        
+        function tryCollectHealthBoost() {
+            if (healthBoost.collected) return;
+            
+            const distanceToHealth = camera.position.distanceTo(healthBoost.mesh.position);
+            if (distanceToHealth < 2) {
+                player.health = Math.min(100, player.health + healthBoost.value);
+                healthBoost.collected = true;
+                healthBoost.mesh.visible = false;
+                updateHealthBar();
+            }
+        }
+        
+        function updateHealthBar() {
+            document.getElementById('healthFill').style.width = player.health + '%';
+            
+            // Change color based on health
+            if (player.health > 50) {
+                document.getElementById('healthFill').style.backgroundColor = '#0f0';
+            } else if (player.health > 25) {
+                document.getElementById('healthFill').style.backgroundColor = '#ff0';
+            } else {
+                document.getElementById('healthFill').style.backgroundColor = '#f00';
+            }
+        }
+        
+        function gameOver() {
+            gameActive = false;
+            document.getElementById('gameOver').style.display = 'block';
+            document.exitPointerLock();
+        }
+        
+        function gameWin() {
+            gameActive = false;
+            document.getElementById('gameWin').style.display = 'block';
+            document.exitPointerLock();
+        }
+        
+        function restartGame() {
+            // Reset player
+            player.health = 100;
+            player.ammo = 10;
+            camera.position.set(0, 1.6, 0);
+            camera.rotation.set(0, 0, 0);
+            updateHealthBar();
+            document.getElementById('ammo').textContent = player.ammo;
+            
+            // Reset enemy
+            enemy.health = 100;
+            enemy.mesh.position.set(15, 1.5, 15);
+            enemy.mesh.visible = true;
+            enemy.state = 'patrol';
+            enemy.currentPatrolPoint = 0;
+            
+            // Reset health boost
+            healthBoost.collected = false;
+            healthBoost.mesh.visible = true;
+            
+            // Clear bullets
+            for (let bullet of bullets) {
+                scene.remove(bullet);
+            }
+            bullets = [];
+            
+            // Reset UI
+            document.getElementById('gameOver').style.display = 'none';
+            document.getElementById('gameWin').style.display = 'none';
+            
+            // Restart game
+            gameActive = true;
+        }
+        
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Skip logic if game is over
+            if (gameActive) {
+                // Calculate delta time
+                const time = performance.now();
+                const delta = (time - prevTime) / 1000;
+                
+                // Update player movement
+                if (document.pointerLockElement) {
+                    // Apply gravity
+                    velocity.y -= 9.8 * delta;
+                    
+                    // Update direction vector
+                    direction.z = Number(moveForward) - Number(moveBackward);
+                    direction.x = Number(moveRight) - Number(moveLeft);
+                    direction.normalize();
+                    
+                    // Move player
+                    if (moveForward || moveBackward) {
+                        velocity.z = direction.z * player.speed;
+                    } else {
+                        velocity.z = 0;
+                    }
+                    
+                    if (moveLeft || moveRight) {
+                        velocity.x = direction.x * player.speed;
+                    } else {
+                        velocity.x = 0;
+                    }
+                    
+                    // Adjust velocity based on camera direction
+                    if (velocity.x !== 0 || velocity.z !== 0) {
+                        const angle = camera.rotation.y;
+                        const sin = Math.sin(angle);
+                        const cos = Math.cos(angle);
+                        const newX = velocity.x * cos - velocity.z * sin;
+                        const newZ = velocity.x * sin + velocity.z * cos;
+                        velocity.x = newX;
+                        velocity.z = newZ;
+                    }
+                    
+                    // Apply velocity
+                    camera.position.x += velocity.x;
+                    camera.position.y += velocity.y * delta;
+                    camera.position.z += velocity.z;
+                    
+                    // Floor collision
+                    if (camera.position.y < 1.6) {
+                        velocity.y = 0;
+                        camera.position.y = 1.6;
+                        canJump = true;
+                    }
+                    
+                    // Update bullets
+                    updateBullets();
+                    
+                    // Update enemy
+                    updateEnemy();
+                }
+                
+                prevTime = time;
+            }
+            
+            // Render scene
+            renderer.render(scene, camera);
+        }
+    </script>
+</body>
+</html>
